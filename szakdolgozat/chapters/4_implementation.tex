@@ -1,110 +1,125 @@
 \Chapter{Tervezés}
+Ez a fejezet a program tervezésével kapcsolatos információkat, specifikációkat tartalmazza. Egy látványterv leírása a felhasználói felületről és a szükséges funkciókról.
 
-\Section{Grafikus felhasználói felület (GUI) - megjelenés, funkció}
+\Section{Grafikus Felhasználói Felület (GUI) - megjelenés, funkció}
 
-Ebben a fejezetben, ahogy kezd a program kialakulni, úgy lehetséges a leírt elképzelések változása is. Az elképzelt program és a végeredmény összehasonlítása valószínűleg a következő fejezet végén lesz elhelyezve.
+Az alkalmazás két menüpontből álljon, jegyzetek menü és keresés menü. A két menü működése egyedi objektumok használatával történjen.
 
-Az alkalmazás három (vagy kettő) fő menüpontből fog állni, a főmenü, jegyzetek menü és keresés menü. Vannak olyan elemek, amik minden menüpontban látszanak és használhatóak, ezek leírása következik:
+\subsection{Szükséges adattípusok}
+Szükséges egy Note és egy Page objektum konstruktor létrehozása.
+\\A Note objektumnak legyenek a következő változói:
+\begin{itemize}
+	\item String noteName - A jegyzet neve.
+	\item ArrayList<Page> pageList - Egy Page típusú ArrayList a jegyzet oldalainak tárolására. Egyszerűen lehet majd törölni és hozzáadni új Page objektumokat.
+	\item int Id - Egy ID az egyszerű azonosítás érdekében.
+	\item static int counter - Egy számláló, ami majd az ID-t növeli, maga a számláló értékét pedig a konstruktorban kell növelni.
+	\item Minden adathoz a megfelelő getter-setter metódusok.
+\end{itemize}
+
+\vspace{10pt} \noindent A Page objektumnak legyenek a következő változói:
+\begin{itemize}
+	\item String pageName - Az oldal neve.
+	\item String pageText - Az oldal tartalma, a szövegdobozba írt adatok.
+	\item int noteId - A lapot tartalmazó jegyzet ID-je ahhoz, hogy egyszerűen meghatározható legyen a kapcsolat egy Note és egy Page objektum között.
+	\item int Id - Egy ID az egyszerű azonosítás érdekében.
+	\item static int counter - Egy számláló, ami majd az ID-t növeli, maga a számláló értékét pedig a konstruktorban kell növelni.
+	\item Minden adathoz a megfelelő getter-setter metódusok.
+\end{itemize}
+
+\subsection{Közös elemek}
+
+Vannak olyan elemek, amiknek mindkét menüpontban látszaniuk kell és használhatók kell legyenek. A pirossal bekeretezett és számozott részek ezeket az elemeket mutatját, leírásuk a kép alatt található.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/menu_1.png}
+	\includegraphics[scale=0.5]{images/menu_1.png}
 	\caption{Program 'körvonala', alapja, a felület amire a többi menü épül.}
 	\label{fig:main_foundation}
 \end{figure}
 
-\noindent \textbf{1.} Gombok helye. Egyelőre fájl megnyitása és mentése gomb található itt, viszont nem funkcionálisak még. Ha további gombok hozzáadása szükséges lesz, akkor azok is itt fognak elhelyezkedni, feltéve ha mind a három menüpontban használhatóak.
-\vspace{5pt} \\Fájl mentése: elmenti a fájlokat az adatbázisba. Gyorsbillentyű: Ctrl + S. A program jelenlegi tervek szerint nem menti el az adatokat automatikusan, ennek megváltozása a későbbiekben lehetséges.
-\vspace{5pt} \\Fájl megnyitása: ha esetleg egy másik számítógépről szeretnénk jegyzeteket betölteni, akkor ez a menüpont tud majd lehetőséget nyújtani ennek kivitelezésére.\vspace{5pt}
-
-\noindent \textbf{2.} Három fő menüpont helye, ezekre kattintva váltogathatunk majd köztük.
-\vspace{5pt} \\ \textbf{3.} Bezárás és tálcáz gombok, funkcióik egyértelműek.
-\vspace{5pt} \\A bal felső sarokba szeretnék majd még egy logo-t rakni. Az alkalmazás bárhová elhelyezhető a képernyőn (tehát lehet húzgálni) viszont fix méretű.
-\vspace{5pt} \\Belépéskor ez a kép fogadja a felhasználót, egyik menüpontban sincs benne ilyenkor.
-
-\subsection{Főmenü}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.7]{images/menu_2.png}
-	\caption{Főmenü, naptár-emlékeztető egyben.}
-	\label{fig:menu_main}
-\end{figure}
-
-\noindent Ez az egész menü nem biztos, hogy a kész alkalmazásban szerepelni fog, időtől függ és attól, hogy egy használható naptár-emlékeztető rendszert sikerül-e implementálnom. Ha sikerül, akkor:
-\vspace{5pt} \\ \textbf{1.} Itt lesz a naptár látható, időben előre, hátra lehet benne haladni. Napokat ki lehet kattintással jelölni.
-\vspace{5pt} \\ \textbf{2.} A naptárban kijelölt nap emlékeztetőinek listája található itt. A kijelölt naphoz lehet emlékeztetőt létrehozni valamint emlékeztetőt törölni. A törlés az éppen kijelölt emlékeztetőt törli. 
-\vspace{5pt} \\ \textbf{3.} Jelenleg egy szövegszerkesztő menü (erről a következő menüben bővebben) található itt, hogy az éppen kijelölt emlékeztető tartalmát lehessen szerkeszteni, de ez valószínűleg változni fog. Ennek mérete a felére fog csökkenni és a szövegmező alá fog kerülni egy menü, amivel a kijelölt emlékeztető beállításait lehet majd szerkeszteni (pl, hogy hány nappal, perccel emlékeztessen a megadott nap előtt, stb..), valamint az emlékeztető létrehozását lebonyolító menü helye is itt lesz.
+\noindent \textbf{1.} Gombok helye. Fájl megnyitása és mentése gombra gondoltam. Ha további gombok hozzáadása szükséges lenne,  azok is ide kerülnének, feltéve ha mindegyik menüpontban használhatóak.
+\vspace{5pt} \\Fájl megnyitása gomb (4.1 ábrán az 1.ikon): lokális adatbázis használata esetén lehet fontos. Szükségessége attól függ, hogy lokális vagy felhőalapú adatbázis kerül felhasználásra.
+\vspace{5pt} \\Fájl mentése gomb (4.1 ábrán a 2. ikon): elmenti az adatok változásait, amiket a későbbiekben az adatbázisba kell töltsön.
+\vspace{5pt} \\ \textbf{2.} Két menüpont váltására alkalmas gombok helye, ezekre kattintva válthatunk a menük között.
+\vspace{5pt} \\ \textbf{3.} Bezár és tálcáz gombok, funkcióik egyértelműeknek tartom.
+\vspace{10pt} \\Az alkalmazás ablak bárhová legyen elhelyezhető a képernyőn (tehát lehessen húzgálni), amíg a felső sötétebb színű sávon tartjuk lenyomva  a bal egérgombot, viszont átméretezni ne lehessen.
+\vspace{5pt} \\Belépéskor ez a kép fogadja a felhasználót, egyik menüpontban se legyen benne.
+\vspace{5pt} \\Egy logo, kisebb ikon elhelyezését valahova, esetleg az 1-essel jelölt gombok felé jó dizájn ötletnek tartom. 
 
 \subsection{Jegyzetek menü}
 
+A 4.2-es ábrán látható a jegyzetek menü elképzelt felépítése A pirossal számozott elemek leírása található a kép alatt, elmondja, hogy milyen funkciókat kell majd, hogy az egyes elemek betöltsenek.
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/menu_3.png}
+	\includegraphics[scale=0.5]{images/menu_2.png}
 	\caption{Jegyzetek menü}
 	\label{fig:menu_notes}
 \end{figure}
 
-\vspace{5pt} \noindent \textbf{1.} Jegyzetek listája itt található. Egy ’note’ tulajdonképpen egy kategóriát jelent (pl jelszavak). Létrehozni és törölni jegyzeteket a lista alján található gombokkal lehet. Ha betelne a jegyzetek listája, akkor egy görgő segítségével lehet köztük navigálni. Létrehozni és törölni jegyzeteket a lista alján található gombokkal lehetséges. A gombok a kijelölt jegyzeteket szerkesztik.
-\vspace{5pt} \\ \textbf{2.} Ha nincs jegyzet kiválasztva, akkor a lista alapvetően üres. Az éppen kijelölt (rákattintott) jegyzet oldalai (pages) található itt. Egy jegyzethez több oldal is létrehozható, de egy oldal csak egy jegyzethez tartozhat (feltéve ha nem másoltuk be egy másik jegyzetbe ugyan azt a szöveget és adtunk a lapunknak hasonló címet). Ha betelne az oldalak listája, akkor egy görgő segítségével lehet köztük navigálni. Létrehozni és törölni oldalakat a lista alján található gombokkal lehetséges. A gombok a kijelölt oldalakat szerkesztik.
-\vspace{5pt} \\ \textbf{3.} Szövegszerkesztő, az éppen kijelölt oldal tartalma látható és szerkeszthető itt. Ha nincs oldal kijelölve, akkor nem használható a szerkesztő. Szerkesztési lehetőségek a következőek: betűstílus, betűméret, dőlt, vastag és aláhúzott szöveg, balra, középre és jobbra igazítás, szöveg szín megadása, vissza és előre (ha vissza meg lett nyomva).
+\vspace{5pt} \noindent \textbf{1.} Jegyzetek (Note objektumok) listája, ahol a jegyzetek neve jelenik meg egymás alatt. 
+\\Ha betelne a jegyzetek listája, akkor a görgő segítségével lehet köztük navigálni.
+\\Átnevezni, létrehozni és törölni jegyzeteket a lista alján található gombokkal lehessen. A gombok csak a kijelölt jegyzeteket szerkesszék!
+\vspace{5pt} \\ \textbf{2.} Oldalak (Page objektumok) listája. Ha nincs jegyzet kiválasztva, akkor a lista alapvetően üres legyen. Az éppen kijelölt (rákattintott) jegyzet oldalainak nevei legyenek itt felsorolva. 
+\\Egy jegyzethez több oldal is létrehozható, de egy adott oldal csak egy meghatározott jegyzethez tartozhat (feltéve ha nem másoltuk be egy másik jegyzetbe ugyan azt a szöveget és adtunk a lapunknak hasonló címet). 
+\\Ha betelne az oldalak listája, akkor a görgő segítségével lehessen köztük navigálni. 
+\\Átnevezni, létrehozni és törölni oldalakat a lista alján található gombokkal lehetséges. A gombok csak a kijelölt oldalakat szerkesszék!
+\\Ha nincs kijelölve jegyzet, akkor a lapok listája is legyen üres.
+\vspace{5pt} \\ \textbf{3.} Szövegszerkesztő, az éppen kijelölt oldal tartalma legyen itt látható és szerkeszthető. 
+\\Ha nincs oldal kijelölve, akkor ne legyen használható a szerkesztő és ne jelenjen meg benne szöveg. 
+\vspace{5pt} \\Legyenek elérhetők szöveg szerkesztésére alkalmas gombok, amelyek funckiói a következők: 
+\begin{itemize}
+	\item Betűstílus, betűméret és szín megadására alkalmas legördülő választási menü.
+	\item Szöveg dőltté, vastaggá és aláhúzottá alakító gombok. Ki-bekapcsolóként működjenek.
+	\item Undo gomb, ami az előző szerkesztést vonja vissza.
+	\item Redo gomb, ami az előzőleg visszavont szerkesztést csinálja újra.
+\end{itemize}
+Az első három pontban leírt funkcióknak csak a kijelölt szövegen legyen hatása.
+\\A gombok legyenek gyorsbillentyűkkel is használhatók.
+
 
 \subsection{Kereső menü}
 
+A 4.3-mas ábrán látható a kereső menü elképzelt felépítése A pirossal számozott elemek leírása található a kép alatt, elmondja, hogy milyen funkciókat kell majd, hogy az egyes elemek betöltsenek.
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/menu_4.png}
+	\includegraphics[scale=0.5]{images/menu_3.png}
 	\caption{Kereső menü}
 	\label{fig:menu_search}
 \end{figure}
 
-\vspace{5pt} \noindent \textbf{1.} Kereső sáv. Nem case-sensitive, tehát nem tesz kis- és nagybetű között különbséget. Beírt szövegre a nagyító gombra való kattintással tudunk rákeresni. Jegyzet- és oldalnevek között és ezek tartalma között is keres. (?)Hibásan begépelt szövegre is kiad valamilyen találatot.
-\vspace{5pt} \\ \textbf{2.} Az előző fázisban bemutatott szövegszerkesztő. Ennek funkciója itt kérdéses, lehet, hogy nem is lesz itt, hanem egy keresési találtara való kattintás után a program vissza fog dobni a megfelelő menüpontba. De lehet, hogy itt marad és akkor a keresési találatok szövege lesz itt szerkeszthető (feltéve ha egy lap találtara kattintunk, nem egy jegyzetre).
+\vspace{5pt} \noindent \textbf{1.} Kereső sáv. Ne legyen case-sensitive, tehát ne tegyen kis- és nagybetű között különbséget.
+\\Jegyzet- és oldalnevek, és az oldalak tartalma között is keressen egyező adatokat.
+\\Jelenjen meg egy legördülő menü ahogy írjuk a szöveget, ami a találatok nevét tartalmazza. Tehát ha egyezést talál a beírt szöveg és 
+\begin{itemize}
+	\item egy jegyzet neve között, akkor a jegyzet neve jelenjen meg.
+	\item egy lap neve között, akkor a lap neve jelenjen meg.
+	\item egy lap tartalma között, akkor a tartalmazó lap neve jelenjen meg.
+\end{itemize}
+Beírt szövegre a nagyító gombra való kattintással tudjunk keresni, vagy a legördülő menüben megjelenő találatokra kattintva. 
+\vspace{5pt} \\ \textbf{2.} Talált jegyzetek és lapok között a két adott gombbal lehessen váltani. Jelenjen meg a kiválasztott találatok listája.
+\\Gombra való kattintással lehessen kiválasztani hogy melyik lista látszódjon.
+\vspace{5pt} \\ \textbf{3.} A jegyzetek menünél bemutatott szövegszerkesztő, melynek működése legyen megegyező.
+A kijelölt lap szövege jelenjen meg itt, legyen szerkeszthető.
+\vspace{5pt} \\ \textbf{4.} A 2. pontban jellemzett gombok esetén két lehetőség van: vagy a jegyzetek listája látszik, vagy a lapok listája. 
+\\A listák az érvényes találatokat tartalmazzák.
+\\Lehessen a listák elemei között (úgy mint a jegyzetek menüben) kattintással választani. Ismét két lehetőség van:
+\begin{itemize}
+	\item Ha egy jegyzet listaelemet választunk, akkor a program tegyen át a jegyzetek menüpontba, és legyen a kiválasztott jegyzet kijelölve. Ha a jegyzetet görgetéssel lehet elérni, akkor a görgő is legyen a megfelelő pozícióba úgy, hogy látszódjon a listán a kiválasztott elem. Lapja ne legyen kijelölve, szövegdoboz legyen üres.
+	\item Ha egy lap listaelemet választunk, akkor a szövegdobozban jelenjen meg a szerkesztett tartalma. Legyen itt is szerkeszthető, a szerkesztések legyenek érzékelhetők a jegyzetek menüből is.
+\end{itemize}
+
+\Section{Adatbázis}
+Az adatok adatbázisba legyenek mindenképp eltárolva, vagy felhőalapú adatbázisba, vagy lokális adatbázisba. 
+\\Ha lokális adatbázisról van szó, akkor az adatok szinkronizálása mindenképp legyen megoldva.
+\\Felhőalapú adatbázis használata esetén csak a titkosítás a kérdéses probléma.
+\\Adatbázishoz való csatlakozás a programkódban legyen megfelelően megoldva.
 
 
-
-
-\newpage
-Ez a fejezet mutatja be a megvalósítás lépéseit.
-Itt lehet az esetlegesen előforduló technikai nehézségeket említeni.
-Be lehet már mutatni a program elkészült részeit.
-
-Meg lehet mutatni az elkészített programkód érdekesebb részeit.
-(Az érdekesebb részek bemutatására kellene szorítkozni.
-Többségében a szöveges leírásnak kellene benne lennie.
-Abból lehet kiindulni, hogy a forráskód a dolgozathoz elérhető, azt nem kell magába a dolgozatba bemásolni, elegendő csak behivatkozni.)
-
-A dolgozatban szereplő forráskódrészletekhez külön vannak programnyelvenként stílusok.
-Python esetében például így néz ki egy formázott kódrészlet.
-\begin{python}
-import sys
-
-if __name__ == '__main__':
-    pass
-\end{python}
-
-A stílusfájlok a \texttt{styles} jegyzékben találhatók.
-A stílusok között szerepel még C++, Java és Rust stílusfájl.
-Ezek használatához a \texttt{dolgozat.tex} fájl elején \texttt{usepackage} paranccsal hozzá kell adni a stílust, majd a stílusfájl nevével megegyező környezetet lehet használni.
-További példaként C++ forráskód esetében ez így szerepel.
-\begin{cpp}
-#include <iostream>
-
-class Sample : public Object
-{
-    // An empty class definition
-}
-\end{cpp}
-Stílusfájlokból elegendő csak annyit meghagyni, amennyire a dolgozatban szükség van.
-Más, C szintaktikájú nyelvekhez (mint például a JavaScript és C\#) a Java vagy C++ stílusfájlok átszerkesztésére van szükség.
-(Elegendő lehet csak a fájlnevet átírni, és a fájlban a környezet nevét.)
-
-Nyers adatok, parancssori kimenetek megjelenítéséhez a \texttt{verbatim} környezetet lehet használni.
-\begin{verbatim}
-$ some commands with arguments
-1 2 3 4 5
-$ _
-\end{verbatim}
-
-A kutatás jellegű témáknál ez a fejezet gyakorlatilag kimaradhat.
-Helyette inkább a fő vizsgálati módszerek, kutatási irányok kaphatnak külön-külön fejezeteket.
+\Section{Titkosítás}
+A titkosítási algoritmus tesztek alapján a legjobbnak vélt algoritmussal kerüljenek az adatok kódolásra.
+\\A titkosítás vagy alkalmazás szinten, saját implementációval legyen megoldva vagy a tárolástól függően az ismertetett adatbázis titkosítási módszerek egyikének alkalmazásával.
+\\Mivel az alkalmazás minden esetben az adathalmaz egészével dolgozik, ezért elegendő lehet, ha egy xml vagy json fájl kerül titkosításra, amely az összes adatot tartalmazza, nem pedig minden adat egyesével.
+\\A titkosítási kulcsok legyenek biztonságosan tárolva, több eszköz között biztonságosan megosztva.
+\\Az alkalmazás bezárása előtt kerüljenek át az adatok az adatbázisba. Alkalmazás megnyitása után kerüljenek beolvasásra majd megjelenítésre.

@@ -1,12 +1,10 @@
 \Chapter{Koncepció}
 
 \Section{Adattárolás}
-Az adattitkosítás esetében valamilyen módon tárolni kell ezeket az adatokat, ezért ésszerűnek tartom, hogy a dolgozat az adattárolási lehetőségek bemutatásával kezdődjön.
-\newline
-\\Az adatok egységes tárolását vagy egy adatbázis segítségével érhetjük el, vagy kimondottan erre kifejlesztett nyelvekkel/adathordozó objektumokkal.
+Az adatok tárolása megoldható adatbázisok segítségével és fájlokba.
 
 \subsection{XML és JSON}
- Ilyen adathordozók közül a leggyakrabban használt az XML és a JSON. Céljuk, hogy platform-független, nyelv-független, alkalmazás-független adatleíró formátumot adjanak, ami képes adatok nagy mértékű ávitelére és feldolgozására.
+ Ilyen adatátviteli formátum közül a leggyakrabban használt az XML és a JSON. Céljuk, hogy platform-független, programozási nyelv független, alkalmazás független adatleíró formátumot adjanak, ami képes adatok nagy mértékű ávitelére és feldolgozására.
 \newline
 \\ \underline{XML – eXtensible Markup Language}
 \vspace{10pt}
@@ -205,11 +203,6 @@ Egy olyan folyamatot nevezhetünk adatbázis titkosításnak, ami egy algoritmus
 \\- Másik hátránya, a kulcsok kezelésének az összetettsége is megnövekedhet, ha több különböző alkalmazásnak kell egy adatbázishoz hozzáférnie, írnia, olvasnia.
 
 
-\subsection{!!!!!!!Programok}
- \textbf{Adatbázis titkosítási lehetőségek szoftverek beszúrása ide?}
- \textbf{File titkosítási lehetőségek szoftverek beszúrása ide?}
-
-
 
 \newpage \Section{Szinkronizáció}
 
@@ -235,13 +228,6 @@ Szokás még fájltükrözésnek (file mirroring), fájlreplikációnak (file re
 Gyors szinkronizálásnak is szokás nevezni (fast sync).
 \vspace{5pt} \\Ez a folyamat mindkét irányba másolja a fájlokat. A fájlok várhatóan mindkét helyen változnak, a két (vagy több) hely egyenértékűnek tekinthető.
 \vspace{5pt} \\Célja, hogy két vagy több hely azonos legyen egymással.
-	
-
-
-\subsection{!!!!!!!!!Programok}
-A következő leírás célja olyan programok bemutatása, amelyek vagy kimondottan adatszinkronizálási probléma megoldására készültek, vagy valamilyen szinten közük van a témához. Ezen programok működése lesz feltüntetve az interneten található dokumentációk alapján.
-
-\textbf{szinkronizáció és verziókezelés szoftverek beszúrása ide?}
 
 
 
@@ -257,8 +243,6 @@ Kulcs előállítását, cseréjét, tárolását és használatát jelenti.
 \vspace{5pt} \\-Certificate authority neve: a certificate előállítója ezzel az információval azonosítja magát.
 \vspace{5pt} \\-Digitális aláírás: az előállító ezzel az aláírással látja el a certificate-et, hogy ellenőrizze annak hitelességét. A megfelelő CA ellenőrzi a tanúsítványt, hogy egy hiteles szolgáltatótól származik-e.
 
-
-\subsection{!!!!!!!!!!valamilyen kulcskezelő rendszer bemutatása kéne ide?}
 
 
 

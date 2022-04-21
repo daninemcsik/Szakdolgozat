@@ -6,12 +6,18 @@ A bemutatott programoknál szó esett titkosítási algoritmusokról, ez eltér 
 \\A dolgozat méréseit és összehasonlításait ezeken az algoritmusokon végeztem.
 \vspace{5pt}\\Az algoritmusok belső matematikai működéséről részletes leírást nem tartalmaz a dokumentum. Bonyolultak és hosszúak, sok-sok oldalt kellene írni ahhoz, hogy megismerjük minden egyes algoritmus pontosan milyen számításokat végez a végső kódölt szöveg eléréséhez.
  
-\Section{Szimmetrikus titkosítási algoritmusok}
-\noindent - Az adatok titkosítása az adatbázisba történő mentéskor és visszafejtéskor történik.
-\\- Adat titkosítására és dekódolására egy privát kulcsot használ.
+\Section{Szimmetrikus titkosítási algoritmusok} 
+\noindent - Adat titkosítására és dekódolására egy privát kulcsot használ.
 \\- Az adatok megosztásához a címzettnek rendelkeznie kell a visszafejtési kulcs másolatával. Ez a titkosítás legegyszerűbb, legrégebbi és legismertebb fajtája.
 \\- Hátránya a kulcs megosztásából ered, ha a visszafejtési kulcs publikussá válik, az adatszivárgáshoz (data leak) vezethet.
 \\- Előnye a sebesség. \newline
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.7]{images/sym.png}
+	\caption{Szimmetrikus titkosítási algoritmusok működése.}
+	\label{fig:sym_encryptino}
+\end{figure}
 
 \subsection{AES (Advanced Encryption Standard)}
 \noindent - Bevált, megbízható titkosítási módszer. 
@@ -58,11 +64,18 @@ A bemutatott programoknál szó esett titkosítási algoritmusokról, ez eltér 
 
 
 
-\Section{Aszimmetrikus titkosítási algoritmusok}
+\newpage \Section{Aszimmetrikus titkosítási algoritmusok}
 \noindent - Egy privát és egy publikus kulcsot használ.
 \vspace{5pt} \\- A publikus kulcs lehetővé teszi, hogy bárki titkosítsa az adatokat.
 \vspace{5pt} \\- A privát kulcs szükséges az adatok  dekódolásához. 
 \vspace{5pt} \\- Biztonságosabbnak vélhető, mivel a privát kulcsok nem kerülnek megosztásra, de ugyanakkor nagyobb a számítási költsége is.\newline
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{images/asym.png}
+	\caption{Aszimmetrikus titkosítási algoritmusok működése.}
+	\label{fig:asym_encryptino}
+\end{figure}
 
 \subsection{RSA (Rivest–Shamir–Adleman)}
 \noindent - Azon az elven alapul, hogy a nagy számok szorzása könnyű, de a nagy számok tényezőkre bontása nehéz. 
@@ -117,7 +130,9 @@ Hat különböző hash függvényből áll: SHA-0, SHA-1, SHA-224, SHA-256, SHA-
 
 A mérések végzéséhez az alkalmazásomból elmentett adatokat fogom tesztadatként használni. Az adatokat struktúrált xml dokumentum formátumban kerülnek tárolásra az összehasonlítások elvégzése érdekében. Három különböző méretű fájlt vizsgálunk. Reális méretű fájlok használatára törekedtem (~500KB, ~2MB ~4MB). Már a 4 MB nagyság (nem titkosított) elérését a program rendeltetésszerű használata esetén is elég valószínűtlen tartom, mivel nagyon sok random adatot kellett bemásoljak ahhoz, hogy elérjem ezt a fájlméretet. 
 \vspace{5pt}\\Feltehető a mérési eredmények arányos növekedése nagyobb fájlméret esetén.
-\vspace{5pt}\\A mérések összeállítása előtti próbálgatásaimból megtudtam, hogy a titkosítási és visszafejtési idő (a program kód alapján, a System.currentTimeMillis() parancs használatával) nem mindig egyezik meg ugyanazon fájl többszöri titkosítása esetén. Ebből következik, hogy egy adott fájl titkosítását mindegyik algoritmus használatakor többször is el kell végeznem, hogy egy korrekt közelítő értéket kapjak.
+
+\subsection{Tesztprogram}
+\vspace{5pt}\noindent A mérések összeállítása előtti próbálgatásaimból megtudtam, hogy a titkosítási és visszafejtési idő (a program kód alapján, a System.currentTimeMillis() parancs használatával) nem mindig egyezik meg ugyanazon fájl többszöri titkosítása esetén. Ebből következik, hogy egy adott fájl titkosítását mindegyik algoritmus használatakor többször is el kell végeznem, hogy egy korrekt közelítő értéket kapjak.
 \vspace{5pt}\\A tesztprogram elkészítésére elsősorban a javax.crypto és java.security könyvtárakat használtam. A program szempontjából ezen könyvtárak által szolgáltatott fontosabb \underline{interface-ek}:
 \vspace{5pt}\\-Key: Az összes kulcs legfelső szintű interface-e. Meghatározza az összes kulcs objektum által használt funkciókat.
 \vspace{5pt}\\-PrivateKey: Célja, hogy csoportosítsa az összes privát kulcs interface-t. Nem tartalmaz metódusokat vagy konstansokat. Speciális privát kulcs interface-ek kiterjesztik ezt az interface-t. 
@@ -130,7 +145,82 @@ A mérések végzéséhez az alkalmazásomból elmentett adatokat fogom tesztada
 \vspace{5pt}\\-KeyPairGenerator: Nyilvános és privát kulcspárok létrehozására szolgál.
 \vspace{5pt}\\-Cipher: Kriptográfiai titkosítási funkciókat biztosít titkosításhoz és visszafejtéshez. A Java Cryptographic Extension (JCE) keretrendszer magját képzi. \newline
 
-\noindent \underline{Ismertetett szimmetrikus titkosítási algoritmusok összehasonlítása:}
+\vspace{10pt} \noindent A tesztprogram felépítése hasonló szimmetrikus és aszimmetrikus titkosítás esetén is, néhány eltéréssel.
+\\A tesztprogram teljesen reprodukálható a felsorolt osztályok és interface-ek használatával.
+\vspace{5pt}\\ Lényegi különbség a két alkalmazás között (szimmetrikus és aszimmetrikus) a kulcsok méretében, létrehozásában / generálásában rejlik. A kódrészletekbe nem megengedett az ékezetes betűk használata, ezért ékezet nélkül kerültek bele magyar szavak.
+\vspace{5pt}\\ - Fájl elérési útvonal, jelen esetben a vizsgált xml fájlok útvonala, amik a tesztek készítésekor az asztalomon voltak.
+\begin{java}
+String filePath = "C:\\Users\\AMD\\Desktop\2MB.xml";
+File inputFile = new File(filePath);
+\end{java}
+\vspace{5pt}- Az objektum és metódus, ami a titkosítást és dekódolást végzi. Az implementálás RSA esetén így nézett ki:
+\begin{java}
+//Titkositas
+Cipher cipher = Cipher.getInstance("RSA");
+cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+byte[] encryptedFileBytes = cipher.doFinal(inputBytes);
+
+//Visszafejtes
+cipher.init(Cipher.DECRYPT_MODE, privateKey);
+byte[] decryptedFileBytes = cipher.doFinal(inputBytes);
+\end{java}
+Szimmetrikus algoritmus használata esetén a publicKey és privateKey helyére a létrehozott szimmetrikus kulcsot kell elhelyezni.
+\vspace{15pt}\\ - Kódolt byte-ok fájlba írása, majd a dekódolt byte-ok másik fájlba írása. Azért dekódoltam, hogy meggyőződjek róla, hogy semmi hiba nem történt titkosítás és visszafejtés alatt.
+\begin{java}
+//Titkositott byte-ok irasa
+FileOutputStream outputStream = 
+			new FileOutputStream(encryptedFile);
+outputStream.write(encryptedFileBytes);
+	
+//Dekodolt byte-ok irasa
+outputStream = new FileOutputStream(decryptedFile);
+outputStream.write(decryptedFileBytes);
+	
+//Ezek lezarasa a megfelelo helyen
+outputStream.close();
+inputStream.close();
+\end{java}
+\vspace{5pt}- Az eltelt idő mérésére az említett System.currentTimeMillis() funkció:
+\begin{java}
+//Kezdo ertek
+long start = System.currentTimeMillis();
+//Vegso ertek
+long end = System.currentTimeMillis();	
+//Korrekt idotartam megkapasa
+long finalTime = end2-start2;	
+\end{java}
+A kezdő és végérték inicializálását a megfelelő helyekre kell elhelyezni. Titkosítás és visszafejtés esetén is a kezdőértéket a Cipher objektum létrehozása elé raktam, a kulcs létrehozását nem számítottam bele az időbe. A végértéket a titkosított/dekódolt byte-ok fájlba történő írása után.
+\vspace{15pt} \\Ahol a legnagyobb a kód különbsége, a kulcsok létrehozása. Először is meg kell jegyezzem, hogy két módon lehet megfelelő kulcsokat létrehozni:
+\vspace{5pt}\\ A megfelelő generátor objektummal (szimmetrikus - KeyGenerator, aszimmetrikus - KeyPairGenerator).
+\vspace{5pt}\\ Létrehozni egy String-et, majd abból egy Key objektumot a SecretKeySpec osztály segítségével.
+\vspace{5pt}\\Az aszimmetrikus algoritmusok méréséhez az első verziót alkalmaztam, a szimmetrikus algoritmusokhoz pedig a másodikat.
+\vspace{5pt}\\ \noindent -Szimmetrikus algoritmus méréseknél a kulcs létrehozása a következő módon nézett ki DES használata esetén:
+\begin{java}
+String key = "T@stK#Y1";
+//Titkos kulcs letrehozasa
+Key secretKey = new SecretKeySpec(key.getBytes(), "DES");	
+\end{java}
+Az alkalmazás többi részében a secretKey objektumot kellett használni.
+\vspace{7pt}\\- Aszimmetrikus algoritmusok mérésekor a következő volt a kód:
+\begin{java}
+KeyPairGenerator generator = 
+			KeyPairGenerator.getInstance("RSA");
+generator.initialize(2048);
+KeyPair pair = generator.generateKeyPair();
+	
+PrivateKey privateKey = pair.getPrivate();
+PublicKey publicKey = pair.getPublic();
+\end{java}
+Titkosításhoz a publicKey-t kell használni, visszafejtéshez pedig a privateKey-t.
+
+
+\subsection{Eredmények, következtetések}
+A számítógépem paraméterei:
+\\ Processzor - AMD Ryzen 5 3600X 6-Core 3.79GHz
+\\ RAM - 16 GB
+\\ OS - Windows 10 Home 64 - bit
+
+\vspace{10pt} \noindent \underline{Ismertetett szimmetrikus titkosítási algoritmusok összehasonlítása:}
 
 \begin{center}
 	
@@ -154,7 +244,6 @@ A mérések végzéséhez az alkalmazásomból elmentett adatokat fogom tesztada
 		\hline
 	\end{tabular}
 \end{center}
-
 Úgy gondolom, hogy az algoritmusok biztonságával kapcsolatosan megfelelő méréseket nem tudok végezni, ezért nem szerepelnek a dokumentumban. A táblázat ’Sikerült-e már feltörni’ sorában lévő információk is az interneten talált adatok.\newline
 
 \newpage \noindent \textbf{AES} (Az összes táblázat értékei milliszekundumban (ms) értendőek)
@@ -615,6 +704,7 @@ A mérések végzéséhez az alkalmazásomból elmentett adatokat fogom tesztada
 \vspace{5pt}\\Volt néhány esetben viszonylag nagy eltérés az értékek között, például a Triple DES esetében, a 4MB méret 5.mérése ~50 milliszekundummal nagyobb mint a másik 4 mérés. Pontosabb átlagértékeket kaphatnánk, ha az egyik módszerrel X méretű fájlt mondjuk százszor titkosítanánk, nem pedig csak tízszer, és az így kapott eredményeket átlagolnánk.
 \vspace{5pt}\\Ettől függetlenül az így kapott értékekről lehet következtetéseket vonni
 \vspace{5pt}\\Mindkét téren (titkosítás és visszafejtés) az AES használata bizonyult a leggyorsabbnak. Ahogy a fájl mérete nőtt, úgy az AES titkosítási ideje nem nőtt olyan látványosan, mint a többi algoritmus esetében. Visszafejtési időre szintén igaz ez az állítás. 
+\\Az AES titkosításhoz 128 bit nagyságú kulcsot használtam.
 \vspace{5pt}\\Gyorsaságot tekintve legközelebb az AES-hez a Blowfish állt, mind visszafejtés és titkosítás terén is.
 \vspace{5pt}\\A DES és a Triple DES közötti egyre inkább növekedő különbség várható volt, hiszen a Triple DES háromszor végzi el azt, amit a DES csak egyszer. Ennek ellenére titkosítási időben nem érte el a Triple DES az elődje háromszorosát, habár nagyobb fájlméret esetén a növekedésüket nézve valószínűleg el fogja, sőt ezt a tendenciát követve valószínűleg a különbség több, mint a háromszorosára is nőhet. Visszafejtési időben sokkal inkább látszik ez a különbség, 4 MB-os fájl titkosítása kétszer addig tart a Triple DES-nek, mint a simának, visszafejtést nézve 4 MB esetén ez az érték majdnem a háromszorosára nőtt.
 \vspace{5pt}\\A program szempontjából valószínűtlennek tartom a 4MB-nál nagyobb fájl lehetőségét, de a mérések kedvéért egy random 64MB nagyságú fájl titkosítását is elvégeztem ugyanilyen módon. 
@@ -833,6 +923,8 @@ Ezután megpróbáltam nagyobb fájlokat titkosítani, így növelnem kellett a 
 
 Annak ellenére, hogy ezek az értékek nem  tűnnek nagynak, a számítógépemnek elég sokáig tartott minden mérés elvégzése, volt néhol 10 másodperc is, mire az eredményt megkaptam. Az említett ’System.currentTimeMillis()’ metódus használatát ajánlották az interneten kód futásidejének mérésére, így nem tudom mi lehetett a probléma, de mivel már az 1 kb-os fájl titkosítása eddig tartott, nagyobb fájlmérettel nem próbálkoztam.
 \vspace{5pt} \\Függőleges tengely az eltelt idő milliszekundumban mérve.
+\vspace{15pt} \\DSA mérését és összehasonlítását nem tartom korrektnek, mivel nem nagy méretű adat titkosítására, hanem digitális aláírásokéra lett kifejlesztve.
+\\ECC mérést szintén nem készítettem, mivel nem tudtam elkészíteni. Utánanéztem az interneten és ECC titkosítást elméletileg a javax.crypto könyvtár segítségével nem lehet végrehajtani. Más függvény könyvtárat azért nem használtam, mert úgy gondolom fennáll a lehetősége, hogy eltérnek az algoritmusok implementálásai, így olyan könyvtár használata lenne optimális, amely az összes vizsgált algoritmust tartalmazza.
 
 \begin{figure}[h]
 	\centering
@@ -842,3 +934,7 @@ Annak ellenére, hogy ezek az értékek nem  tűnnek nagynak, a számítógépem
 \end{figure}
 
 
+\noindent Röviden összefoglalva, a tesztekkel és mérésekkel olyan eredményeket kaptunk, amikre számítottam, annak ellenére, hogy a sebességük a leírásokban nem lett számszerűsítve. 
+\\Az AES-nél nem értek egyet a leírt állítással, miszerint "Hátránya, hogy szoftveresen nehezen implementálható lehet, illetve komplexitása és nagysága miatt teljesítményi ideje is nagy lehet".
+\\A szoftveres implementálás függvény könyvtár használata miatt volt egyszerű, a matematikai részét nem nekem kellett megoldanom.
+\\Nagy teljesítményi ideje pedig relatív, hiszen a többi vizsgált szimmetrikus algoritmushoz képest az AES-é volt a legkisebb.

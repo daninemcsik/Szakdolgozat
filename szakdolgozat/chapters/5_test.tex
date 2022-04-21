@@ -1,31 +1,35 @@
 \Chapter{Működés, tesztelés}
 
-\subsection{Jegyzetek menü}
+A fejezet az elkészített alkalmazás rendeltetésszerű működését mutatja be.
+
+\Section{Jegyzetek menü}
+
+Az 5.1-es ábrán látható a jegyzetek menü felépítése, a pirossal számozott elemek leírása található a kép alatt.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/doc_1.png}
+	\includegraphics[scale=0.5]{images/doc_1.png}
 	\caption{Jegyzetek menü használat közben.}
 	\label{fig:menu_notes_2}
 \end{figure}
 
 \vspace{5pt} \noindent \textbf{1}-es panel a jegyzetek panelje, itt találhatóak egymás alá beszúrva a különböző jegyzetek. Az éppen kijelölt jegyzet kék színű, kattintással tudunk új jegyzetet kiválasztani, valamint ha a panelen belül az üres részre kattintunk, akkor mindig az utolsó jegyzetet fogja kijelölni.
 \newline \\ Található a panelen 3 gomb. 
-\vspace{5pt} \\ \textbf{2}-es gomb az éppen kijelölt jegyzet átnevezésére szolgál, egy felugró modális ablakba a beírt szövegre nevezhetjük át a kijelölt elemet, vagy megszakíthatjuk az egész folyamatot. (lásd 5.2 ábra)
+\vspace{5pt} \\ \textbf{2}-es gomb az éppen kijelölt jegyzet átnevezésére szolgál, egy felugró modális ablakba a beírt szövegre nevezhetjük át a kijelölt elemet, vagy megszakíthatjuk az egész folyamatot. (lásd 6.2 ábra)
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/doc_2.png}
+	\includegraphics[scale=0.6]{images/doc_2.png}
 	\caption{Átnevezésre szolgáló modális ablak.}
 	\label{fig:menu_notes_rename}
 \end{figure}
 
 \vspace{5pt} \noindent \textbf{3}-mas gombbal új jegyzetet adunk a meglévő jegyzet listához. Alapértelmezett neve a jegyzeteknek ’New Note [sorszám]’.
-\vspace{5pt} \\ \textbf{4}-es gombbal az éppen kijelölt jegyzetet törölhetjük, vagy szakíthatjuk meg ezt a folyamatot egy felugró modális ablak segítségével. (lásd 5.3 ábra)
+\vspace{5pt} \\ \textbf{4}-es gombbal az éppen kijelölt jegyzetet törölhetjük, vagy szakíthatjuk meg ezt a folyamatot egy felugró modális ablak segítségével. (lásd 6.3 ábra)
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/doc_3.png}
+	\includegraphics[scale=0.6]{images/doc_3.png}
 	\caption{Törlésre szolgáló modális ablak.}
 	\label{fig:menu_notes_delete}
 \end{figure}
@@ -44,26 +48,27 @@
 \\Gyorsbillentyű: Ctrl + I
 \vspace{5pt} \\-Aláhúzás: kijelölt szövegrész aláhúzása.
 \\Gyorsbillentyű: Ctrl + U
-\vspace{5pt} \\-Balra, középre, jobbra sorolás: kijelölt szövegrész adott irányba sorolása. Egy sor esetén a szöveg csak egy irányba sorolható.
-\\Gyorsbillentyű: Ctrl + Q, Ctrl+E, Ctrl+R
 \vspace{5pt} \\-Undo gomb: A szövegdoboz utolsó változtatását visszavonja. Fontos, hogy csak a szövegdobozon működik, note vagy page törlésre, átnevezésre, stb… nem!
 \\Gyorsbillentyű: Ctrl + Z
 \vspace{5pt} \\-Redo gomb: Az undo gomb ellentéte. Fontos, hogy csak a szövegdobozon működik, note vagy page törlésre, átnevezésre, stb… nem!
 \\Gyorsbillentyű: Ctrl + Y
+\vspace{10pt} \\Nem számít, hogy a szöveg méret, szín és stílusnál mi van éppen kijelölve. Az újonnan beírt szöveg mindig fekete színű lesz, 14-es betűméretű és egyszerű stílusú. Ezen tulajdonságokat megváltoztatni a legördülő menük újabb használatával lehetséges
 
 \vspace{5pt} \noindent \textbf{7}-jelzett gomb a mentés gomb. Gyorsbillentyű: Ctrl + S. Fontos, hogy minden egyes alkalommal megnyomni, amikor egy lap tartalmán változtatunk, mert így kerülnek a módosítások mentésre. 
 \vspace{5pt} \\Ha nem használjuk, és véletlenül átlépünk egy másik lapra, akkor az összes eddig bevitt információ elveszlik. Szerencsére az Undo gomb használatával visszahozható az elveszett információ, ha ez valamilyen oknál fogva nem működne, akkor a bevitt adatok ténylegesen elvesztek.
-\subsection{!!!!!!!!!!!!!Mentést meg kell változtatni, a mentés csak az adatbázisba való mentésre vonatkozzon!}
+\Section{!!!!!!!!!!!!!Mentést meg kell változtatni, a mentés csak az adatbázisba való mentésre vonatkozzon!}
 
 
 
-\newpage \subsection{Kereső menü}
+\newpage \Section{Kereső menü}
+
+Az 5.2-es ábrán látható a kereső menü felépítése, a pirossal számozott elemek leírása található a kép alatt.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/doc_4.png}
+	\includegraphics[scale=0.5]{images/doc_4.png}
 	\caption{Kereső menü működés közben.}
-	\label{fig:menu_search}
+	\label{fig:menu_search_2}
 \end{figure}
 
 \vspace{5pt} \noindent \textbf{1}-essel jelölt elem a ’search bar’ (kereső sor). Jegyzetek, lapok és lapok tartalma között keres. Ha jegyzet neve, lap neve, vagy lap tartalma tartalmazza a beírt kifejezést, akkor lesz találat. 
@@ -71,7 +76,7 @@
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.7]{images/doc_5.png}
+	\includegraphics[scale=0.4]{images/doc_5.png}
 	\caption{Keresési folyamat szemléltetése.}
 	\label{fig:menu_search_searchBar}
 \end{figure}
@@ -94,27 +99,15 @@
 
 
 
-\subsection{Adattárolás}
+\Section{Adattárolás}
 
 Az adatok felhőalapú adatbázisban kerülnek tárolásra, így megoldva a szinkronizáció problémáját. Egy hátránya van ennek, ahogy az adatbázisok leírásánál említettem, ha nincs internetkapcsolat, akkor nem működik a program. Tehát az internetelérés a megfelelő működés szempontjából létfontosságú.
-\vspace{5pt} \\Az \textbf{!!!!!!!!!!!XY!!!!!!!!!!!!} adatbázis használata mögött semmi konkrét indoklás nincs, nem nyújt semmi extra funkciót, amiért ezt a szolgáltatót választottam másik helyett.
+\vspace{5pt} \\A Firebase adatbázis használata mögött semmi konkrét indoklás nincs, nem nyújt semmi extra funkciót, amiért ezt a szolgáltatót választottam másik helyett.
 
-\subsection{Titkosítás és kulcskezelés}
+\Section{Titkosítás és kulcskezelés}
 
 Az adatok védelmére az AES titkosítási algoritmust használtam, főként a tesztekből megállapított tulajdonságai miatt. Mivel az alkalmazást én fogom használni a későbbiekben, nem nagyobb célközönség felé irányul, ezért egy aszimmetrikus titkosítási algoritmus használatát végképp nem látom szükségesnek.
 \\A titkosítási folyamat és a kulcskezelés is alkalmazás szintjén történik. Nagy valószínűséggel adatbázis szintjén is meg lehetett volna ezt oldani, ez igazából az adatbázis szolgáltató iránti bizalmon alapszik, hogy az ember megbízik-e a szolgáltató kulcskezelési és titkosítási módszereiben.
 
-\subsection{!!!!VALAMILYEN RÉSZLETES FORRÁSKÓD KÉNE IDE + KEYMANAGEMENT LEÍRÁS, INDOKLÁS!!!!}
+\Section{!!!!VALAMILYEN RÉSZLETES FORRÁSKÓD KÉNE IDE + KEYMANAGEMENT LEÍRÁS, INDOKLÁS!!!!}
 
-
-
-\newpage
-A fejezetben be kell mutatni, hogy az elkészült alkalmazás hogyan használható.
-(Az, hogy hogyan kell, hogy működjön, és hogy hogy lett elkészítve, az előző fejezetekben már megtörtént.)
-
-Jellemzően az alábbi dolgok kerülhetnek ide.
-\begin{itemize}
-\item Tesztfuttatások. Le lehet írni a futási időket, memória és tárigényt.
-\item Felhasználói kézikönyv jellegű leírás. Kifejezetten a végfelhasználó szempontjából lehet azt bemutatni, hogy mit hogy lehet majd használni.
-\item Kutatás kapcsán ide főként táblázatok, görbék és egyéb részletes összesítések kerülhetnek.
-\end{itemize}
