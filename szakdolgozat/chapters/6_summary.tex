@@ -1,50 +1,8 @@
 \Chapter{Összefoglalás}
 
----szöveg---
-
-
-\Section{Ismert bug-ok}
-Jelenleg három kisebb bug-ról tudok, ami biztosan megtalálható az alkalmazásban. Egyik bug sem 'töri meg' az alkalmazást, de a gördülékeny működéshez jó lenne a közeljövőben megoldani őket.
-\\ Mind a felhasználói felülethez köthető, kettő a kereső menü keresősávjához, egy pedig a jegyzetek listájához.
-\begin{itemize}
-	\item Bármit írunk be a keresőbe, ha több mint egy találatot dob ki, és rányomunk az első lehetőségre, akkor az a keresősáv szövegdobozába mindig a 'New Note 0'-t fogja behelyettesíteni (vagy a jegyzetek listájának első elemét). Ez egyetlen egyező találat esetén nem érvényes.
-	\item A másik keresősáv bug pedig ehhez, egyetlen egyezés esetéhez köthető. Ha tegyük fel rákeresünk a 'New Note 0'-ra, akkor a legördülő menü eltűnik, attól függetlenül, hogy van helyes találat. A szövegdobozra való újabb kattintással jelenik meg. Ha viszont nem teljes egyezőséggel keresünk rá valamire, például azt írjuk be, hogy 'New note 0', akkor megjelenik az egyező találat egyetlen egyezés esetén is. Valamilyen case-sensitive problémája lehet, amire sajnos nem tudtam rájönni.
-	\item Ha a jegyzetek menüben egy lap tartalmát szeretnénk szerkeszteni, elég gyakran eltűnik az adott lap kijelölése, így a szerkesztendő tartalom is. Lehetséges, hogy egy párszor rá kell kattintani a lapra, csak utána marad meg a kijelölés.
-	\\Érdekesség, hogy a kereső menüben található lapok listája esetén nem áll fenn ez a probléma. Lehetséges, hogy a jegyzetek menüben ez a lapok és jegyzetek listaelemei közötti kapcsolat miatt problémás.
-	
-\end{itemize}
-\noindent Szóba kerültek az 5. fejezetben a felhasználói felület létrehozásával kapcsolatos nehézségek, a felsorolt bug-okat is ilyen nehézségnek tudnám be. 
-\\Úgy gondolom, ha nem Swing-et, hanem egy modernebb GUI fejlesztő függvény könyvtárat használtam volna, akkor nem találkoztam volna ezekkel a hibákkal.
-
-
-\Section{További fejlesztési lehetőségek}
-Egyik opció sem kulcsfontosságú az alkalmazás működésének szempontjából, azért nem kerültek bele a program végső verziójába. Hasznos funkciók, de némelyik inkább csak a kényelmet szolgálja.
-\\Az ötletek nagy részének későbbi megvalósítása ettől függetlenül tervbe van.
-
-\subsection{Automatikus elindulás}
-A program automatikusan induljon el az eszköz indításakor.
-
-\subsection{Naptár és emlékeztető}
-Az első megvalósítandó ötlet egy naptár elhelyezése az alkalmazás kettő meglévő menüje mellé.
-\\Ez a képernyő jelenne meg alkalmazás indulásakor, főmenü szerepet töltene be.
-\vspace{5pt}\\A felületen lenne egy naptár, amit lehetne időben előre-hátra lapozni, akárcsak egy rendes naptárat.
-\vspace{5pt}\\Emlékeztető írására alkalmas funkciókat is kéne tartalmazzon, ez lenne a menüpont lényege. A felhasználó írhatna egy emlékeztetőt egy jövőbeli eseményre (múltbeli eseményre hibát dobna) és be lehetne állítani, hogy mikor emlékeztessen (aznap, egy nappal előtte, két nappal előtte, stb..).
-\vspace{5pt}\\Emlékeztető alatt egy felugró ablakra gondolok, ami attól függetlenül, hogy milyen ablakok vannak még megnyitva, azok felett lenne (on top). 
-\\Felépítése hasonló lenne a jegyzet/lap törlése modális ablakéhoz.
-Tartalmazna egy 'OK' gombot, ami bezárja ezt az ablakot, és egy 'Remind me later' gombot, ami ideiglenesen bezárja az ablakot, majd X perc múlva ismét megjeleníti. A gombok felett jelenne meg az emlékeztető szövege.
-
-
-\subsection{Több felhasználó}
-Az alkalmazás alapvetően saját felhasználásra készült, nagy valószínűséggel más nem is fogja használni, de ha mégis akkor valamilyen regisztrációs és bejelentkezős, több felhasználót támogató rendszert létre kellene hozni.
-\vspace{5pt}\\Ebből eredhet több probléma, további dolgok amiket meg kéne oldani:
-\begin{itemize}
-	\item Ha az alkalmazás az eszköz indításakor elindul, akkor először a belépési felület jelenne meg. Ebből a képernyőből a felhasználó naptárbeli emlékeztetői nem kéne, hogy elérhetők legyenek, mivel a program nem is tudja, hogy melyik felhasználó fog belépni.
-	\vspace{5pt}\\Ennek a problémának egy lehetséges megoldása, ha a belépő képernyőn létrehoznánk egy opcionális lehetőséget, (ami általában megtalálható a belépő képernyőkön), mégpedig hogy a program emlékezzen a belépési adataira a felhasználónak, és így lépjen be automatikusan a profiljára. Ebben az esetben az emlékeztetők is meg tudnának jelenni. 
-	\vspace{5pt}\\Nem biztos egyébként, hogy ez az ötlet teljes mértékben megoldaná a problémát, ez még csak egy elképzelés.
-\end{itemize}
-
-\subsection{Beállítások}
-Egy felugró ablak, tele opciókkal.
-\\Kimondottan a felhasználói felület megváltoztatására alkalmas beállításokra gondolok (pl.: színek variálása), de akár működés	módosítására alkalmas beállításokat is tartalmazhatna ez az ablak.
-\\Két titkosítási opciót is el lehetne itt helyezni. Ezalatt arra gondolok, hogy alkalmazás szintű titkosítási megoldást alkalmazzon az applikáció vagy elegendőnek tartja a felhasználó az adatbázis at-rest titkosítását, amit a szolgáltató végez.
-
+Úgy gondolom, hogy sikerült a dolgozat elméleti részének egész jól lefednie a témát és az adott problémákat.
+\vspace{5pt} \\  Biztos vagyok benne, hogy sikerült kiválasztanom a megfelelő titkosítási algoritmust és módszert mind a tesztek és az alkalmazás szempontjából is, hiszen az AES egy nemzetközileg elismert és tesztelt, erős és biztonságos titkosítási algoritmus.
+\vspace{5pt}\\ Az alkalmazás végső verziójával teljes mértékben meg vagyok elégedve. Sikerült kialakítanom szinte minden téren úgy az applikációt, ahogy azt témaválasztáskor elterveztem.
+\vspace{5pt} \\ Úgy érzem, a szövegszerkesztőt még lehetne  tovább fejleszteni és tökéletesíteni, szinte majdnem az elképzeléseknek megfelelően működik, de úgy gondolom több időt kellett volna a fejlesztésére szánnom. \\Ugyanakkor észben kell tartani, hogy az alkalmazás elsődleges funkciója nem a szöveg szerkeszthetősége volt, hanem adatok jegyzet-szerű, struktúrált és biztonságos tárolása, valamint az elérhetőség, rendelkezésre állás, amiket szerintem sikerült jól kiviteleznem.
+\vspace{5pt}\\ Összefoglalva meg vagyok elégedve a munkámmal és a dolgozattal, sok hasznos dolgot tanultam adatbiztonságtól kezdve idegen kód olvasásáig, amik a jövőben biztosan hasznomra válnak.
+\vspace{5pt}\\ Ahogy az 5. fejezet végén írtam, az alkalmazást használni és fejlesztését folytatni fogom a jövőben. 

@@ -3,7 +3,7 @@ Ez a fejezet a program tervezésével kapcsolatos információkat, specifikáci�
 
 \Section{Grafikus Felhasználói Felület (GUI) - megjelenés, funkció}
 
-Az alkalmazás két menüpontből álljon, jegyzetek menü és keresés menü. A két menü működése egyedi objektumok használatával történjen.
+Az alkalmazás két menüpontből álljon, jegyzetek és kereső menü. A két menü működése egyedi objektumok használatával történjen.
 
 \subsection{Szükséges adattípusok}
 Szükséges egy Note és egy Page objektum konstruktor létrehozása.
@@ -28,7 +28,7 @@ Szükséges egy Note és egy Page objektum konstruktor létrehozása.
 
 \subsection{Közös elemek}
 
-Vannak olyan elemek, amiknek mindkét menüpontban látszaniuk kell és használhatók kell legyenek. A pirossal bekeretezett és számozott részek ezeket az elemeket mutatját, leírásuk a kép alatt található.
+A következő elemek olyanok, amelyeknek mindkét menüpontban látszaniuk kell és használhatóak kell legyenek. A pirossal bekeretezett és számozott részek ezeket az elemeket jelzik, leírásuk a kép alatt található.
 
 \begin{figure}[h]
 	\centering
@@ -43,8 +43,7 @@ Vannak olyan elemek, amiknek mindkét menüpontban látszaniuk kell és használ
 \vspace{5pt} \\ \textbf{2.} Két menüpont váltására alkalmas gombok helye, ezekre kattintva válthatunk a menük között.
 \vspace{5pt} \\ \textbf{3.} Bezár és tálcáz gombok, funkcióik egyértelműeknek tartom.
 \vspace{10pt} \\Az alkalmazás ablak bárhová legyen elhelyezhető a képernyőn (tehát lehessen húzgálni), amíg a felső sötétebb színű sávon tartjuk lenyomva  a bal egérgombot, viszont átméretezni ne lehessen.
-\vspace{5pt} \\Belépéskor ez a kép fogadja a felhasználót, egyik menüpontban se legyen benne.
-\vspace{5pt} \\Egy logo, kisebb ikon elhelyezését valahova, esetleg az 1-essel jelölt gombok felé jó dizájn ötletnek tartom. 
+\vspace{5pt} \\Belépéskor ez a kép fogadja a felhasználót, egyik menüpontban se legyen benne. 
 
 \subsection{Jegyzetek menü}
 
@@ -59,7 +58,7 @@ A 4.2-es ábrán látható a jegyzetek menü elképzelt felépítése A pirossal
 
 \vspace{5pt} \noindent \textbf{1.} Jegyzetek (Note objektumok) listája, ahol a jegyzetek neve jelenik meg egymás alatt. 
 \\Ha betelne a jegyzetek listája, akkor a görgő segítségével lehet köztük navigálni.
-\\Átnevezni, létrehozni és törölni jegyzeteket a lista alján található gombokkal lehessen. A gombok csak a kijelölt jegyzeteket szerkesszék!
+\\Átnevezni, létrehozni és törölni jegyzeteket a lista alján található gombokkal lehessen. A gombok csak a kijelölt jegyzetet szerkesszék!
 \vspace{5pt} \\ \textbf{2.} Oldalak (Page objektumok) listája. Ha nincs jegyzet kiválasztva, akkor a lista alapvetően üres legyen. Az éppen kijelölt (rákattintott) jegyzet oldalainak nevei legyenek itt felsorolva. 
 \\Egy jegyzethez több oldal is létrehozható, de egy adott oldal csak egy meghatározott jegyzethez tartozhat (feltéve ha nem másoltuk be egy másik jegyzetbe ugyan azt a szöveget és adtunk a lapunknak hasonló címet). 
 \\Ha betelne az oldalak listája, akkor a görgő segítségével lehessen köztük navigálni. 
@@ -74,7 +73,7 @@ A 4.2-es ábrán látható a jegyzetek menü elképzelt felépítése A pirossal
 	\item Undo gomb, ami az előző szerkesztést vonja vissza.
 	\item Redo gomb, ami az előzőleg visszavont szerkesztést csinálja újra.
 \end{itemize}
-Az első három pontban leírt funkcióknak csak a kijelölt szövegen legyen hatása.
+Az első és második pontban leírt funkcióknak csak a kijelölt szövegen legyen hatása.
 \\A gombok legyenek gyorsbillentyűkkel is használhatók.
 
 
@@ -102,12 +101,12 @@ Beírt szövegre a nagyító gombra való kattintással tudjunk keresni, vagy a 
 \\Gombra való kattintással lehessen kiválasztani hogy melyik lista látszódjon.
 \vspace{5pt} \\ \textbf{3.} A jegyzetek menünél bemutatott szövegszerkesztő, melynek működése legyen megegyező.
 A kijelölt lap szövege jelenjen meg itt, legyen szerkeszthető.
-\vspace{5pt} \\ \textbf{4.} A 2. pontban jellemzett gombok esetén két lehetőség van: vagy a jegyzetek listája látszik, vagy a lapok listája. 
+\vspace{5pt} \\ \textbf{4.} A 2. pontban jellemzett gombok esetén két lehetőség legyen: vagy a jegyzetek listája látszódjon, vagy a lapok listája. 
 \\A listák az érvényes találatokat tartalmazzák.
-\\Lehessen a listák elemei között (úgy mint a jegyzetek menüben) kattintással választani. Ismét két lehetőség van:
+\\Lehessen a listák elemei között (úgy mint a jegyzetek menüben) kattintással választani. Ilyenkor további két lehetőség legyen:
 \begin{itemize}
 	\item Ha egy jegyzet listaelemet választunk, akkor a program tegyen át a jegyzetek menüpontba, és legyen a kiválasztott jegyzet kijelölve. Ha a jegyzetet görgetéssel lehet elérni, akkor a görgő is legyen a megfelelő pozícióba úgy, hogy látszódjon a listán a kiválasztott elem. Lapja ne legyen kijelölve, szövegdoboz legyen üres.
-	\item Ha egy lap listaelemet választunk, akkor a szövegdobozban jelenjen meg a szerkesztett tartalma. Legyen itt is szerkeszthető, a szerkesztések legyenek érzékelhetők a jegyzetek menüből is.
+	\item Ha egy lap listaelemet választunk, akkor a szövegdobozban jelenjen meg a  tartalma. Legyen itt is szerkeszthető a tartalom.
 \end{itemize}
 
 \Section{Adatbázis}

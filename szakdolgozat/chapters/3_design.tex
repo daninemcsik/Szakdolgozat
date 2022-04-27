@@ -246,417 +246,325 @@ A számítógépem paraméterei:
 \end{center}
 Úgy gondolom, hogy az algoritmusok biztonságával kapcsolatosan megfelelő méréseket nem tudok végezni, ezért nem szerepelnek a dokumentumban. A táblázat ’Sikerült-e már feltörni’ sorában lévő információk is az interneten talált adatok.\newline
 
-\newpage \noindent \textbf{AES} (Az összes táblázat értékei milliszekundumban (ms) értendőek)
-
+\newpage
+\noindent Az AES algoritmusok 128 bit nagyságú kulcsot használtak. A táblázatokban szereplő értékek milliszekundumban (ms) értendők.
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{500KB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Titkosítás} \newline \textbf{500KB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás} & 49 & 44 & 46 & 43 & 48 & \textbf{46,2} \\
+		\textbf{1.mérés} & 49 & 51 & 73 & 48\\
 		\hline
-		\textbf{Visszafejtés} & 7 & 7 & 6 & 7 & 7 & \textbf{7,2} \\
+		\textbf{2.mérés} & 44 & 50 & 69 & 44\\
 		\hline
-		 & \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		 \hline
-		 \textbf{Titkosítás} & 46 & 44 & 44 & 47 & 61 & \\
-		 \hline
-		 \textbf{Visszafejtés} & 7 & 8 & 6 & 8 & 8 &\\
-		 \hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+		\textbf{3.mérés} & 46 & 50 & 70 & 49\\
 		\hline
-		\textbf{1MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{4.mérés} & 43 & 50 & 74 & 49\\
 		\hline
-		\textbf{Titkosítás} & 55 & 51 & 57 & 58 & 55 &\textbf{54,2} \\
+		\textbf{5.mérés} & 48 & 56 & 71 & 46\\
 		\hline
-		\textbf{Visszafejtés} &13 & 12 & 11 & 12 & 12 &	\textbf{12}  \\
+		\textbf{6.mérés} & 46 & 57 & 74 & 50\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{7.mérés} & 44 & 53 & 74 & 52\\
 		\hline
-		\textbf{Titkosítás} & 54 & 53 & 57 & 51 & 51 & \\
+		\textbf{8.mérés} & 44 & 57 & 74 & 52\\
 		\hline
-		\textbf{Visszafejtés} & 12 & 12 & 11 & 12 & 13 & \\
+		\textbf{9.mérés} & 47 & 58 & 70 & 50\\
+		\hline
+		\textbf{10.mérés} & 61 & 58 & 70 & 46\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{46,2} & \textbf{54} & \textbf{71,9} & \textbf{48,6}\\
 		\hline
 	\end{tabular}
 \end{center}
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{2MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{500KB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás} & 52 & 58 & 51 & 56 & 51 & \textbf{56,7} \\
+		\textbf{1.mérés} & 7 & 17 & 28 & 14\\
 		\hline
-		\textbf{Visszafejtés} &18 & 17 & 17 & 17 & 17 &	\textbf{18}  \\
+		\textbf{2.mérés} & 7 & 21 & 28 & 13\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 6 & 17 & 29 & 12\\
 		\hline
-		\textbf{Titkosítás} & 60 & 55 & 60 & 70 & 54 & \\
+		\textbf{4.mérés} & 7 & 16 & 35 & 13\\
 		\hline
-		\textbf{Visszafejtés} & 20 & 18 & 20 & 18 & 18 & \\
+		\textbf{5.mérés} & 7 & 17 & 28 & 13\\
+		\hline
+		\textbf{6.mérés} & 7 & 18 & 35 & 12\\
+		\hline
+		\textbf{7.mérés} & 8 & 16 & 33 & 14\\
+		\hline
+		\textbf{8.mérés} & 6 & 20 & 29 & 15\\
+		\hline
+		\textbf{9.mérés} & 8 & 17 & 29 & 14\\
+		\hline
+		\textbf{10.mérés} & 8 & 19 & 30 & 14\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{7,2} & \textbf{17,8} & \textbf{30,4} & \textbf{13,4}\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Titkosítás} \newline \textbf{1MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
+		\hline
+		\textbf{1.mérés} & 55 & 70 & 105 & 60\\
+		\hline
+		\textbf{2.mérés} & 51 & 63 & 98 & 65\\
+		\hline
+		\textbf{3.mérés} & 57 & 68 & 109 & 57\\
+		\hline
+		\textbf{4.mérés} & 58 & 67 & 102 & 58\\
+		\hline
+		\textbf{5.mérés} & 55 & 68 & 110 & 62\\
+		\hline
+		\textbf{6.mérés} & 54 & 71 & 106 & 58\\
+		\hline
+		\textbf{7.mérés} & 53 & 63 & 102 & 59\\
+		\hline
+		\textbf{8.mérés} & 57 & 65 & 105 & 64\\
+		\hline
+		\textbf{9.mérés} & 51 & 70 & 107 & 53\\
+		\hline
+		\textbf{10.mérés} & 51 & 72 & 100 & 56\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{54,2} & \textbf{67,7} &\textbf{ 104,4} & \textbf{59,2}\\
 		\hline
 	\end{tabular}
 \end{center}
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{3MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{1MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&55&64&63&56&60&\textbf{61,1} \\
+		\textbf{1.mérés} & 13 & 29 & 59 & 18\\
 		\hline
-		\textbf{Visszafejtés}&20&22&21&21&21&\textbf{21,2} \\
+		\textbf{2.mérés} & 12 & 30 & 58 & 21\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 11 & 30 & 68 & 18\\
 		\hline
-		\textbf{Titkosítás}&73&59&64&58&59& \\
+		\textbf{4.mérés} & 12 & 31 & 58 & 19\\
 		\hline
-		\textbf{Visszafejtés}&23&21&20&22&21& \\
+		\textbf{5.mérés} & 12 & 30 & 59 & 21\\
+		\hline
+		\textbf{6.mérés} & 12 & 31 & 58 & 18\\
+		\hline
+		\textbf{7.mérés} & 12 & 32 & 59 & 20\\
+		\hline
+		\textbf{8.mérés} & 11 & 29 & 59 & 20\\
+		\hline
+		\textbf{9.mérés} & 12 & 27 & 59 & 18\\
+		\hline
+		\textbf{10.mérés} & 13 & 30 & 56 & 19\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{12} & \textbf{29,9} & \textbf{59,3} & \textbf{19,2}\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Titkosítás} \newline \textbf{2MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
+		\hline
+		\textbf{1.mérés} & 52 & 86 & 149 & 71\\
+		\hline
+		\textbf{2.mérés} & 58 & 85 & 148 & 68\\
+		\hline
+		\textbf{3.mérés} & 51 & 90 & 157 & 65\\
+		\hline
+		\textbf{4.mérés} & 56 & 86 & 149 & 66\\
+		\hline
+		\textbf{5.mérés} & 51 & 85 & 145 & 71\\
+		\hline
+		\textbf{6.mérés} & 60 & 97 & 161 & 76\\
+		\hline
+		\textbf{7.mérés} & 55 & 86 & 166 & 69\\
+		\hline
+		\textbf{8.mérés} & 60 & 95 & 153 & 68\\
+		\hline
+		\textbf{9.mérés} & 70 & 89 & 157 & 70\\
+		\hline
+		\textbf{10.mérés} & 54 & 87 & 154 & 74\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{56,7} & \textbf{88,6} & \textbf{153,9} & \textbf{69,8} \\
 		\hline
 	\end{tabular}
 \end{center}
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{4MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{2MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&66&63&60&56&58&\textbf{63,2} \\
+		\textbf{1.mérés} & 18 & 48 & 109 & 32\\
 		\hline
-		\textbf{Visszafejtés}&23&23&22&23&22&\textbf{23} \\
+		\textbf{2.mérés} & 17 & 47 & 110 & 33\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 17 & 48 & 111 & 32\\
 		\hline
-		\textbf{Titkosítás}&72&62&66&67&62&\\
+		\textbf{4.mérés} & 17 & 48 & 110 & 32\\
 		\hline
-		\textbf{Visszafejtés}&24&24&23&23&23& \\
+		\textbf{5.mérés} & 17 & 48 & 110 & 32\\
 		\hline
-	\end{tabular}
-\end{center}
-
-\newpage \noindent \textbf{DES}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+		\textbf{6.mérés} & 20 & 49 & 136 & 33\\
 		\hline
-		\textbf{500KB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{7.mérés} & 18 & 49 & 137 & 35\\
 		\hline
-		\textbf{Titkosítás}&51&50&50&50&56&\textbf{54} \\
+		\textbf{8.mérés} & 20 & 50 & 111 & 35\\
 		\hline
-		\textbf{Visszafejtés}&17&21&17&16&17&\textbf{17,8} \\
+		\textbf{9.mérés} & 18 & 49 & 111 & 32\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{10.mérés} & 18 & 50 & 112 & 34\\
 		\hline
-		\textbf{Titkosítás}&57&53&57&58&58&\\
 		\hline
-		\textbf{Visszafejtés}&18&16&20&17&19&\\
+		\textbf{Átlag} & \textbf{18} & \textbf{48,5} & \textbf{115,7} & \textbf{33}\\
 		\hline
 	\end{tabular}
 \end{center}
 
+\newpage
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{1MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Titkosítás} \newline \textbf{3MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&70&63&68&67&68&\textbf{67,7} \\
+		\textbf{1.mérés} & 55 & 109 & 205 & 96\\
 		\hline
-		\textbf{Visszafejtés}&29&30&30&31&30&\textbf{29,9}  \\
+		\textbf{2.mérés} & 64 & 108 & 216 & 80\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 63 & 114 & 241 & 80\\
 		\hline
-		\textbf{Titkosítás}&71&63&65&70&72& \\
+		\textbf{4.mérés} & 56 & 98 & 209 & 78\\
 		\hline
-		\textbf{Visszafejtés}&31&32&29&27&30& \\
+		\textbf{5.mérés} & 60 & 113 & 204 & 84\\
 		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+		\textbf{6.mérés} & 73 & 117 & 209 & 79\\
 		\hline
-		\textbf{2MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{7.mérés} & 59 & 103 & 238 & 78\\
 		\hline
-		\textbf{Titkosítás}&86&85&90&86&85&\textbf{88,6}\\
+		\textbf{8.mérés} & 64 & 117 & 206 & 81\\
 		\hline
-		\textbf{Visszafejtés}&48&47&48&48&48&\textbf{48,5} \\
+		\textbf{9.mérés} & 58 & 113 & 242 & 86\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{10.mérés} & 59 & 113 & 204 & 85\\
 		\hline
-		\textbf{Titkosítás}&97&86&95&89&87& \\
 		\hline
-		\textbf{Visszafejtés}&49&49&50&49&49& \\
+		\textbf{Átlag} & \textbf{61,1} & \textbf{110,5} & \textbf{217,4} & \textbf{82,7} \\
 		\hline
 	\end{tabular}
 \end{center}
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{3MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{3MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&109&108&114&98&113&\textbf{110,5}\\
+		\textbf{1.mérés} & 20 & 68 & 162 & 41\\
 		\hline
-		\textbf{Visszafejtés}&68&67&67&68&69&\textbf{67,9}\\
+		\textbf{2.mérés} & 22 & 67 & 163 & 41\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 21 & 67 & 199 & 42\\
 		\hline
-		\textbf{Titkosítás}&117&103&117&113&113& \\
+		\textbf{4.mérés} & 21 & 68 & 163 & 42\\
 		\hline
-		\textbf{Visszafejtés}&67&68&67&70&68& \\
+		\textbf{5.mérés} & 21 & 69 & 162 & 41\\
+		\hline
+		\textbf{6.mérés} & 23 & 67 & 164 & 45\\
+		\hline
+		\textbf{7.mérés} & 21 & 68 & 201 & 42\\
+		\hline
+		\textbf{8.mérés} & 20 & 67 & 162 & 43\\
+		\hline
+		\textbf{9.mérés} & 22 & 70 & 200 & 42\\
+		\hline
+		\textbf{10.mérés} & 21 & 68 & 164 & 45\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{21,2} & \textbf{67,9} & \textbf{174} & \textbf{42,4}\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\newpage
+\begin{center}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+		\hline
+		\textbf{Titkosítás} \newline \textbf{4MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
+		\hline
+		\textbf{1.mérés} & 66 & 135 & 258 & 93\\
+		\hline
+		\textbf{2.mérés} & 63 & 115 & 254 & 95\\
+		\hline
+		\textbf{3.mérés} & 60 & 137 & 258 & 96\\
+		\hline
+		\textbf{4.mérés} & 56 & 135 & 255 & 93\\
+		\hline
+		\textbf{5.mérés} & 58 & 131 & 303 & 94\\
+		\hline
+		\textbf{6.mérés} & 72 & 137 & 262 & 91\\
+		\hline
+		\textbf{7.mérés} & 62 & 133 & 263 & 91\\
+		\hline
+		\textbf{8.mérés} & 66 & 137 & 310 & 95\\
+		\hline
+		\textbf{9.mérés} & 67 & 123 & 259 & 97\\
+		\hline
+		\textbf{10.mérés} & 62 & 137 & 270 & 92\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{63,2} & \textbf{132} & \textbf{269,2} & \textbf{93,7}\\
 		\hline
 	\end{tabular}
 \end{center}
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{4MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{4MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&135&115&137&135&131&\textbf{132} \\
+		\textbf{1.mérés} & 23 & 84 & 212 & 51\\
 		\hline
-		\textbf{Visszafejtés}&84&85&83&83&83&\textbf{85} \\
+		\textbf{2.mérés} & 23 & 85 & 213 & 53\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 22 & 83 & 213 & 52\\
 		\hline
-		\textbf{Titkosítás}&137&133&137&123&137&\\
+		\textbf{4.mérés} & 23 & 83 & 213 & 50\\
 		\hline
-		\textbf{Visszafejtés}&91&84&86&88&83& \\
+		\textbf{5.mérés} & 22 & 83 & 262 & 40\\
 		\hline
-	\end{tabular}
-\end{center}
-
-\newpage \noindent \textbf{Triple DES}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+		\textbf{6.mérés} & 24 & 91 & 217 & 54\\
 		\hline
-		\textbf{500KB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{7.mérés} & 24 & 84 & 216 & 52\\
 		\hline
-		\textbf{Titkosítás}&73&69&70&74&71&\textbf{71,9} \\
+		\textbf{8.mérés} & 23 & 86 & 265 & 52\\
 		\hline
-		\textbf{Visszafejtés}&28&28&29&35&28&\textbf{30,4} \\
+		\textbf{9.mérés} & 23 & 88 & 214 & 51\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{10.mérés} & 23 & 83 & 266 & 52\\
 		\hline
-		\textbf{Titkosítás}&74&74&74&70&70&\\
 		\hline
-		\textbf{Visszafejtés}&35&33&29&29&30&\\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{1MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&105&98&109&102&110&\textbf{104,4} \\
-		\hline
-		\textbf{Visszafejtés}&59&58&68&58&59&\textbf{59,3}  \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&106&102&105&107&100& \\
-		\hline
-		\textbf{Visszafejtés}&58&59&59&56&59& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{2MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&149&148&157&149&145&\textbf{153,9}\\
-		\hline
-		\textbf{Visszafejtés}&109&110&111&110&110&\textbf{115,7} \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&161&166&153&157&154& \\
-		\hline
-		\textbf{Visszafejtés}&136&137&111&111&112& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{3MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&205&216&241&209&204&\textbf{217,4}\\
-		\hline
-		\textbf{Visszafejtés}&162&163&199&163&162&\textbf{174}\\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&209&238&206&242&204& \\
-		\hline
-		\textbf{Visszafejtés}&164&201&162&200&164& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{4MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&258&254&258&255&303&\textbf{269,2}\\
-		\hline
-		\textbf{Visszafejtés}&212&213&213&213&262&\textbf{229,1}\\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&262&263&310&259&270&\\
-		\hline
-		\textbf{Visszafejtés}&217&216&265&214&266& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-
-\newpage \noindent \textbf{Blowfish}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{500KB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&48&44&49&49&46&\textbf{48,6} \\
-		\hline
-		\textbf{Visszafejtés}&14&13&12&13&13&\textbf{13,4} \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&50&52&52&50&46&\\
-		\hline
-		\textbf{Visszafejtés}&12&14&15&14&14&\\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{1MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&60&65&57&58&62&\textbf{59,2}\\
-		\hline
-		\textbf{Visszafejtés}&18&21&18&19&21&\textbf{19,2}  \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&58&59&64&53&56& \\
-		\hline
-		\textbf{Visszafejtés}&18&20&20&18&19& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{2MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&71&68&65&66&71&\textbf{69,8}\\
-		\hline
-		\textbf{Visszafejtés}&32&33&32&32&32&\textbf{33} \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&76&69&68&70&74& \\
-		\hline
-		\textbf{Visszafejtés}&33&35&35&32&34& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{3MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&96&80&80&78&84&\textbf{82,7}\\
-		\hline
-		\textbf{Visszafejtés}&41&41&42&42&41&\textbf{42,4}\\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&79&78&81&86&85& \\
-		\hline
-		\textbf{Visszafejtés}&45&42&43&42&45& \\
-		\hline
-	\end{tabular}
-\end{center}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{4MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&93&95&96&93&94&\textbf{93,7}\\
-		\hline
-		\textbf{Visszafejtés}&51&53&52&50&40&\textbf{50,7}\\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&91&91&95&97&92&\\
-		\hline
-		\textbf{Visszafejtés}&54&52&52&51&52& \\
+		\textbf{Átlag} & \textbf{23} & \textbf{85} & \textbf{229,1} & \textbf{50,7}\\
 		\hline
 	\end{tabular}
 \end{center}
 
 
 \newpage \noindent A fájl mérete titkosítás előtt és után minden esetben megegyezett, kivéve pár bájt különbséggel.
+\\Az átlagértékeket külön táblázatokba összegyűjtöttem jobb átláthatóság érdekében:
 
 \begin{center}
 	
@@ -700,112 +608,87 @@ A számítógépem paraméterei:
 \end{center}
 
 
-\noindent A táblázat a mért átlagértékeket tartalmazza.
-\vspace{5pt}\\Volt néhány esetben viszonylag nagy eltérés az értékek között, például a Triple DES esetében, a 4MB méret 5.mérése ~50 milliszekundummal nagyobb mint a másik 4 mérés. Pontosabb átlagértékeket kaphatnánk, ha az egyik módszerrel X méretű fájlt mondjuk százszor titkosítanánk, nem pedig csak tízszer, és az így kapott eredményeket átlagolnánk.
-\vspace{5pt}\\Ettől függetlenül az így kapott értékekről lehet következtetéseket vonni
+\noindent Néhány esetben viszonylag nagy eltérés volt az értékek között, például a Triple DES esetében, a 4MB méret 5.mérése ~50 milliszekundummal nagyobb mint a többi mérés. Pontosabb átlagértékeket kaphatnánk, ha az egyik módszerrel X méretű fájlt mondjuk százszor titkosítanánk, nem pedig csak tízszer, és az így kapott eredményeket átlagolnánk.
+\vspace{5pt}\\Ettől függetlenül az így kapott értékekről lehet következtetéseket vonni:
 \vspace{5pt}\\Mindkét téren (titkosítás és visszafejtés) az AES használata bizonyult a leggyorsabbnak. Ahogy a fájl mérete nőtt, úgy az AES titkosítási ideje nem nőtt olyan látványosan, mint a többi algoritmus esetében. Visszafejtési időre szintén igaz ez az állítás. 
 \\Az AES titkosításhoz 128 bit nagyságú kulcsot használtam.
 \vspace{5pt}\\Gyorsaságot tekintve legközelebb az AES-hez a Blowfish állt, mind visszafejtés és titkosítás terén is.
-\vspace{5pt}\\A DES és a Triple DES közötti egyre inkább növekedő különbség várható volt, hiszen a Triple DES háromszor végzi el azt, amit a DES csak egyszer. Ennek ellenére titkosítási időben nem érte el a Triple DES az elődje háromszorosát, habár nagyobb fájlméret esetén a növekedésüket nézve valószínűleg el fogja, sőt ezt a tendenciát követve valószínűleg a különbség több, mint a háromszorosára is nőhet. Visszafejtési időben sokkal inkább látszik ez a különbség, 4 MB-os fájl titkosítása kétszer addig tart a Triple DES-nek, mint a simának, visszafejtést nézve 4 MB esetén ez az érték majdnem a háromszorosára nőtt.
-\vspace{5pt}\\A program szempontjából valószínűtlennek tartom a 4MB-nál nagyobb fájl lehetőségét, de a mérések kedvéért egy random 64MB nagyságú fájl titkosítását is elvégeztem ugyanilyen módon. 
-\vspace{5pt}\\A kapott eredmények (szintén milliszekundumban értendők):
+\vspace{5pt}\\A DES és a Triple DES közötti egyre inkább növekedő különbség várható volt, hiszen a Triple DES háromszor végzi el azt, amit a DES csak egyszer. Ennek ellenére titkosítási időben nem érte el a Triple DES az elődje háromszorosát, habár nagyobb fájlméret esetén a növekedésüket nézve valószínűleg el fogja, sőt ezt a tendenciát követve valószínűleg a különbség több, mint a háromszorosára is nőhet. Visszafejtési időben sokkal inkább látszik ez a különbség, 4 MB-os fájl titkosítása átlagosan kétszer addig tart a Triple DES-nek, mint a DES-nek, visszafejtést nézve 4 MB esetén ez az érték közel háromszorosára nőtt.
+\vspace{5pt}\\A program szempontjából valószínűtlennek tartom a 4MB-nál nagyobb fájl lehetőségét, de a mérések kedvéért 64MB nagyságú fájl titkosítását is elvégeztem ugyanilyen módon. 
 
-\newpage \noindent \textbf{AES}
 
+\newpage
+A kapott eredmények (szintén milliszekundumban értendők):
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{64MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Titkosítás} \newline \textbf{64MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&392&369&359&411&364&\textbf{374,3} \\
+		\textbf{1.mérés} & 392 & 1678 & 3505 & 956\\
 		\hline
-		\textbf{Visszafejtés}&298&314&300&297&289&\textbf{307,2} \\
+		\textbf{2.mérés} & 369 & 1314 & 3524 & 950\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 359 & 1703 & 3522 & 968\\
 		\hline
-		\textbf{Titkosítás}&377&354&374&377&366&\\
+		\textbf{4.mérés} & 411 & 1688 & 3512 & 993\\
 		\hline
-		\textbf{Visszafejtés}&289&285&401&308&291&\\
+		\textbf{5.mérés} & 364 & 1676 & 3515 & 979\\
+		\hline
+		\textbf{6.mérés} & 377 & 1682 & 3514 & 974\\
+		\hline
+		\textbf{7.mérés} & 354 & 1311 & 3514 & 974\\
+		\hline
+		\textbf{8.mérés} & 374 & 1328 & 4351 & 974\\
+		\hline
+		\textbf{9.mérés} & 377 & 1693 & 3518 & 1089\\
+		\hline
+		\textbf{10.mérés} & 366 & 1694 & 3501 & 997\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{374,3} & \textbf{1576,6} & \textbf{3597,6} & \textbf{985,4}\\
 		\hline
 	\end{tabular}
 \end{center}
 
-\noindent \textbf{DES}
-
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.6cm}|p{1.6cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.5cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{64MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{64MB} & \textbf{AES} & \textbf{DES} & \textbf{Triple DES} & \textbf{Blowfish}\\
 		\hline
-		\textbf{Titkosítás}&1678&1314&1703&1688&1676&\textbf{1576,6} \\
+		\textbf{1.mérés} & 298 & 1301 & 3451 & 735\\
 		\hline
-		\textbf{Visszafejtés}&1301&1272&1323&1297&1305&\textbf{1326,1} \\
+		\textbf{2.mérés} & 314 & 1272 & 3464 & 775\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 300 & 1323 & 3516 & 755\\
 		\hline
-		\textbf{Titkosítás}&1681&1311&1328&1693&1694&\\
+		\textbf{4.mérés} & 297 & 1297 & 3452 & 762\\
 		\hline
-		\textbf{Visszafejtés}&1309&1560&1297&1299&1298&\\
+		\textbf{5.mérés} & 289 & 1305 & 3447 & 747\\
 		\hline
-	\end{tabular}
-\end{center}
-
-\noindent \textbf{Triple DES}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.6cm}|p{1.6cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.5cm}|}
+		\textbf{6.mérés} & 289 & 1309 & 3438 & 755\\
 		\hline
-		\textbf{64MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{7.mérés} & 285 & 1560 & 3441 & 767\\
 		\hline
-		\textbf{Titkosítás}&3505&3524&3522&3512&3515&\textbf{3597,6}\\
+		\textbf{8.mérés} & 401 & 1297 & 4269 & 763\\
 		\hline
-		\textbf{Visszafejtés}&3451&3464&3516&3452&3447&\textbf{3536,6} \\
+		\textbf{9.mérés} & 308 & 1299 & 3435 & 764\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{10.mérés} & 291 & 1298 & 3453 & 750\\
 		\hline
-		\textbf{Titkosítás}&3514&3514&4351&3518&3501&\\
 		\hline
-		\textbf{Visszafejtés}&3438&3441&4269&3435&3453&\\
-		\hline
-	\end{tabular}
-\end{center}
-
-\noindent \textbf{Blowfish}
-
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.2cm}|}
-		\hline
-		\textbf{64MB} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&956&950&968&993&979&\textbf{985,4} \\
-		\hline
-		\textbf{Visszafejtés}&735&775&755&762&747&\textbf{757,3} \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&974&974&974&1089&997&\\
-		\hline
-		\textbf{Visszafejtés}&755&767&763&764&750&\\
+		\textbf{Átlag} & \textbf{307,2} & \textbf{1326,1} & \textbf{3536,6} & \textbf{757,3}\\
 		\hline
 	\end{tabular}
 \end{center}
 
 
-Az előző 500KB-4MB-os táblázat 4MB-os értékeivel összehasonlítva ezeket az értékeket a következőt kapjuk:
+A 4MB-os táblázatok értékeivel összehasonlítva ezeket az értékeket a következőt kapjuk:
 \vspace{5pt}\\Az AES titkosítási ideje 5,92-szeresére nőtt, amíg a visszafejtési ideje 13,35-szörösére.
 \vspace{5pt}\\A DES titkosítási ideje 11,94-szeresére nőtt, amíg a visszafejtési ideje 15,6-szorosára.
 \vspace{5pt}\\A TripleDES titkosítási ideje 13,36 -szorosára nőtt, amíg a visszafejtési ideje 15,44-szeresére.
 \vspace{5pt}\\A Blowfish titkosítási ideje 10,51-szeresére nőtt, amíg a visszafejtési ideje 14,94- szeresére.
-\vspace{5pt}\\Ezek az adatok azért lehetnek érdekesek, mivel ha a 4MB és 64MB-os fájlméretet nézzük, akkor igaz, hogy 64 / 4 = 12, így ezt a logikát követve 12-szeres időnövekedést várhatunk titkosítás és visszafejtés esetén is. Ennek ellenére nem ezt kapjuk, hol többet, hol kevesebbet, tehát az egyenes arányosság logikáját nem követhetjük ebben az esetben. 
-\vspace{5pt}\\Ezt az állítást egyébként igazolhatjuk az 500KB-4MB-os táblázatot nézve is, mivel ott sem pontosan duplázódtak meg az idők, annak ellenére, hogy a fájl mérete dupla akkora lett.
+\vspace{5pt}\\Ezek az adatok azért lehetnek érdekesek, mivel ha a 4MB és 64MB-os fájlméretet nézzük, akkor igaz, hogy 64 / 4 = 12, így ezt a logikát követve 12-szeres időnövekedést várhatunk titkosítás és visszafejtés esetén is. Ennek ellenére nem ezt kapjuk, hol többet, hol kevesebbet, tehát az egyenes arányosság logikája nem alkalmazható az algoritmusokra.
+\vspace{5pt}\\Ezt az állítást igazolhatjuk az 500KB-1MB-2MB-4MB-os táblázatokat nézve is, mivel ezekben a táblázatokban sem duplázódtak meg pontosan az idők, annak ellenére, hogy a fájl mérete dupla akkora lett.
 
 
 \begin{figure}[h]
@@ -823,7 +706,7 @@ Az előző 500KB-4MB-os táblázat 4MB-os értékeivel összehasonlítva ezeket 
 \end{figure}
 
 
-\newpage \noindent  A 64 MB-os esetet külön diagramba rajzoltam, különben összenyomta volna az előző diagramok értékeit:
+\newpage \noindent  A 64 MB-os esetet külön diagramba rajzoltam, különben összenyomta volna az előző diagramokat:
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.8]{images/alg_graf_3.png}
@@ -835,106 +718,118 @@ Az előző 500KB-4MB-os táblázat 4MB-os értékeivel összehasonlítva ezeket 
 \vspace{15pt} \\ \textbf{RSA}
 \vspace{5pt} \\ Szerettem volna a szimmetrikus algoritmusokkal összehasonlítani, de nem lenne korrekt, mivel az adatmennyiség felsőhatára, amit a javax.crypto könyvtár használatával titkosítani tudtam, az 245 byte volt. Ha nagyobb mérettel próbálkoztam ugyanazt a hibaüzenetet kaptam „Data must not be longer than 245 bytes”.
 \vspace{5pt} \\Ezután az interneten jobban utána olvastam a problémának és megtudtam, hogy az RSA algoritmus maximum akkora mennyiségű adatot képes titkosítani, mint az RSA kulcs mérete (mínusz az ún. header data, azaz fejlécadat). 
-\vspace{5pt} \\Kettő hatványait használtam kulcsméret megadására, először 2048 byte nagyságú kulccsal kezdtem. A következő mérések ezzel készültek (szintén milliszekundumban értendők az értékek):
+\vspace{5pt} \\Kettő hatványait használtam kulcsméret megadására, először 2048 bit nagyságú kulccsal kezdtem. A következő mérések ezzel készültek (szintén milliszekundumban értendők az értékek):
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.6cm}|p{1.6cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.5cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{64 byte} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Titkosítás} \newline \textbf{RSA} & \textbf{64 byte} & \textbf{128 byte} & \textbf{245 byte}\\
 		\hline
-		\textbf{Titkosítás}&28&28&25&23&24& \textbf{26,5} \\
+		\textbf{1.mérés} & 28 & 24 & 28\\
 		\hline
-		\textbf{Visszafejtés}&7&6&6&4&6& \textbf{6,3} \\
+		\textbf{2.mérés} & 28 & 24 & 30\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 25 & 26 & 30\\
 		\hline
-		\textbf{Titkosítás}&26&27&30&29&25&\\
+		\textbf{4.mérés} & 23 & 26 & 28\\
 		\hline
-		\textbf{Visszafejtés}&7&5&7&8&7&\\
+		\textbf{5.mérés} & 24 & 25 & 28\\
+		\hline
+		\textbf{6.mérés} & 26 & 21 & 25\\
+		\hline
+		\textbf{7.mérés} & 27 & 23 & 22\\
+		\hline
+		\textbf{8.mérés} & 30 & 28 & 22\\
+		\hline
+		\textbf{9.mérés} & 29 & 26 & 21\\
+		\hline
+		\textbf{10.mérés} & 25 & 28 & 25\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{26,5} & \textbf{25,1} & \textbf{25,9}\\
 		\hline
 	\end{tabular}
 \end{center}
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.6cm}|p{1.6cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.5cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
-		\textbf{128 byte} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{Visszafejtés} \newline \textbf{RSA} & \textbf{64 byte} & \textbf{128 byte} & \textbf{245 byte}\\
 		\hline
-		\textbf{Titkosítás}&24&24&26&26&25& \textbf{25,1} \\
+		\textbf{1.mérés} & 7 & 6 & 7\\
 		\hline
-		\textbf{Visszafejtés}&6&5&7&7&7& \textbf{6,3} \\
+		\textbf{2.mérés} & 6 & 5 & 4\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 6 & 7 & 5\\
 		\hline
-		\textbf{Titkosítás}&21&23&28&26&28 &\\
+		\textbf{4.mérés} & 4 & 7 & 7\\
 		\hline
-		\textbf{Visszafejtés}&4&7&7&5&8&\\
+		\textbf{5.mérés} & 6 & 7 & 6\\
+		\hline
+		\textbf{6.mérés} & 7 & 4 & 4\\
+		\hline
+		\textbf{7.mérés} & 5 & 7 & 9\\
+		\hline
+		\textbf{8.mérés} & 7 & 7 & 5\\
+		\hline
+		\textbf{9.mérés} & 8 & 5 & 7\\
+		\hline
+		\textbf{10.mérés} & 7 & 8 & 6\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{6,3} & \textbf{6,3} & \textbf{6}\\
 		\hline
 	\end{tabular}
 \end{center}
 
-\begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.6cm}|p{1.6cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.5cm}|}
-		\hline
-		\textbf{245 byte} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
-		\hline
-		\textbf{Titkosítás}&28&30&30&28&28& \textbf{25,9} \\
-		\hline
-		\textbf{Visszafejtés}&7&4&5&7&6& \textbf{6} \\
-		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
-		\hline
-		\textbf{Titkosítás}&25&22&22&21&25&\\
-		\hline
-		\textbf{Visszafejtés}&4&9&5&7&6&\\
-		\hline
-	\end{tabular}
-\end{center}
 Ezután megpróbáltam nagyobb fájlokat titkosítani, így növelnem kellett a kulcs nagyságát is.
-\vspace{5pt} \\ A kulcs nagysága: 8192 byte. Titkosítandó fájl nagysága: 1013 byte (a fejlécadat nagysága miatt ez lett a limit, de a kettőt összeadva egyébként $2^{10}$-en, azaz 1024 byte). Titkosított fájl mérete: 1024 byte.
-
-
+\vspace{5pt} \\ A kulcs nagysága: 8192 bit. Titkosítandó fájl nagysága: 1013 byte (a fejlécadat nagysága miatt ez lett a limit, de a kettőt összeadva egyébként $2^{10}$-en, azaz 1024 byte). Titkosított fájl mérete: 1024 byte.
 
 \begin{center}
-	
-	
-	\begin{tabular}{|p{2.4cm}|p{1.6cm}|p{1.6cm}|p{1.7cm}|p{1.7cm}|p{1.8cm}|p{1.5cm}|}
+	\begin{tabular}{|p{2.4cm}|p{2.4cm}|p{2.4cm}|}
 		\hline
-		\textbf{1013 byte} & \textbf{1.mérés} & \textbf{2.mérés} & \textbf{3.mérés} & \textbf{4.mérés} & \textbf{5.mérés} & \textbf{Átlag} \\
+		\textbf{1024 byte} & \textbf{Titkosítás} & \textbf{Visszafejtés}\\
 		\hline
-		\textbf{Titkosítás}&28&21&22&31&29& \textbf{25,6} \\
+		\textbf{1.mérés} & 28 & 117\\
 		\hline
-		\textbf{Visszafejtés}&117&123&121&121&125& \textbf{121,2} \\
+		\textbf{2.mérés} & 21 & 123\\
 		\hline
-		& \textbf{6.mérés} & \textbf{7.mérés} & \textbf{8.mérés} & \textbf{9.mérés} & \textbf{10.mérés} & \\
+		\textbf{3.mérés} & 22 & 121\\
 		\hline
-		\textbf{Titkosítás}&23&24&27&28&23&\\
+		\textbf{4.mérés} & 31 & 121\\
 		\hline
-		\textbf{Visszafejtés}&119&122&121&119&124&\\
+		\textbf{5.mérés} & 29 & 125\\
+		\hline
+		\textbf{6.mérés} & 23 & 119\\
+		\hline
+		\textbf{7.mérés} & 24 & 122\\
+		\hline
+		\textbf{8.mérés} & 27 & 121\\
+		\hline
+		\textbf{9.mérés} & 28 & 119\\
+		\hline
+		\textbf{10.mérés} & 23 & 124\\
+		\hline
+		\hline
+		\textbf{Átlag} & \textbf{25,6} & \textbf{121,1}\\
 		\hline
 	\end{tabular}
 \end{center}
 
-Annak ellenére, hogy ezek az értékek nem  tűnnek nagynak, a számítógépemnek elég sokáig tartott minden mérés elvégzése, volt néhol 10 másodperc is, mire az eredményt megkaptam. Az említett ’System.currentTimeMillis()’ metódus használatát ajánlották az interneten kód futásidejének mérésére, így nem tudom mi lehetett a probléma, de mivel már az 1 kb-os fájl titkosítása eddig tartott, nagyobb fájlmérettel nem próbálkoztam.
-\vspace{5pt} \\Függőleges tengely az eltelt idő milliszekundumban mérve.
-\vspace{15pt} \\DSA mérését és összehasonlítását nem tartom korrektnek, mivel nem nagy méretű adat titkosítására, hanem digitális aláírásokéra lett kifejlesztve.
-\\ECC mérést szintén nem készítettem, mivel nem tudtam elkészíteni. Utánanéztem az interneten és ECC titkosítást elméletileg a javax.crypto könyvtár segítségével nem lehet végrehajtani. Más függvény könyvtárat azért nem használtam, mert úgy gondolom fennáll a lehetősége, hogy eltérnek az algoritmusok implementálásai, így olyan könyvtár használata lenne optimális, amely az összes vizsgált algoritmust tartalmazza.
 
+\noindent Annak ellenére, hogy ezek az értékek nem  tűnnek nagynak, a számítógépemnek elég sokáig tartott minden mérés elvégzése, volt néhol 10 másodperc is, mire az eredményt megkaptam. Az említett ’System.currentTimeMillis()’ metódus használatát ajánlották az interneten kód futásidejének mérésére, így nem tudom mi lehetett a probléma, de mivel már az 1 kb-os fájl titkosítása eddig tartott, nagyobb fájlmérettel nem próbálkoztam.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.8]{images/alg_graf_4.png}
 	\caption{RSA titkosítás, visszafejtés. Függőleges tengely - idő (ms)}
 	\label{fig:rsa_graf}
 \end{figure}
+\\ \noindent DSA mérését és összehasonlítását nem tartom korrektnek, mivel nem nagy méretű adat titkosítására, hanem digitális aláírásokra lett kifejlesztve.
+\\ECC mérést szintén nem készítettem, mivel nem tudtam. Utánanéztem az interneten és ECC titkosítást elméletileg a javax.crypto könyvtár segítségével nem lehet végrehajtani. Más függvény könyvtárat azért nem használtam, mert úgy gondolom fennáll a lehetősége, hogy eltérnek az algoritmusok implementálásai, így olyan könyvtár használata lenne optimális, amely az összes vizsgált algoritmust tartalmazza.
 
 
-\noindent Röviden összefoglalva, a tesztekkel és mérésekkel olyan eredményeket kaptunk, amikre számítottam, annak ellenére, hogy a sebességük a leírásokban nem lett számszerűsítve. 
-\\Az AES-nél nem értek egyet a leírt állítással, miszerint "Hátránya, hogy szoftveresen nehezen implementálható lehet, illetve komplexitása és nagysága miatt teljesítményi ideje is nagy lehet".
+
+\vspace{15pt}\noindent Röviden összefoglalva, a tesztekkel és mérésekkel olyan eredményeket kaptam, amikre számítottam, annak ellenére, hogy a sebességük az előző alfejezetek leírásaiban nem lett számszerűsítve. 
+\\Az AES-nél nem értek egyet a talált állítással, miszerint "Hátránya, hogy szoftveresen nehezen implementálható lehet, illetve komplexitása és nagysága miatt teljesítményi ideje is nagy lehet".
 \\A szoftveres implementálás függvény könyvtár használata miatt volt egyszerű, a matematikai részét nem nekem kellett megoldanom.
 \\Nagy teljesítményi ideje pedig relatív, hiszen a többi vizsgált szimmetrikus algoritmushoz képest az AES-é volt a legkisebb.
