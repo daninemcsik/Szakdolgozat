@@ -37,6 +37,13 @@ public class Note {
 		setId(counter);
 		counter++;
 	}
+	/**
+	 * A note object's empty constructor.
+	
+	 */
+	public Note() {
+		counter++;
+	}
 	
 	/**
 	 * @return	a note's name.
@@ -68,6 +75,11 @@ public class Note {
 	public void removePageFromNote(Page page) {
 		pageList.remove(page.getNoteId());
 	}
+	
+	public void deleteEveryPage() {
+		pageList.clear();
+	}
+	
 	/**
 	 * 
 	 * @return 	ArrayList of the given note's pages.

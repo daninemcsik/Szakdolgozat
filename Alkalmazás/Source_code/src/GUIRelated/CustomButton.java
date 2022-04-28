@@ -6,6 +6,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 public class CustomButton extends JButton{
 	
+	/**
+	 * Randomly generated serial version ID
+	 */
+	private static final long serialVersionUID = 6531371007240993732L;
 	private Color hoverBackgroundColor;
 	private Color pressedBackgroundColor;
 	

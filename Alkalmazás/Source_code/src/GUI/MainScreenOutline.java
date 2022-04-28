@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -8,19 +7,22 @@ import java.awt.Event;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import com.google.firebase.cloud.StorageClient;
 
 import Data.Content;
+import Database.DatabaseFunctions;
+import Encryption.EncryptionFunctions;
+import GUIRelated.PopupWindow;
+import XML.XMLWriter;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
@@ -29,54 +31,46 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
-import javax.swing.JInternalFrame;
 
 
+@SuppressWarnings("deprecation")
 public class MainScreenOutline {
 
 	private JFrame frame;
 	private JPanel upperPanel;
 	private JLabel closeButton;
 	private JLabel minimizeButton;
-	private JLabel openFileButton;
 	private JLabel saveFileButton;
-	private JLabel mainMenuButton;
 	private JLabel notesMenuButton;
 	private JLabel searchMenuButton;
+	private ImageIcon imageIcon;
 	
 	private static Point mouseDownScreenCoords;
     private static Point mouseDownCompCoords;
-	
-    //private int lastSelectedNoteIndex, lastSelectedPageIndex;
     
     private Color buttonBackgroundColor = new Color(33, 35, 39);
    	private Color outlineColor = new Color(63, 66, 72);
    	private Color selectionBlue = new Color(28, 73, 255);
    	private Color selectionRed = new Color(200, 10, 10);
    	private Color selectionGray = new Color(44, 47, 51);
-    
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainScreenOutline window = new MainScreenOutline();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+   	
+   	private StorageClient dbStorageClient;
+   
+   	private PopupWindow popupWindow = new PopupWindow();
+   	
+	public MainScreenOutline(Content notesAndPages, StorageClient dbStorageClient) {
+		this.dbStorageClient = dbStorageClient;
+		initialize(notesAndPages, dbStorageClient);
 	}
 
-	public MainScreenOutline() {
-		initialize();
-	}
-
-	private void initialize() {
-		ImageIcon imageIcon;
-		Content notesAndPages = new Content();
+	private void initialize(Content notesAndPages, StorageClient dbStorageClient) {
+		imageIcon = new ImageIcon(new ImageIcon(MainScreenOutline.class.getResource("/IconsAndPictures/main_icon.png")).getImage().getScaledInstance(40, 40 , Image.SCALE_DEFAULT));	
 		
 		frame = new JFrame();
 		frame.getContentPane().setForeground(Color.BLACK);
@@ -87,15 +81,14 @@ public class MainScreenOutline {
 		frame.setUndecorated(true);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		frame.setIconImage(imageIcon.getImage());
 		
 		
 		
 		
 		NotesMenuScreen notesMenu = new NotesMenuScreen(notesAndPages);
-		MainMenuScreen mainMenu = new MainMenuScreen();
 		SearchMenuScreen searchMenu = new SearchMenuScreen(notesAndPages, notesMenu, this);
 		frame.getContentPane().add(notesMenu);
-		frame.getContentPane().add(mainMenu);
 		frame.getContentPane().add(searchMenu);
 		
 		//FELSÕ SÁV
@@ -125,18 +118,6 @@ public class MainScreenOutline {
 		minimizeButton.setBackground(buttonBackgroundColor);
 		upperPanel.add(minimizeButton);
 		
-		//FÁJL MEGNYITÁS GOMB
-		openFileButton = new JLabel("");
-		imageIcon = new ImageIcon(new ImageIcon(MainScreenOutline.class.getResource("/IconsAndPictures/open_file.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-		openFileButton.setIcon(imageIcon);
-		openFileButton.setHorizontalAlignment(SwingConstants.CENTER);
-		openFileButton.setOpaque(true);
-		openFileButton.setForeground(Color.LIGHT_GRAY);
-		openFileButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		openFileButton.setBackground(buttonBackgroundColor);
-		openFileButton.setBounds(0, 20, 40, 20);
-		upperPanel.add(openFileButton);
-		
 		//FÁJL MENTÉS GOMB
 		saveFileButton = new JLabel("");
 		imageIcon = new ImageIcon(new ImageIcon(MainScreenOutline.class.getResource("/IconsAndPictures/save_file.png")).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
@@ -146,22 +127,12 @@ public class MainScreenOutline {
 		saveFileButton.setForeground(Color.LIGHT_GRAY);
 		saveFileButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		saveFileButton.setBackground(buttonBackgroundColor);
-		saveFileButton.setBounds(40, 20, 40, 20);
+		saveFileButton.setBounds(0, 20, 40, 20);
 		upperPanel.add(saveFileButton);
-		
-		//MAIN MENU BUTTON
-		mainMenuButton = new JLabel("Main menu");
-		mainMenuButton.setBounds(0, 42, 333, 28);
-		mainMenuButton.setBackground(buttonBackgroundColor);
-		mainMenuButton.setForeground(Color.WHITE);
-		mainMenuButton.setHorizontalAlignment(SwingConstants.CENTER);
-		mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
-		mainMenuButton.setOpaque(true);
-		upperPanel.add(mainMenuButton);
-		
+
 		//NOTES MENU BUTTON
 		notesMenuButton = new JLabel("Notes");
-		notesMenuButton.setBounds(333, 42, 333, 28);
+		notesMenuButton.setBounds(0, 42, 500, 28);
 		notesMenuButton.setBackground(buttonBackgroundColor);
 		notesMenuButton.setForeground(Color.WHITE);
 		notesMenuButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,7 +142,7 @@ public class MainScreenOutline {
 		
 		//SEARCH MENU BUTTON
 		searchMenuButton = new JLabel("Search");
-		searchMenuButton.setBounds(666, 42, 333, 28);
+		searchMenuButton.setBounds(500, 42, 500, 28);
 		searchMenuButton.setBackground(buttonBackgroundColor);
 		searchMenuButton.setForeground(Color.WHITE);
 		searchMenuButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -196,9 +167,18 @@ public class MainScreenOutline {
 		
 		//KEYBINDS
 		Action saveFile = new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 4661948930933794639L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				save(notesAndPages, notesMenu, searchMenu);
+				try {
+					save(notesAndPages);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				 
 			}
 		};
@@ -212,188 +192,208 @@ public class MainScreenOutline {
 		
 		
 		
-		
-		//ACTION / MOUSE LISTENERS
+		//LISTENERS
 		upperPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				mouseDownScreenCoords = null;
-                mouseDownCompCoords = null;
+				try {
+					mouseDownScreenCoords = null;
+	                mouseDownCompCoords = null;
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				 mouseDownScreenCoords = e.getLocationOnScreen();
-	             mouseDownCompCoords = e.getPoint();
+				try {
+					mouseDownScreenCoords = e.getLocationOnScreen();
+		             mouseDownCompCoords = e.getPoint();
+				}catch (Exception e1) {
+				}
 			}
 		});
 		upperPanel.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Point currentCoords = e.getLocationOnScreen();
-				frame.setLocation(mouseDownScreenCoords.x + (currentCoords.x - mouseDownScreenCoords.x) - mouseDownCompCoords.x,
-                        mouseDownScreenCoords.y + (currentCoords.y - mouseDownScreenCoords.y) - mouseDownCompCoords.y);
+				try {
+					Point currentCoords = e.getLocationOnScreen();
+					frame.setLocation(mouseDownScreenCoords.x + (currentCoords.x - mouseDownScreenCoords.x) - mouseDownCompCoords.x,
+	                        mouseDownScreenCoords.y + (currentCoords.y - mouseDownScreenCoords.y) - mouseDownCompCoords.y);
+				}catch (Exception e1) {
+				}
 			}
 		});
-		openFileButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				openFileButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				openFileButton.setBorder(BorderFactory.createEmptyBorder());
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				openFileButton.setBackground(selectionBlue);
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				openFileButton.setBackground(buttonBackgroundColor);
-			}
-		});
+		
 		saveFileButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				saveFileButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					saveFileButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
+				try {
 				saveFileButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
 				saveFileButton.setBackground(selectionBlue);
-				save(notesAndPages, notesMenu, searchMenu);
+				try {
+					save(notesAndPages);
+				} catch (Exception e1) {
+					
+				}
 				
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				saveFileButton.setBackground(buttonBackgroundColor);
+				try {
+					saveFileButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		closeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				closeButton.setBackground(selectionRed);
-				closeButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					closeButton.setBackground(selectionRed);
+					closeButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				closeButton.setBackground(buttonBackgroundColor);
-				closeButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					closeButton.setBackground(buttonBackgroundColor);
+					closeButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				frame.dispose();
+				try {
+					save(notesAndPages);
+					frame.dispose();
+					System.exit(0);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		minimizeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				minimizeButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					minimizeButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				minimizeButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					minimizeButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				frame.setState(JFrame.ICONIFIED);
-			}
-		});
-		mainMenuButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				mainMenuButton.setBackground(selectionGray);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				mainMenuButton.setBackground(buttonBackgroundColor);
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {
-				//lastSelectedNoteIndex = notesMenu.getNoteList().getSelectedIndex();
-				//lastSelectedPageIndex = notesMenu.getPageList().getSelectedIndex();
-				notesMenu.setVisible(false);
-				mainMenu.setVisible(true);
-				searchMenu.setVisible(false);
-				mainMenuButton.setBorder(BorderFactory.createLoweredBevelBorder());
-				notesMenuButton.setBorder(BorderFactory.createEmptyBorder());
-				searchMenuButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					frame.setState(JFrame.ICONIFIED);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		notesMenuButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				notesMenuButton.setBackground(selectionGray);
+				try {
+					notesMenuButton.setBackground(selectionGray);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				notesMenuButton.setBackground(buttonBackgroundColor);
+				try {
+					notesMenuButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				notesMenu.setVisible(true);
-				//notesMenu.getNoteList().setSelectedIndex(lastSelectedNoteIndex);
-				//notesMenu.getPageList().setSelectedIndex(lastSelectedPageIndex);
-				mainMenu.setVisible(false);
-				searchMenu.setVisible(false);
-				mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
-				notesMenuButton.setBorder(BorderFactory.createLoweredBevelBorder());
-				searchMenuButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					notesMenu.setVisible(true);
+					searchMenu.setVisible(false);
+					notesMenuButton.setBorder(BorderFactory.createLoweredBevelBorder());
+					searchMenuButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 		});
 		searchMenuButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				searchMenuButton.setBackground(selectionGray);
+				try {
+					searchMenuButton.setBackground(selectionGray);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				searchMenuButton.setBackground(buttonBackgroundColor);
+				try {
+					searchMenuButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//lastSelectedNoteIndex = notesMenu.getNoteList().getSelectedIndex();
-				//lastSelectedPageIndex = notesMenu.getPageList().getSelectedIndex();
-				notesMenu.setVisible(false);
-				mainMenu.setVisible(false);
-				searchMenu.setVisible(true);
-				mainMenuButton.setBorder(BorderFactory.createEmptyBorder());
-				notesMenuButton.setBorder(BorderFactory.createEmptyBorder());
-				searchMenuButton.setBorder(BorderFactory.createLoweredBevelBorder());
-			}
-		});
-		
-		
-	}
-	
-	public void save(Content notesAndPages, NotesMenuScreen notesMenu, SearchMenuScreen searchMenu) {
-		if(notesMenu.isVisible()) {
-			notesMenu.getPageList().getSelectedValue().setPageText(notesMenu.getTextPane().getText());
-			notesMenu.getPageList().getSelectedValue().setPageTextStyle(notesMenu.getTextPane().getStyledDocument());
-		}
-		if(searchMenu.isVisible()) {
-			
-			for(int i = 0; i < notesAndPages.getNoteListModel().getSize(); i++) {
-				
-				for(int j = 0; j < notesAndPages.getNoteListModel().get(i).getNotesPages().size(); j++) {
-					
-					if(notesAndPages.getNoteListModel().get(i).getNotesPages().get(j).equals(searchMenu.getPageList().getSelectedValue())) {
-						notesAndPages.getNoteListModel().get(i).getNotesPages().get(j).setPageText(searchMenu.getTextPane().getText());
-					}
-					
+				try {
+					notesMenu.setVisible(false);
+					searchMenu.setVisible(true);
+					notesMenuButton.setBorder(BorderFactory.createEmptyBorder());
+					searchMenuButton.setBorder(BorderFactory.createLoweredBevelBorder());
+				}catch (Exception e1) {
 				}
 			}
-			
-			searchMenu.getPageList().getSelectedValue().setPageText(searchMenu.getTextPane().getText());	
-		}
-		
+		});
 	}
+		
+		
+		
+		
 
-	public JLabel getMainMenuButton() {
-		return mainMenuButton;
+			
+
+	
+	public void save(Content notesAndPages) throws FileNotFoundException {
+		try {
+			String dirPath = new File(XMLWriter.class.getProtectionDomain().getCodeSource()
+					.getLocation().toURI()).getParent();
+			XMLWriter xmlWriter = new XMLWriter();
+			DatabaseFunctions dbFunc = new DatabaseFunctions();
+			EncryptionFunctions encFunc = new EncryptionFunctions(dbStorageClient);
+			
+			xmlWriter.write(notesAndPages); //output.xml
+			
+			String encryptedFilePath = dirPath + "\\encryptedFile.xml";
+			File encryptedFile = new File(encryptedFilePath);
+			
+			String inputFilePath = dirPath + "\\tempXMLWriter.xml";
+			File inputFile = new File(inputFilePath);
+			encFunc.encrypt(inputFile, encryptedFile, dbStorageClient);
+			
+			dbFunc.storageUpload(dbStorageClient, encryptedFilePath, "applicationData.xml");
+
+			encryptedFile.delete();
+			inputFile.delete();
+		} catch(URISyntaxException e) {
+			int val = popupWindow.createErrorHandlingWindow("Code error 12", "URISyntaxException while saving files");
+			while(val == 1) {
+				
+			}
+		}
 	}
 
 	public JLabel getNotesMenuButton() {
@@ -404,4 +404,7 @@ public class MainScreenOutline {
 		return searchMenuButton;
 	}
 	
+	public void setVisible(boolean state) {
+		frame.setVisible(state);
+	}
 }

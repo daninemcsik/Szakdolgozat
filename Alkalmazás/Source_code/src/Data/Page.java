@@ -1,7 +1,5 @@
 package Data;
 
-import javax.swing.text.StyledDocument;
-
 public class Page{
 	/**
 	 * A page's name.
@@ -27,7 +25,11 @@ public class Page{
 	 * An integer type id.
 	 */
 	private int Id;
-	private StyledDocument pageTextStyle;
+	
+	public Page(String pageName) {
+		this.pageName = pageName;
+		this.pageText = "";
+	}
 	
 	/**
 	 * A page object's constructor. The static counter gets increased
@@ -40,13 +42,32 @@ public class Page{
 	
 	 */
 	public Page(String pageName, String text, int noteid) {
-		this.pageName = pageName + " " + counter;
+		this.pageName = pageName;
 		this.pageText = text;
 		this.noteId = noteid;
 		setId(counter);
 		counter++;
 	}
+	/**
+	 * A page object's constructor. The static counter gets increased
+	 * every time a note object is created. A page object's id is set to
+	 * the current value of the counter integer.
+	 * 
+	 * @param 	pageName	sets the page's name.
+	 * @param 	text		the page's content.
+	 * @param	pageid		the id of the page.
+	 * @param	noteid		the id of the note that contains this page.
 	
+	 */
+	/*
+	public Page(String pageName, String text, int pageid, int noteid) {
+		this.pageName = pageName + " " + counter;
+		this.pageText = text;
+		this.noteId = noteid;
+		setId(pageid);
+		counter++;
+	}
+	*/
 	/**
 	 * @return	the page's name.
 	 */
@@ -81,6 +102,10 @@ public class Page{
 	public int getNoteId() {
 		return noteId;
 	}
+	
+	public void setNoteId(int noteId) {
+		this.noteId = noteId;
+	}
 
 	/**
 	 * @return	the page's id.
@@ -96,13 +121,6 @@ public class Page{
 		this.Id = id;
 	}
 
-	public StyledDocument getPageTextStyle() {
-		return pageTextStyle;
-	}
-
-	public void setPageTextStyle(StyledDocument pageTextStyle) {
-		this.pageTextStyle = pageTextStyle;
-	}
 	
 	
 }

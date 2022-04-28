@@ -9,6 +9,7 @@ import javax.swing.JList;
   *
   */
 public class Content{
+	
 	/**
 	 * A Note type DefaultListModel. Used to initialize a note type list's items.
 	 */
@@ -18,12 +19,13 @@ public class Content{
 	 * A Page type DefaultListModel. Used to initialize a page type list's items.
 	 */
 	DefaultListModel<Page> pagelist = new DefaultListModel<>(); //Ez csak egy megjelenítésre használt tároló elem, az page-eket maguk a note-ok tartalmazzák.
-
+	
 	/**
 	 * @return 	a Note type DefaultListModel.
 	 */
 	public DefaultListModel<Note> getNoteListModel() {
 		return notelist;
+		
 	}
 	
 	/**
@@ -47,6 +49,7 @@ public class Content{
 	 */
 	public void addPageToListModel(Page page) {
 		pagelist.addElement(page);
+	
 	}
 	
 	/**

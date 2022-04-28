@@ -2,8 +2,6 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,24 +13,24 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.MutableComboBoxModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.undo.UndoManager;
 
 import Data.Content;
 import Data.Note;
@@ -41,7 +39,7 @@ import GUIRelated.ComboBoxFilter;
 import GUIRelated.ComboBoxRenderer;
 import GUIRelated.CustomCorner;
 import GUIRelated.CustomScrollbar;
-import GUIRelated.FilteredComboBoxRenderer;
+import GUIRelated.CustomSelectionCaret;
 import GUIRelated.NotesRenderer;
 import GUIRelated.PagesRenderer;
 
@@ -50,8 +48,10 @@ import javax.swing.JList;
 
 public class SearchMenuScreen extends JPanel{
 
-	//private JFrame frame;
+	private static final long serialVersionUID = -8220236144646282738L;
+
 	private JPanel searchPanel;
+	@SuppressWarnings("rawtypes")
 	private JComboBox searchBar;
 	private JLabel searchButton;
 	private JLabel notesSearchResultTab;
@@ -70,10 +70,10 @@ public class SearchMenuScreen extends JPanel{
 	private Color buttonBackgroundColor = new Color(33, 35, 39);
 	private Color outlineColor = new Color(63, 66, 72);
 	private Color panelColor = new Color(80, 83, 87);
-	private Color selectionBlue = new Color(28, 73, 255);
+	private Color selectionBlue = new Color(0, 155, 155);
 	private Color textFieldColor = new Color(44, 47, 51);
 	
-	private TextEditorButtonFunctions textEditorButtons;
+	private TextEditorButtons textEditorButtons;
 	private String tempText = "";
 	
 	public SearchMenuScreen(Content listItems, NotesMenuScreen notesMenu, MainScreenOutline mainScreen) {
@@ -81,6 +81,7 @@ public class SearchMenuScreen extends JPanel{
 	}
 
 	
+	@SuppressWarnings({ "deprecation", "unchecked", "rawtypes" })
 	private void initialize(Content listItems, NotesMenuScreen notesMenu, MainScreenOutline mainScreen) {
 		ImageIcon imageIcon;
 		ComboBoxFilter comboBoxFilter = new ComboBoxFilter(listItems);
@@ -102,12 +103,13 @@ public class SearchMenuScreen extends JPanel{
 		//JEGYZET ÍRHATÓ FELÜLET, IDE LEHET A SZÖVEGET ÍRNI
 		textPane = new JTextPane();
 		textPane.setBackground(panelColor);
-		textPane.setForeground(Color.WHITE);
 		textPane.disable();
 		textPane.setCaretColor(Color.WHITE);
 		textPane.setContentType("text/html");
+		textPane.setCaret(new CustomSelectionCaret());
 		textsScrollPane.setViewportView(textPane);
-			
+		textPane.setSelectionColor(selectionBlue);
+		
 		//KERESÉS PANEL
 		searchPanel = new JPanel();
 		searchPanel.setBounds(5, 5, 390, 570);
@@ -125,7 +127,7 @@ public class SearchMenuScreen extends JPanel{
 		searchBar.setOpaque(true);
 		searchBar.setUI(new BasicComboBoxUI() {	
 			
-            @Override
+           @Override
     	    protected JButton createArrowButton() {
     	    	JButton button = new BasicArrowButton(BasicArrowButton.SOUTH, buttonBackgroundColor, buttonBackgroundColor, Color.WHITE, buttonBackgroundColor);
     	    	button.setFocusPainted(true);
@@ -137,7 +139,11 @@ public class SearchMenuScreen extends JPanel{
             @Override
             protected ComboPopup createPopup() {
                return new BasicComboPopup(searchBar) {
-            	   	@Override
+            	   	/**
+					 * 
+					 */
+					private static final long serialVersionUID = -2367910780114297309L;
+					@Override
 	           		protected void configureList() {
 	               	    list.setFont( comboBox.getFont() );
 	               	    list.setForeground( comboBox.getForeground() );
@@ -209,7 +215,7 @@ public class SearchMenuScreen extends JPanel{
 		noteList.setSelectionBackground(selectionBlue);
 		noteList.setFixedCellHeight(40);
 		noteList.setFixedCellWidth(390);
-		noteList.setCellRenderer(new NotesRenderer(listItems, textPane, textEditorButtons));
+		noteList.setCellRenderer(new NotesRenderer());
 		
 		noteListScroll = new JScrollPane(noteList);
 		noteListScroll.setBounds(0, 59, 390, 511);
@@ -227,7 +233,7 @@ public class SearchMenuScreen extends JPanel{
 		pageList.setSelectionBackground(selectionBlue);
 		pageList.setFixedCellHeight(40);
 		pageList.setFixedCellWidth(192);
-		pageList.setCellRenderer(new PagesRenderer(textPane, textEditorButtons));
+		pageList.setCellRenderer(new PagesRenderer());
 		
 		pageListScroll = new JScrollPane(pageList);
 		pageListScroll.setBounds(0, 59, 390, 511);
@@ -252,7 +258,7 @@ public class SearchMenuScreen extends JPanel{
 		
 	
 		//SZERKESZTÕ GOMBJAI
-		textEditorButtons = new TextEditorButtonFunctions(this, textPane);
+		textEditorButtons = new TextEditorButtons(this, textPane);
 		
 		
 		
@@ -270,16 +276,22 @@ public class SearchMenuScreen extends JPanel{
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				search(noteList, pageList, listItems, searchBar);
-				if(!noteListScroll.isVisible() && !pageListScroll.isVisible()) {
-					noteListScroll.setVisible(true);
-					notesSearchResultTab.setBorder(BorderFactory.createLoweredBevelBorder());
+				try {
+					search(noteList, pageList, listItems, searchBar);
+					if(!noteListScroll.isVisible() && !pageListScroll.isVisible()) {
+						noteListScroll.setVisible(true);
+						notesSearchResultTab.setBorder(BorderFactory.createLoweredBevelBorder());
+					}
+					searchButton.setBackground(textFieldColor);
+				}catch (Exception e1) {
 				}
-				searchButton.setBackground(textFieldColor);
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				searchButton.setBackground(buttonBackgroundColor);
+				try {
+					searchButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		
@@ -287,20 +299,23 @@ public class SearchMenuScreen extends JPanel{
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println(searchBar.getSelectedItem().toString());
-				text.setText(searchBar.getSelectedItem().toString());
+				try {
+					searchBar.setPopupVisible(true);
+					System.out.println(searchBar.getSelectedItem().toString());
+					text.setText(searchBar.getSelectedItem().toString());
+				}catch (Exception e1) {
+				}
 			}
 			
 		});
+		
 		text.getDocument().addDocumentListener(new DocumentListener() {
 			
-			@SuppressWarnings("unchecked")
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				tempText = text.getText();
 				try {
 					searchBar.setModel(comboBoxFilter.filterElements(tempText));
-					
 				}catch(Exception f) {
 					if(searchBar.getModel().getSize() == 0) {
 						searchBar.setPopupVisible(false);
@@ -311,13 +326,11 @@ public class SearchMenuScreen extends JPanel{
 				}
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				tempText = text.getText();
 				try {
 					searchBar.setModel(comboBoxFilter.filterElements(tempText));
-					
 				}catch(Exception f) {
 					if(searchBar.getModel().getSize() == 0) {
 						searchBar.setPopupVisible(false);
@@ -329,6 +342,7 @@ public class SearchMenuScreen extends JPanel{
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
+				System.out.println("c" + searchBar.getModel().getSize());
 			}
 			
 			
@@ -342,23 +356,25 @@ public class SearchMenuScreen extends JPanel{
 				
 			}
 
-			@SuppressWarnings("unchecked")
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
-				if(tempText.length() == 0) {
-					searchBar.setModel(comboBoxFilter.initializeEveryItem());
-					searchBar.setSelectedItem(null);
-					if(searchBar.getModel().getSize() == 0) {
-						searchBar.setPopupVisible(false);
+				try {
+					if(tempText.length() == 0) {
+						searchBar.setModel(comboBoxFilter.initializeEveryItem());
 						
+						searchBar.setSelectedItem(null);
+						if(searchBar.getModel().getSize() == 0) {
+							searchBar.setPopupVisible(false);
+							
+						}else {
+							searchBar.setPopupVisible(true);
+						}
 					}else {
-						searchBar.setPopupVisible(true);
+						text.setText(tempText);
 					}
-				}else {
-					text.setText(tempText);
+					searchBar.setPopupVisible(true);
+				}catch (Exception e1) {
 				}
-				searchBar.setPopupVisible(true);
 				
 			}
 
@@ -403,88 +419,125 @@ public class SearchMenuScreen extends JPanel{
 			}
 			
 		});
-		
-		/*
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * TODO
-		 * 
-		 * - az elsõ kiválasztás mindig new note 0-t ad valamiért
-		 * - számokkal történõ összehasonlítás vagy kis-nagy betûvel nem megy rendesen törléskor (kiválasztod, törlöd, majd megint beírod és nem hoz ki rá semmit)
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
+
 		notesSearchResultTab.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				notesSearchResultTab.setBackground(textFieldColor);
+				try {
+					notesSearchResultTab.setBackground(textFieldColor);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				notesSearchResultTab.setBackground(buttonBackgroundColor);
+				try {
+					notesSearchResultTab.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				noteListScroll.setVisible(true);
-				pageListScroll.setVisible(false);
-				notesSearchResultTab.setBorder(BorderFactory.createLoweredBevelBorder());
-				pagesSearchResultTab.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					noteListScroll.setVisible(true);
+					pageListScroll.setVisible(false);
+					notesSearchResultTab.setBorder(BorderFactory.createLoweredBevelBorder());
+					pagesSearchResultTab.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 		});
 		pagesSearchResultTab.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				pagesSearchResultTab.setBackground(textFieldColor);
+				try {
+					pagesSearchResultTab.setBackground(textFieldColor);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pagesSearchResultTab.setBackground(buttonBackgroundColor);
+				try {
+					pagesSearchResultTab.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				noteListScroll.setVisible(false);
-				pageListScroll.setVisible(true);
-				notesSearchResultTab.setBorder(BorderFactory.createEmptyBorder());
-				pagesSearchResultTab.setBorder(BorderFactory.createLoweredBevelBorder());
+				try {
+					noteListScroll.setVisible(false);
+					pageListScroll.setVisible(true);
+					notesSearchResultTab.setBorder(BorderFactory.createEmptyBorder());
+					pagesSearchResultTab.setBorder(BorderFactory.createLoweredBevelBorder());
+				}catch (Exception e1) {
+				}
 			}
+		});
+		textPane.addCaretListener(new CaretListener() {
+
+			@Override
+			public void caretUpdate(CaretEvent arg0) {
+				textEditorButtons.setButtonSettings();
+			}
+			
 		});
 		noteList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				clickOnNoteAction(notesMenu, listItems);
-				setVisible(false);
-				notesMenu.setVisible(true);
-				mainScreen.getMainMenuButton().setBorder(BorderFactory.createEmptyBorder());
-				mainScreen.getSearchMenuButton().setBorder(BorderFactory.createEmptyBorder());
-				mainScreen.getNotesMenuButton().setBorder(BorderFactory.createLoweredBevelBorder());
+				try {
+					clickOnNoteAction(notesMenu, listItems);
+					setVisible(false);
+					notesMenu.setVisible(true);
+					mainScreen.getSearchMenuButton().setBorder(BorderFactory.createEmptyBorder());
+					mainScreen.getNotesMenuButton().setBorder(BorderFactory.createLoweredBevelBorder());
+				}catch (Exception e1) {
+				}
 			}
+		});
+		textPane.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					pageList.getSelectedValue().setPageText(textPane.getText());
+				}
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					pageList.getSelectedValue().setPageText(textPane.getText());
+				}
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					pageList.getSelectedValue().setPageText(textPane.getText());
+				}
+			}
+			
+		});
+		pageList.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					textPane.enable();
+					textPane.setText(pageList.getSelectedValue().getPageText());
+				}else if (pageList.isSelectionEmpty()) {
+					textPane.disable();
+				}
+				textEditorButtons.setUndoManager(new UndoManager());
+				textEditorButtons.setDefaultButtonSettings();
+			}
+			
 		});
 		
 	}
 	
 	/*
 	 * Determines if the input is contained in any note's name, page's name or content.
-	 * 
 	 */
+	@SuppressWarnings("rawtypes")
 	private void search(JList<Note> noteList, JList<Page> pageList, Content listItems, JComboBox searchBar) {
 		DefaultListModel<Note> noteListModel = new DefaultListModel<Note>();
 		DefaultListModel<Page> pageListModel = new DefaultListModel<Page>();

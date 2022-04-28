@@ -41,14 +41,19 @@ public class ComboBoxFilter {
 		DefaultComboBoxModel<String> returnList = new DefaultComboBoxModel<String>();
 		ArrayList<String> contentItems = new ArrayList<String>();
 		
+		
+		
 		for(int i = 0; i < content.getNoteListModel().getSize(); i++) {
-			if(content.getNoteListModel().get(i).getNoteName().toLowerCase().contains(text.toLowerCase())) {
+			if(content.getNoteListModel().get(i).getNoteName().toLowerCase().contains(text.toLowerCase()) || 
+				content.getNoteListModel().get(i).getNoteName().equalsIgnoreCase(text)) {
 				contentItems.add(content.getNoteListModel().get(i).getNoteName());
 			}
 			
 			for(int j = 0; j < content.getNoteListModel().get(i).getNotesPages().size(); j++) {
 				if(	content.getNoteListModel().get(i).getNotesPages().get(j).getPageName().toLowerCase().contains(text.toLowerCase()) ||
-					content.getNoteListModel().get(i).getNotesPages().get(j).getPageText().toLowerCase().contains(text.toLowerCase())) {
+					content.getNoteListModel().get(i).getNotesPages().get(j).getPageText().toLowerCase().contains(text.toLowerCase()) ||
+					content.getNoteListModel().get(i).getNotesPages().get(j).getPageName().equalsIgnoreCase(text) ||
+					content.getNoteListModel().get(i).getNotesPages().get(j).getPageText().equalsIgnoreCase(text)) {
 					contentItems.add(content.getNoteListModel().get(i).getNotesPages().get(j).getPageName());
 				}
 			}

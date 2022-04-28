@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -11,35 +12,39 @@ import java.awt.Image;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.StyleConstants;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.undo.UndoManager;
 
 import Data.Content;
 import Data.Note;
 import Data.Page;
 import GUIRelated.NotesRenderer;
 import GUIRelated.PagesRenderer;
+import GUIRelated.PopupWindow;
 import GUIRelated.CustomCorner;
-import GUIRelated.CustomJOptionPane;
-import GUIRelated.CustomJOptionPaneLayout;
+import GUIRelated.CustomEditorKit;
 import GUIRelated.CustomScrollbar;
+import GUIRelated.CustomSelectionCaret;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 
 public class NotesMenuScreen extends JPanel{
 
 
+	private static final long serialVersionUID = -5598512108954675576L;
+	
 	private JPanel notesPanel;
 	private JLabel notesLabel;
 	private JLabel renameNoteButton;
@@ -58,35 +63,28 @@ public class NotesMenuScreen extends JPanel{
 	
 	private JScrollPane textsScrollPane;
 	private JTextPane textPane;
+	private ImageIcon imageIcon;
 	
 	private Color buttonBackgroundColor = new Color(33, 35, 39);
 	private Color outlineColor = new Color(63, 66, 72);
-	private Color selectionGray = new Color(44, 47, 51);
 	private Color panelColor = new Color(80, 83, 87);
-	private Color selectionBlue = new Color(28, 73, 255);
+	private Color selectionBlue = new Color(0, 155, 155);
 	private Color selectionRed = new Color(200, 10, 10);
 	
-	private TextEditorButtonFunctions textEditorButtons;
-
+	private TextEditorButtons textEditorButtons;
+	
 	private Content content;
+	private PopupWindow popupWindow = new PopupWindow();
+	private CustomEditorKit customEditorKit = new CustomEditorKit();
 	
-	
-	
-	/**
-	 * Create the application.
-	 */
 	public NotesMenuScreen(Content content) {
 		this.content = content;
 		initialize(content);
 	
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	@SuppressWarnings("deprecation")
 	private void initialize(Content listItems) {
-		ImageIcon imageIcon;
-
 		
 		setBounds(0, 70, 1000, 580);
 		setVisible(false);
@@ -112,11 +110,11 @@ public class NotesMenuScreen extends JPanel{
 		textPane.disable();
 		textPane.setCaretColor(Color.WHITE);
 		textPane.setContentType("text/html");
+		textPane.setCaret(new CustomSelectionCaret());
+		textPane.setSelectionColor(selectionBlue);
 		textsScrollPane.setViewportView(textPane);
 		
-		//SZERKESZTÕ GOMBJAI
-		textEditorButtons = new TextEditorButtonFunctions(this, textPane);
-		
+		customEditorKit.init(textPane);
 		
 		//NOTES PANEL
 		notesPanel = new JPanel();
@@ -180,7 +178,7 @@ public class NotesMenuScreen extends JPanel{
 		noteList.setSelectionBackground(selectionBlue);
 		noteList.setFixedCellHeight(40);
 		noteList.setFixedCellWidth(192);
-		noteList.setCellRenderer(new NotesRenderer(listItems, textPane, textEditorButtons));
+		noteList.setCellRenderer(new NotesRenderer());
 		
 		//NOTE LISTA GÖRGÕ
 		noteListScroll = new JScrollPane(noteList);
@@ -257,7 +255,7 @@ public class NotesMenuScreen extends JPanel{
 		pageList.setSelectionBackground(selectionBlue);
 		pageList.setFixedCellHeight(40);
 		pageList.setFixedCellWidth(192);
-		pageList.setCellRenderer(new PagesRenderer(textPane, textEditorButtons));
+		pageList.setCellRenderer(new PagesRenderer());
 		
 		//PAGES LISTA GÖRGÕ
 		pagesListScroll = new JScrollPane(pageList);
@@ -266,10 +264,10 @@ public class NotesMenuScreen extends JPanel{
 		pagesListScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		pagesListScroll.getVerticalScrollBar().setUI(new CustomScrollbar());
 		pagesPanel.add(pagesListScroll);
+
 		
-		
-		
-		
+		//SZERKESZTÕ GOMBJAI
+		textEditorButtons = new TextEditorButtons(this, textPane);
 		
 		
 		
@@ -298,142 +296,267 @@ public class NotesMenuScreen extends JPanel{
 		
 		
 		
-		
-		
-		
-		
-		
-		
 		//LISTENERS		
 		renameNoteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				renameNoteButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					renameNoteButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				renameNoteButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					renameNoteButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				renameNoteButton.setBackground(selectionBlue);
-				//noteList.repaint();
-				createPopupMenu("note", "rename");
-				
+				try {
+					renameNoteButton.setBackground(selectionBlue);
+					popupWindow.createPopupMenu("note", "rename", content, noteList, pageList);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				renameNoteButton.setBackground(buttonBackgroundColor);
+				try {
+					renameNoteButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		addNoteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				addNoteButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					addNoteButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				addNoteButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					addNoteButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				addNoteButton.setBackground(selectionBlue);
-				listItems.addNoteTolistModel(new Note("New Note"));
-				
-				noteList.setSelectedIndex((noteList.getModel().getSize())-1);
-				noteList.ensureIndexIsVisible(noteList.getSelectedIndex());
+				try {
+					addNoteButton.setBackground(selectionBlue);
+					listItems.addNoteTolistModel(new Note("New Note"));
+					noteList.setSelectedIndex((noteList.getModel().getSize())-1);
+					noteList.ensureIndexIsVisible(noteList.getSelectedIndex());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				addNoteButton.setBackground(buttonBackgroundColor);
+				try {
+					addNoteButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		deleteNoteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				deleteNoteButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					deleteNoteButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				deleteNoteButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					deleteNoteButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				deleteNoteButton.setBackground(selectionRed);
-				createPopupMenu("note", "delete");	
+				try {
+					deleteNoteButton.setBackground(selectionRed);
+					popupWindow.createPopupMenu("note", "delete", content, noteList, pageList);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				deleteNoteButton.setBackground(buttonBackgroundColor);
+				try {
+					deleteNoteButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		renamePageButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				renamePageButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					renamePageButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				renamePageButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					renamePageButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				renamePageButton.setBackground(selectionBlue);
-				createPopupMenu("page", "rename");						
+				try {
+					renamePageButton.setBackground(selectionBlue);	
+					popupWindow.createPopupMenu("page", "rename", content, noteList, pageList);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				renamePageButton.setBackground(buttonBackgroundColor);
+				try {
+					renamePageButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		addPageButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				addPageButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					addPageButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				addPageButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					addPageButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				addPageButton.setBackground(selectionBlue);
-				noteList.getSelectedValue().addPageToNote(new Page("New Page", "", noteList.getSelectedValue().getId()));
-				//testNoteListItems.addPageToListModel(new Page("New Page", "", noteList.getSelectedValue().getId()));
-				listItems.refreshPageListModel(noteList);
-				pageList.setSelectedIndex((pageList.getModel().getSize())-1);
-				pageList.ensureIndexIsVisible(pageList.getSelectedIndex());
+				try {
+					addPageButton.setBackground(selectionBlue);
+					noteList.getSelectedValue().addPageToNote(new Page("New Page", "", noteList.getSelectedValue().getId()));
+					listItems.refreshPageListModel(noteList);
+					pageList.setSelectedIndex((pageList.getModel().getSize())-1);
+					pageList.ensureIndexIsVisible(pageList.getSelectedIndex());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				addPageButton.setBackground(buttonBackgroundColor);
+				try {
+					addPageButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
 		deletePageButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				deletePageButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				try {
+					deletePageButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				deletePageButton.setBorder(BorderFactory.createEmptyBorder());
+				try {
+					deletePageButton.setBorder(BorderFactory.createEmptyBorder());
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				deletePageButton.setBackground(selectionRed);
-				createPopupMenu("page", "delete");
+				try {
+					deletePageButton.setBackground(selectionRed);
+					popupWindow.createPopupMenu("page", "delete", content, noteList, pageList);
+				}catch (Exception e1) {
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				deletePageButton.setBackground(buttonBackgroundColor);
+				try {
+					deletePageButton.setBackground(buttonBackgroundColor);
+				}catch (Exception e1) {
+				}
 			}
 		});
-		
-		
+		textPane.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					pageList.getSelectedValue().setPageText(textPane.getText());
+				}
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					pageList.getSelectedValue().setPageText(textPane.getText());
+				}
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					pageList.getSelectedValue().setPageText(textPane.getText());
+				}
+			}
+			
+		});	
+		textPane.addCaretListener(new CaretListener() {
+
+			@Override
+			public void caretUpdate(CaretEvent arg0) {
+				textEditorButtons.setButtonSettings();
+			}
+			
+		});
+		noteList.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				noteList.repaint();
+				((DefaultListModel<Page>)pageList.getModel()).clear();
+				textPane.disable();
+				textPane.getCaret().setVisible(false);
+				textPane.setText("");
+				if(!noteList.isSelectionEmpty()) {
+					listItems.refreshPageListModel(noteList);
+					
+				}
+				
+			}
+			
+		});
+		pageList.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				if(!pageList.isSelectionEmpty()) {
+					textPane.enable();
+					textPane.getCaret().setVisible(true);
+					textPane.setText(pageList.getSelectedValue().getPageText());
+				}else if (pageList.isSelectionEmpty()) {
+					textPane.disable();
+					textPane.getCaret().setVisible(false);
+					textPane.setText("");
+				}
+				textEditorButtons.setUndoManager(new UndoManager());
+				textEditorButtons.setDefaultButtonSettings();
+			}
+			
+		});
 	}
-	
-	
-	
+
+
 	public JTextPane getTextPane() {
 		return textPane;
 	}
@@ -446,54 +569,10 @@ public class NotesMenuScreen extends JPanel{
 		return pageList;
 	}
 	
-	public TextEditorButtonFunctions getTextEditorButtons() {
+	public TextEditorButtons getTextEditorButtons() {
 		return textEditorButtons;
 	}
 	
 	
-	private void createPopupMenu(String type, String action){
-		UIManager.put("Panel.background", outlineColor);
-		UIManager.put("OptionPane.messageForeground", Color.WHITE);
-		UIManager.put("TextField.background", selectionGray);
-		UIManager.put("TextField.foreground", Color.WHITE);
 		
-		JLabel msg = new JLabel();
-		msg.setHorizontalAlignment(SwingConstants.CENTER);
-		msg.setForeground(Color.WHITE);
-		
-		CustomJOptionPane pane = new CustomJOptionPane();
-		
-		if(type.equalsIgnoreCase("note") && action.equalsIgnoreCase("rename")) {
-			msg.setText("Rename '" + noteList.getSelectedValue().getNoteName() + "' to:");
-			pane.setWantsInput(true);
-			
-		}else if (type.equalsIgnoreCase("page") && action.equalsIgnoreCase("rename")) {
-			msg.setText("Rename '" + pageList.getSelectedValue().getPageName() + "' to:");
-			pane.setWantsInput(true);
-			
-		}else if(type.equalsIgnoreCase("note") && action.equalsIgnoreCase("delete")) {
-			msg.setText("Are you sure you want to delete '" + noteList.getSelectedValue().getNoteName() + "'?");
-			pane.setWantsInput(false);
-			
-		}else if (type.equalsIgnoreCase("page") && action.equalsIgnoreCase("delete")) {
-			msg.setText("Are you sure you want to delete '" + pageList.getSelectedValue().getPageName() + "'?");
-			pane.setWantsInput(false);
-		}
-		
-		
-	    pane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    pane.setOpaque(false);
-	    pane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
-	    pane.setUI(new CustomJOptionPaneLayout(content, noteList, pageList, type, action));
-	  	pane.setMessage(msg);
-	  	
-	  	
-	  	
-	    JDialog f = pane.createDialog("");
-	    f.show();
-	    f.dispose();   
-	}
-	
-	
-	
 }

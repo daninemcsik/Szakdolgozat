@@ -2,18 +2,13 @@ package GUIRelated;
 
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -21,7 +16,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -37,10 +31,8 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 	
 	private Color buttonBackgroundColor = new Color(33, 35, 39);
 	private Color outlineColor = new Color(63, 66, 72);
-	private Color selectionGray = new Color(44, 47, 51);
-	private Color panelColor = new Color(80, 83, 87);
-	private Color selectionBlue = new Color(28, 73, 255);
-	private Color selectionRed = new Color(200, 10, 10);
+	private Color selectionBlue = new Color(0, 155, 155);
+ 	
 	private JTextField temp;
 	private JList<Note> noteList;
 	private JList<Page> pageList;
@@ -56,6 +48,10 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 		this.content = content;
 	}
 
+	public CustomJOptionPaneLayout(String type, String action) {
+		this.type = type;
+		this.action = action;
+	}
 	
 	
 	public JButton createButton() {
@@ -88,6 +84,9 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 		}else if(action.equalsIgnoreCase("delete")) {
 			customButton.setText("Yes");
 			customButton2.setText("No");
+		}else if(action.equalsIgnoreCase("inform")) {
+			customButton.setText("OK");
+			container.remove(customButton2);
 		}
 		
 		customButton.addMouseListener(new MouseAdapter() {
@@ -187,9 +186,10 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 			}
 			
 		}else if(type.equalsIgnoreCase("note") && action.equalsIgnoreCase("delete")) {
+			noteList.getSelectedValue().deleteEveryPage();
 			content.getNoteListModel().remove(noteList.getSelectedIndex());
-			noteList.revalidate();
-			noteList.repaint();
+			content.getPageListModel().removeAllElements();
+
 			if(w != null) {
 				w.dispose();
 			}
@@ -197,23 +197,32 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 		}else if(type.equalsIgnoreCase("page") && action.equalsIgnoreCase("delete")) {
 			noteList.getSelectedValue().getNotesPages().remove(pageList.getSelectedValue());
 			content.getPageListModel().removeElement(pageList.getSelectedValue());
-			pageList.revalidate();
-			pageList.repaint();
+
 			if(w != null) {
 				w.dispose();
+			}
+			
+		}else if(type.equalsIgnoreCase("inform") && action.equalsIgnoreCase("inform")) {
+			if(w != null) {
+				w.dispose();
+			}
+			try {
+				System.exit(0);
+			}catch(Exception e) {
+				
 			}
 		}
 	}
 	
 	@Override
 	protected Container createButtonArea() {
-	       JPanel bottom = new JPanel();
-	       bottom.setBorder(BorderFactory.createLineBorder(outlineColor));
-	       bottom.setBackground(outlineColor);
-	       bottom.setLayout(new ButtonAreaLayout(true, 30));
-	       addButtonComponents(bottom, getButtons(), getInitialValueIndex());
-	       return bottom;
-	    }
+		JPanel bottom = new JPanel();   	
+		bottom.setBorder(BorderFactory.createLineBorder(outlineColor));
+		bottom.setBackground(outlineColor);
+		bottom.setLayout(new ButtonAreaLayout(true, 30));
+		addButtonComponents(bottom, getButtons(), getInitialValueIndex());
+		return bottom;
+	}
 	
 	@Override
 	protected Object getMessage() {
