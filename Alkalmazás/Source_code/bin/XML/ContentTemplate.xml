@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<notelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="http://www.example.com/Content.xsd">
+
+	<note>
+		
+		<noteName></noteName>
+		<id></id>
+		<pagelist>
+		
+			<page>
+				<pageName></pageName>
+				<pageText></pageText>
+				<pageId></pageId>
+				<noteId></noteId>
+			</page>
+			
+		</pagelist>
+		
+	</note>
+
+</notelist>
