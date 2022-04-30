@@ -16,8 +16,6 @@ import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -512,14 +510,6 @@ public class NotesMenuScreen extends JPanel{
 			}
 			
 		});	
-		textPane.addCaretListener(new CaretListener() {
-
-			@Override
-			public void caretUpdate(CaretEvent arg0) {
-				textEditorButtons.setButtonSettings();
-			}
-			
-		});
 		noteList.addListSelectionListener(new ListSelectionListener() {
 
 			@Override

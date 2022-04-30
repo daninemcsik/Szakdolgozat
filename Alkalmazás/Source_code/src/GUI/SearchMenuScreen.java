@@ -20,8 +20,6 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -471,14 +469,6 @@ public class SearchMenuScreen extends JPanel{
 				}catch (Exception e1) {
 				}
 			}
-		});
-		textPane.addCaretListener(new CaretListener() {
-
-			@Override
-			public void caretUpdate(CaretEvent arg0) {
-				textEditorButtons.setButtonSettings();
-			}
-			
 		});
 		noteList.addMouseListener(new MouseAdapter() {
 			@Override
