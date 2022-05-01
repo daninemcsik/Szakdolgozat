@@ -68,7 +68,6 @@ public class TextEditorButtons {
 	private static AttributeSet attributeSet;
 	private StyledDocument doc;
 	private Element element;
-	private int start;
 	private MutableAttributeSet asNew;
 	private Color pickedColor;
 	private int len;
@@ -727,77 +726,7 @@ public class TextEditorButtons {
 		fontSizeMenuBar.setSelectedItem("12");
 		colorPickerMenuBar.setSelectedItem("White");
 		fontStyleMenuBar.setSelectedItem("Dialog");	
-	}
-	
-	public void setButtonSettings() {
-		start = textPane.getCaretPosition();
-		element = doc.getCharacterElement(start);
-		attributeSet = element.getAttributes();
-		asNew = new SimpleAttributeSet(attributeSet.copyAttributes());
-		
-		if(attributeSet.getAttribute(StyleConstants.FontConstants.FontSize) != null) {
-			fontSizeMenuBar.removeItemListener(getFontSizeListener());
-
-			fontSizeMenuBar.setSelectedItem(attributeSet.getAttribute(StyleConstants.FontConstants.FontSize).toString());
-			
-			fontSizeMenuBar.addItemListener(getFontSizeListener());
-		} 
-		
-		if(attributeSet.getAttribute(StyleConstants.ColorConstants.Foreground) != null){
-			String color = attributeSet.getAttribute(StyleConstants.ColorConstants.Foreground).toString();
-			switch(color) {
-				case "java.awt.Color[r=0,g=0,b=0]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Black");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=255,g=0,b=0]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Red");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=255,g=255,b=0]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Yellow");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=0,g=0,b=255]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Blue");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=0,g=255,b=0]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Green");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=255,g=200,b=0]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Orange");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=255,g=175,b=175]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("Pink");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-				case "java.awt.Color[r=255,g=255,b=255]":
-					colorPickerMenuBar.removeItemListener(getColorPickerListener());
-					colorPickerMenuBar.setSelectedItem("White");
-					colorPickerMenuBar.addItemListener(getColorPickerListener());
-					break;
-			}
-		}
-		
-		if(attributeSet.getAttribute(StyleConstants.FontConstants.FontFamily) != null){
-			fontStyleMenuBar.removeItemListener(getFontStyleListener());
-			
-			fontStyleMenuBar.setSelectedItem(attributeSet.getAttribute(StyleConstants.FontConstants.FontFamily).toString());
-			
-			fontStyleMenuBar.addItemListener(getFontStyleListener());
-		}
-	}
-		
+	}		
 	public ItemListener getFontSizeListener() {
 		ItemListener fontSizeItemListener = new ItemListener() {
 			@Override

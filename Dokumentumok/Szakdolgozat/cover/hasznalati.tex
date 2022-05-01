@@ -5,17 +5,19 @@
 
 \vskip 1cm
 
-Ennek a címe lehet például \textit{A mellékelt CD tartalma} vagy \textit{Adathordozó használati útmutató} is.
-
-Ez jellemzően csak egy fél-egy oldalas leírás.
-Arra szolgál, hogy ha valaki kézhez kapja a szakdolgozathoz tartozó CD-t, akkor tudja, hogy mi hol van rajta.
-Jellemzően elég csak felsorolni, hogy milyen jegyzékek vannak, és azokban mi található.
-Az elkészített programok telepítéséhez, futtatásához tartozó instrukciók kerülhetnek ide.
-
-A CD lemezre mindenképpen rá kell tenni
+\noindent A CD 2 fő jegyzéket tartalmaz, az Alkalmazás és a Dokumentumok jegyzéket.
+\vspace{5pt} \\Az Alkalmazás mappában megtalálható a
 \begin{itemize}
-\item a dolgozatot egy \texttt{dolgozat.pdf} fájl formájában,
-\item a LaTeX forráskódját a dolgozatnak,
-\item az elkészített programot, fontosabb futási eredményeket (például ha kép a kimenet),
-\item egy útmutatót a CD használatához (ami lehet ez a fejezet külön PDF-be vagy MarkDown fájlként kimentve).
+	\item User\_manual mappa, amiben az alkalmazás kezeléséhez szükséges használati útmutató pdf-je található.
+	\item Source\_code mappa, ami az elkészített alkalmazás forráskódját tartalmazza. A mappán belül a src/Main/MainClass.java fájlban található az alkalmazást indító main függvény. 
+	\\Az elkészített programok telepítéséhez, futtatásához tartozó feltételek a használati útmutatóban vannak leírva. 
+	\item Release mappa, melyben az alkalmazás található futtatható .jar kiterjesztésben.
 \end{itemize}
+\vspace{5pt} A Dokumentumok mappában megtalálható(k) a
+\begin{itemize}
+	\item Adatszerkezetek, Tervezés és Titkosítási\_dokumentumok mappák, amelyek az összes, a dolgozattal kapcsolatosan összegyűjtött anyagot tartalmazzák .docx, .pdf és .txt kiterjesztésű fájlokban.
+	\item CD\_User\_Manual mappa, a CD használati útmutatójának pdf-ét tartalmazza.
+	\item Szakdolgozat mappa, amiben a dolgozat LaTeX forráskódja található.
+	\item Szakdolgozat\_pdf mappa, ami a szakdolgozat pdf verzióját tartalmazza.
+\end{itemize}
+

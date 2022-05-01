@@ -6,7 +6,7 @@ A fejezet az elkészített alkalmazás rendeltetésszerű működését mutatja 
 Az alkalmazáshoz szükséges fájlok elérési útvonalát a config.xml fájlban kell megadni.
 Egy fájl elérési útvonalát az alábbi módon kell megadni: \\C:\textbackslash Users\textbackslash AMD\textbackslash Desktop\textbackslash firebase\_service\_key\_example.json.
 \vspace{5pt}\\Ha az alkalmazást először futattjuk az eszközön, vagy egy új mappában tettük a futtatható .jar fájlt, amiben nem található config.xml, akkor automatikusan létrejön az adott mappában egy fájl, példa adatokkal. Ezeket meg kell változtatnunk, hogy használni tudjuk az alkalmazást.
-\vspace{15pt}\\A 6.1-es ábra egy automatikusan létrehozott config.xml fájl felépítését mutatja. A pirossal számozott sorok tartalmát kell szerkesszük, a további alfejezetekben ezt fejtem ki.
+\vspace{15pt}\\A \ref{fig:config_file}. ábra egy automatikusan létrehozott config.xml fájl felépítését mutatja. A pirossal számozott sorok tartalmát kell szerkesszük, a további alfejezetekben ezt fejtem ki.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/config_1.png}
@@ -15,19 +15,19 @@ Egy fájl elérési útvonalát az alábbi módon kell megadni: \\C:\textbacksla
 \end{figure}
 
 \subsection{Firebase}
-Az 1-es és 2-essel jelölt sorok megfelelő kitöltéséhez létre kell hoznunk egy Firebase adatbázist. 
-\vspace{5pt}\\Egy böngészőben a \textit{console.firebase.google.com} url beírása, majd egy google fiókba való belépés után ez a 6.2 ábrán látható kép fogad minket.
+A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő kitöltéséhez létre kell hoznunk egy Firebase adatbázist. 
+\vspace{5pt}\\Egy böngészőben a \href{https://console.firebase.google.com/u/0/}{console.firebase.google.com} url beírása, majd egy google fiókba való belépés után ez a \ref{fig:firebase_reg}. ábrán látható kép fogad minket.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{images/config_2.png}
 	\caption{Firebase regisztráció}
 	\label{fig:firebase_reg}
 \end{figure}
 \noindent Kattintsunk a 'Create a project' gombra, majd végezzük el a szükséges lépéseket.
-\\Ha megtettük, a 6.3 ábra képét láthatjuk. Kattintsunk a 'Storage' gombra a 'Build' menün belül a képernyő bal szélén található sávban.
+\\Ha megtettük, a \ref{fig:firebase_storage_reg}. ábra képét láthatjuk. Kattintsunk a 'Storage' gombra a 'Build' menün belül, a kép bal szélén található sávban.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{images/config_3.png}
 	\caption{Firebase kezdő képernyő}
@@ -35,33 +35,27 @@ Az 1-es és 2-essel jelölt sorok megfelelő kitöltéséhez létre kell hoznunk
 \end{figure}
 
 \noindent Kattintsunk a 'Get started' gombra, majd válasszuk ki a 'Start in production mode' lehetőséget, majd 'Next'. A legördülő menüben válasszuk a megfelelő Storage location-t, ami valószínűleg eur3 (europe-west) lesz. Fontos, hogy ezt nem lehet később megváltoztatni, így győződjünk meg választásunkról! Végül a 'Done' gombra nyomjunk.
-\vspace{5pt}\\Ha ezt mind megtettük a 6.4-es ábrához hasonlót látunk.
+\vspace{5pt}\\Ha ezt mind megtettük a \ref{fig:firebase_storage_default}. ábrához hasonlót látunk.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{images/config_4.png}
 	\caption{Firebase storage alapértelmezett kép}
 	\label{fig:firebase_storage_default}
 \end{figure}
 
+\noindent A config.xml fájlban a tag-ek (<dbJsonPath>...</dbJsonPath>) közé kell a megfelelő adatokat beírnunk. A \ref{fig:config_file}. ábrán piros 2-essel jelölt <dbStoragePath>...</dbStoragePath> tag-ek közé a \ref{fig:firebase_storage_default}. ábrán 1-essel jelölt linket kell bemásoljuk a 'gs://' nélkül.
+\vspace{5pt}\\Ha ez megvan kattintsunk a \ref{fig:firebase_storage_default}. ábrán piros 2-essel jelölt fogaskerékre, majd 'Project settings', az újonnan megjelent felső sávban pedig a service accounts-ra (lásd \ref{fig:firebase_service_key}. ábra 3-mas lehetőség).
 
-
-
-
-
-
-\noindent A config.xml fájlban a tag-ek (<dbJsonPath>...</dbJsonPath>) közé kell a megfelelő adatokat beírnunk. A 2-essel jelölt <dbStoragePath>...</dbStoragePath> tag-ek közé a 6.4-es ábrán 1-essel jelölt linket kell bemásoljuk a gs:// nélkül.
-\vspace{5pt}\\Ha ez megvan kattintsunk a 6.4-es ábrán piros 2-essel jelölt fogaskerékre, majd 'Project settings', az újonnan megjelent felső sávban pedig a service accounts-ra (lásd 6.5 ábra 3-mas lehetőség).
-
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.2]{images/config_5.png}
 	\caption{Firebase service key generálás}
 	\label{fig:firebase_service_key}
 \end{figure}
-\noindent Nyomjuk meg sorrendben a 6.5-ös ábrán piros számokkal jelölt gombokat, majd a felugró ablaknál a 'Generate key' gombot. Sikeresen letöltöttük a szükséges Firebase service key json fájlt!
+\noindent Nyomjuk meg sorrendben a \ref{fig:firebase_service_key}. ábrán piros számokkal jelölt gombokat, majd a felugró ablaknál a 'Generate key' gombot. Sikeresen letöltöttük a szükséges Firebase Service Key json fájlt!
 \vspace{5pt}\\A config.xml fájlban a <dbJsonPath>...</dbJsonPath> tag-ek közé másoljuk be a letöltött json fájl elérési útvonalát. Ezt a leírás elején található példa elérési úthoz hasonlóan tegyük.
-\vspace{5pt}\\ Ha lépésről lépésre mindent megtettünk, a config.xml fájl tartalma hasonlóan kell, hogy kinézzen, mint a 6.6-os ábrán látható.
+\vspace{5pt}\\ Ha lépésről lépésre mindent megtettünk, a config.xml fájl tartalma hasonlóan kell, hogy kinézzen, mint a \ref{fig:config_file_final}. ábrán látható.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/config_6.png}
@@ -69,18 +63,18 @@ Az 1-es és 2-essel jelölt sorok megfelelő kitöltéséhez létre kell hoznunk
 	\label{fig:config_file_final}
 \end{figure}
 \newline
-\noindent Végezetül mentsük el, majd zárjuk be a config.xml fájlt, ezután futtassuk a .jar fájlt. Ha hibaüzenetet kapunk vizsgáljuk meg a config.xml fájlt. Nézzük meg, hogy helyesen írtuk-e be az elérési útvonalakat, '\textbackslash' jeleket alkalmaztunk-e a megadásukhoz. Ha továbbra is hibaüzenetet kapunk ismételjük el elejéről a lépéseket.
+\noindent Végezetül mentsük el, majd zárjuk be a config.xml fájlt, ezután futtassuk a .jar fájlt. Ha hibaüzenetet kapunk vizsgáljuk meg a config.xml fájlt. Nézzük meg, hogy helyesen írtuk-e be az elérési útvonalakat, '\textbackslash' jeleket alkalmaztunk-e a megadásukhoz. \\Ha továbbra is hibaüzenetet kapunk ismételjük el elejéről a lépéseket.
 \vspace{5pt}\\ Ha mindent megfelelően adtunk meg a program elindul.
 
 
 \subsection{Fontos információk}
 \textbf{Nagyon fontos}, hogy a .jks fájlt ne töröljük. Ha mégis letöröljük hibákba fogunk ütközni, az alkalmazás adatai elvesznek és nem tudjuk őket sehogy visszaszerezni.
-\vspace{5pt}\\Ha mégis törölnénk a KeyStore fájlt, akkor 6.4-es ábrán lévő felületen töröljük a Storage-ben lévő fájlokat. Így az előzőleg elmentett titkosított adatok is eltűnnek, és a .jks fájl is. A program ebben az esetben következő futtatáskor új fájlokat generál és üres tartalommal indul.
+\vspace{5pt}\\Ha töröltük a KeyStore fájlt, akkor \ref{fig:firebase_storage_default}. ábrán lévő felületen töröljük a Storage-ben lévő, programhoz tartozó összes fájlt (appKeyStore.jks, applicationData.xml). Így az előzőleg elmentett titkosított adatok is eltűnnek, és a .jks fájl is. A program ebben az esetben következő futtatáskor új fájlokat generál és üres tartalommal indul.
+\vspace{5pt}\\A program futtatásához java futtató környezet szükséges, ezt JRE-nek hívják (Java Runtime Environment). Telepíthetjük az Oracle-féle implementációt is, ami a \\ \href{https://java.com/en/download/manual.jsp}{https://java.com/en/download/manual.jsp} linken érhető el.
 
+\vspace{30pt}\Section{Jegyzetek menü}
 
-\newpage\Section{Jegyzetek menü}
-
-Az 6.7-es ábrán látható a jegyzetek menü felépítése, a pirossal számozott elemek leírása található a kép alatt.
+Az \ref{fig:menu_notes_2}. ábrán látható a jegyzetek menü felépítése, a pirossal számozott elemek leírása található a kép alatt.
 
 \begin{figure}[h]
 	\centering
@@ -91,7 +85,7 @@ Az 6.7-es ábrán látható a jegyzetek menü felépítése, a pirossal számozo
 
 \vspace{5pt} \noindent \textbf{1}-es panel a jegyzetek panelje, itt találhatóak egymás alá beszúrva a különböző jegyzetek. Az éppen kijelölt jegyzet kék színű, kattintással tudunk új jegyzetet kiválasztani, valamint ha a panelen belül az üres részre kattintunk, akkor mindig az utolsó jegyzetet fogja kijelölni.
 \newline \\ Található a panelen 3 gomb. 
-\vspace{5pt} \\ \textbf{2}-es gomb az éppen kijelölt jegyzet átnevezésére szolgál, egy felugró modális ablakba a beírt szövegre nevezhetjük át a kijelölt elemet, vagy megszakíthatjuk az egész folyamatot. (lásd 6.8 ábra)
+\vspace{5pt} \\ \textbf{2}-es gomb az éppen kijelölt jegyzet átnevezésére szolgál, egy felugró modális ablakba a beírt szövegre nevezhetjük át a kijelölt elemet, vagy megszakíthatjuk az egész folyamatot. (lásd \ref{fig:menu_notes_rename}. ábra)
 
 \begin{figure}[h]
 	\centering
@@ -101,7 +95,7 @@ Az 6.7-es ábrán látható a jegyzetek menü felépítése, a pirossal számozo
 \end{figure}
 
 \vspace{5pt} \noindent \textbf{3}-mas gombbal új jegyzetet adunk a meglévő jegyzet listához. Alapértelmezett neve a jegyzeteknek ’New Note [sorszám]’. A sorszám a jegyzet id-jével egyezik, nem a listabeli pozíciójával.
-\vspace{5pt} \\ \textbf{4}-es gombbal az éppen kijelölt jegyzetet törölhetjük, vagy szakíthatjuk meg ezt a folyamatot egy felugró modális ablak segítségével. (lásd 6.9 ábra)
+\vspace{5pt} \\ \textbf{4}-es gombbal az éppen kijelölt jegyzetet törölhetjük, vagy szakíthatjuk meg ezt a folyamatot egy felugró modális ablak segítségével. (lásd \ref{fig:menu_notes_delete}. ábra)
 
 \begin{figure}[h]
 	\centering
@@ -135,9 +129,9 @@ Az 6.7-es ábrán látható a jegyzetek menü felépítése, a pirossal számozo
 
 
 
-\newpage \Section{Kereső menü}
+\vspace{30pt}\Section{Kereső menü}
 
-Az 6.10-es ábrán látható a kereső menü felépítése, a pirossal számozott elemek leírása található a kép alatt.
+Az \ref{fig:menu_search_2}. ábrán látható a kereső menü felépítése, a pirossal számozott elemek leírása található a kép alatt.
 
 \begin{figure}[h]
 	\centering
@@ -147,7 +141,7 @@ Az 6.10-es ábrán látható a kereső menü felépítése, a pirossal számozot
 \end{figure}
 
 \vspace{5pt} \noindent \textbf{1}-essel jelölt elem a ’search bar’ (kereső sor). Jegyzetek, lapok és lapok tartalma között keres. Ha jegyzet neve, lap neve, vagy lap tartalma tartalmazza a beírt kifejezést, akkor lesz találat. 
-\vspace{5pt} \\Hogy a keresés könnyebb legyen, üres search bar-ba való kattintáskor az összes jegyzet és lap neve megjelenik egy listába. Ahogy a keresendő szöveget írjuk be a lista annak megfelelően fog változni. 
+\vspace{5pt} \\Hogy a keresés könnyebb legyen, üres search bar-ba való kattintáskor az összes jegyzet és lap neve megjelenik egy listába. Ahogy a keresendő szöveget írjuk be a lista annak megfelelően fog változni (lásd \ref{fig:menu_search_searchBar}. ábra). 
 
 \begin{figure}[h]
 	\centering
@@ -168,12 +162,11 @@ Az 6.10-es ábrán látható a kereső menü felépítése, a pirossal számozot
 \vspace{5pt} \\Ha esetleg átnevezni vagy törölni szeretnénk az adott lapot, a Notes Menu-ben tehetjük ezt meg.
 
 \Section{Ismert bug-ok}
-Jelenleg két kisebb bug-ról tudok, ami biztosan megtalálható az alkalmazásban. Egyik bug sem 'töri meg' az alkalmazást, de a gördülékeny működéshez jó lenne a közeljövőben megoldani őket.
+Jelenleg kettő kisebb bug-ról tudok, ami biztosan megtalálható az alkalmazásban. Egyik bug sem 'töri meg' az alkalmazást, de a gördülékeny működéshez jó lenne a közeljövőben megoldani őket.
 \\ Mind a felhasználói felülethez köthető, azon belül is a kereső menühöz.
 \begin{itemize}
 	\item Bármit írunk be a keresőbe, ha több mint egy találatot dob ki, és rányomunk az első lehetőségre, akkor az a keresősáv szövegdobozába mindig a 'New Note 0'-t fogja behelyettesíteni (a jegyzetek listájának első elemének nevét). Ez egyetlen egyező találat esetén nem érvényes.
-	\item A másik keresősáv bug pedig ehhez, egyetlen egyezés esetéhez köthető. Tegyük fel rákeresünk a 'New Note 0'-ra, akkor a legördülő menü eltűnik, attól függetlenül, hogy van egyező találat. A szövegdobozra való újabb kattintással jelenik meg. Ha viszont nem teljes egyezőséggel keresünk rá valamire, például azt írjuk be, hogy 'New note 0', akkor megjelenik az egyező találat egyetlen egyezés esetén is. Valamilyen case-sensitive probléma lehet, amire sajnos nem tudtam rájönni.
-	
+	\item A másik keresősáv bug pedig ehhez, egyetlen egyezés esetéhez köthető. Tegyük fel rákeresünk a 'New Note 0'-ra, akkor a legördülő menü eltűnik, attól függetlenül, hogy van egyező találat. A szövegdobozra való újabb kattintással jelenik meg. Ha viszont nem teljes egyezőséggel keresünk rá valamire, például azt írjuk be, hogy 'New note 0', akkor megjelenik az egyező találat egyetlen egyezés esetén is.
 \end{itemize}
-\noindent Szóba kerültek az 5.5 és 5.6 alfejezetben a felhasználói felület létrehozásával kapcsolatos nehézségek, a felsorolt bug-okat is ilyen nehézségnek tudnám be. 
+\noindent Szóba kerültek az 5.5. és 5.6. alfejezetben a felhasználói felület létrehozásával kapcsolatos nehézségek, a keresősáv bug-jait is ilyen nehézségek közé sorolnám.
 \\Úgy gondolom, ha nem Swing-et, hanem egy modernebb GUI fejlesztő függvény könyvtárat használtam volna, akkor nem találkoztam volna ezekkel a hibákkal.
