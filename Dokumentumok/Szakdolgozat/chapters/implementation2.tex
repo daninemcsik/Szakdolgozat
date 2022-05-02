@@ -1,10 +1,12 @@
 \Chapter{Implementáció}
+
 A fejezet a program készítése során felmerülő problémák leírásával foglalkozik. Bemutatja hogyan sikerült az alkalmazás egyes részeit implementálnom. Nem tartalmaz a program használatával kapcsolatos információkat. 
 \\A fejezet felépítése a program csomag-szintű felépítésével egyezik.
-\\Nem LaTeX-Java stílusú kódrészleteket tartalmaz, hanem beszúrt képeket a kész kódról.
+% \\Nem \LaTeX\-Java stílusú kódrészleteket tartalmaz, hanem beszúrt képeket a kész kódról.
 
 \Section{Data}
-Az előző fejezetben leírt szükséges adattípusokat egy Content nevű osztályba gyűjtöttem össze. A csomag felépítése a \ref{fig:package_data}. ábrán látható.
+
+Az előző fejezetben leírt szükséges adattípusokat egy Content nevű osztályba gyűjtöttem össze. A csomag felépítése \aref{fig:package_data}. ábrán látható.
 \vspace{5pt}\\Két tároló objektumot tartalmaz, amelyek DefaultListModel típusúak, ezen belül Note és Page típusú adatokat tartalmaznak. DefaultListModel objektumot egy lista elemeinek létrehozására és megjelenítésére használjuk Java-ban. Mivel az adatok csak listákban kerülnek megjelenítésre, ezért ez az objektum tökéletes volt az adatok tárolására.
 \vspace{5pt}\\Az alkalmazás azon részei, amelyek az adatokkal dolgoznak a Content osztályon keresztül érik el őket.
 \begin{figure}[h]
@@ -25,6 +27,8 @@ Egy osztályt tartalmaz, a DatabaseFunctions-t, amiben az adatbázissal kapcsola
 	\caption{Database csomag és osztálya}
 	\label{fig:package_database}
 \end{figure}
+
+% TODO: Az ilyen képek helyett az osztályokról inkább kisebb UML diagramok kellenének!
 
 \Section{Encryption}
 Titkosítással kapcsolatos osztályokat tartalmaz. A csomag felépítése a \ref{fig:package_encryption}. ábrán látható.

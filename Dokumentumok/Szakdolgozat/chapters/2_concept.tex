@@ -1,36 +1,48 @@
 \Chapter{Koncepció}
 
 \Section{Személyes Információszervezés}
-A személyes információszervezés (PIM - Personal Information Management) olyan folyamat ami alatt egy ember megpróbálja az általa hasznosnak vélt információkat összegyűjteni, rendszerezni, tárolni \cite{enwiki:1076787930}. A folyamat lehet fizikai vagy digitális.
+
+A személyes információszervezés (\textit{PIM, Personal Information Management}) olyan folyamat ami alatt egy ember megpróbálja az általa hasznosnak vélt információkat összegyűjteni, rendszerezni, tárolni \cite{enwiki:1076787930}. A folyamat lehet fizikai vagy digitális.
 \vspace{5pt}\\ Fontos, személyes információ lehet például:
 \begin{itemize}
-	\item Személy hivatalos adatai, okmányai
-	\item Telefonszámok, e-mail címek, elérési adatok
-	\item Képek, videók, TV adások
-	\item Időpontok, tapasztalatok, emlékek
-	\item Költségek, kiadások
-	\item Zenék 
-	\item Érdeklődési körökkel, hobbikkal kapcsolatos információk
+	\item a személy hivatalos adatai, okmányai,
+	\item telefonszámok, e-mail címek, elérési adatok,
+	\item képek, zenék, videók,
+	\item időpontok, tapasztalatok, emlékek,
+	\item költségek, kiadások,
+	\item érdeklődési körökkel, hobbikkal kapcsolatos információk.
 \end{itemize}
 Ez a lista személyről személyre változik, minden ember különbözik, más információkat talál fontosnak.
-\vspace{5pt}\\ Nagyon előnyös, ha valamilyen formában megvalósítjuk a személyes információszervezést az életünkben. 
-\\Gondoljunk bele, hányszor volt már olyan, hogy egy időpontot elfelejtettünk, nem találtunk meg egy weboldalt, nem emlékeztünk egy születésnapra vagy egy leadási határidőre. Egy PIM rendszer lényege ilyen információknak a struktúrált, összeszedett tárolása, hogy megkönnyítse az adott személy mindennapjait, hiszen ha egy helyen tárolunk minden fontos információt, akkor a jövőben tudni fogjuk, hogy hol keressük őket.
+
+Nagyon előnyös, ha valamilyen formában megvalósítjuk a személyes információszervezést az életünkben.
+Gondoljunk bele, hányszor volt már olyan, hogy egy időpontot elfelejtettünk, nem találtunk meg egy weboldalt, nem emlékeztünk egy születésnapra vagy egy feladat elkészítési határidejére. Egy PIM rendszer lényege ilyen információknak a strukturált, összeszedett tárolása, hogy megkönnyítse az adott személy mindennapjait, hiszen ha egy helyen tárolunk minden fontos információt, akkor a jövőben tudni fogjuk, hogy hol keressük őket.
 
 \newpage \Section{Adattárolás}
+
 Az adatok tárolása megoldható adatbázisok segítségével és fájlokba.
 
 \subsection{XML és JSON}
+
 Adatátviteli formátumok közül a leggyakrabban használtak közé tartozik az XML és a JSON \cite{nurseitov2009comparison}. Céljuk, hogy platform-független, programozási nyelv független, alkalmazás független adatleíró formátumot adjanak, ami képes adatok nagy mértékű átvitelére és feldolgozására. A két formátum részletes összehasonlítását tartalmazza a \ref{tab:jsonandxml}-es táblázat.
-\newline
-\\ \underline{XML – eXtensible Markup Language}
+
+\bigskip
+
+\noindent \underline{XML – eXtensible Markup Language}
 \vspace{10pt}
 \newline \noindent Rugalmas, könnyen értelmezhető emberek és számítógép számára is.  
-\vspace{5pt}\\HTML-hez hasonló szintaxisú nyelv. Felépítése tag-ekből áll. Nem előre definiáltak a tag-ek, ez azt jelenti, hogy mi hozzuk létre őket. Egy példa tag felépítése: <autó>…. </autó>.
-\vspace{5pt}\\Első a nyitó tag, a második, ferde vonallal jelölt tag a záró tag.
-\\Tag-ek között megadhatjuk a tartalmukat (pl. autó márka), vagy további tag-ekkel, amiket gyerekelemek (pl rendszám, szín) nevezünk, tovább konkretizálhatjuk a tartalmat.
-\\Üres tag megadására is lehetséges, aminek nincs tartalma (pl.:<autó/>).
-\vspace{5pt}\\Egy XML dokumentum robosztus méreteket is elérhet a tag-ekből álló felépítése miatt.
-\newline
+\vspace{5pt}\\HTML-hez hasonló szintaxisú nyelv. Felépítése \textit{tag}-ekkel kijelölt elemekből áll. Ezek nem előre definiáltak, mi is definiálhatunk ilyeneket. Egy példa egy elem megadására:
+\begin{java}
+<auto> ... </auto>
+\end{java}
+Első a nyitó tag, a második, ferde vonallal jelölt tag a záró tag.
+
+Tag-ek között megadhatjuk a tartalmukat (például autó márka), vagy további elemekkel, amiket gyerekelemek (pl rendszám, szín) nevezünk, tovább konkretizálhatjuk a tartalmat.
+
+Üres tag megadására is lehetséges, aminek nincs tartalma (például \texttt{<auto />}).
+
+% Egy XML dokumentum robusztus méreteket is elérhet a tag-ekből álló felépítése miatt.
+
+\bigskip
 
 \noindent \underline{JSON – JavaScript Object Notation}
 \vspace{10pt}
@@ -43,6 +55,8 @@ Adatátviteli formátumok közül a leggyakrabban használtak közé tartozik az
 \\  \indent \{”keresztnév” : ”Tibor”, ”vezetéknév” : ”Nagy”\}
 ]\}
 
+% TODO: A JSON-ös részt is az előzőhöz hasonlóan kellene formázni.
+
 \begin{table}[H]
 	\centering
 	\caption{JSON és XML összehasonlító táblázat}
@@ -52,11 +66,11 @@ Adatátviteli formátumok közül a leggyakrabban használtak közé tartozik az
 		\hline
 		\textbf{JSON} & \textbf{XML} \\
 		\hline
-		JavaScript nyelven alapszik & SGML szabványból származtatott \\
+		JavaScript nyelvrészhalmaza & SGML szabványból származtatott \\
 		\hline
-		Tábla(kulcs-érték) felépítés & Fa felépítés \\
+		Tábla (kulcs-érték) felépítés & Fa felépítés \\
 		\hline
-		Könnyedén értelmezhető & Tag felépítés miatt, aki nem tudja hogy kell értelmezni, annak nehezebb dolga lesz mint egy JSON file-lal lenne\\
+		Könnyedén értelmezhető & Tag felépítés miatt, aki nem tudja hogy kell értelmezni, annak nehezebb dolga lesz mint egy JSON fájllal lenne\\
 		\hline
 		Nem támogat kommenteket & Támogat kommenteket \\
 		\hline
@@ -66,15 +80,15 @@ Adatátviteli formátumok közül a leggyakrabban használtak közé tartozik az
 		\hline
 		Kisebb file méret & Nagyobb file méret\\
 		\hline
-		String, számok, tömbök, objektumok és boolean értékeket támogat & Komplexebb adattípusokat is támogat például képek, nem-primitív adattípusok, stb..\\
+		Szövegek, számok, tömbök, objektumok és logikai értékeket támogat & Komplexebb adattípusokat is támogat például képek, nem-primitív adattípusok\\
 		\hline
 		Minden böngésző támogatja & Legtöbb böngésző támogatja\\
 		\hline
 		Adatcsere formátumtípusú & Jelölőnyelv formátumtípusú\\
 		\hline
-		Adat megjelenítésére nem alkalmas & Mivel jelölőnyelv (markup language), ezért adat megjelenítésére is alkalmas\\
+		Adat megjelenítésére nem alkalmas & Mivel jelölőnyelv (\textit{markup language}), ezért adat megjelenítésére is alkalmas\\
 		\hline
-		Egy szabványos javascript függvénnyel használat előtt elemezni/felbontani/szeparálni (parse) kell a file-t. & Adott programozási nyelvnek megfelelően kell elemezni/felbontani/szeparálni (parse) a file-t.\\
+		Egy szabványos JavaScript függvénnyel használat előtt elemezni/felbontani/szeparálni (parzolni) kell a fájlt. & Adott programozási nyelvnek megfelelően kell elemezni/felbontani/szeparálni (parzolni) a fájlt.\\
 		\hline
 		Könnyedén elemezhető, kevés kód szükséges hozzá & Nehezebben elemezhető a tartalma\\
 		\hline
@@ -83,8 +97,10 @@ Adatátviteli formátumok közül a leggyakrabban használtak közé tartozik az
 	\end{tabular}
 \end{table}
 
+% TODO: Mit jelent az, hogy adat megjelenítésére nem alkalmas?
+
 \vspace{6pt}
-\noindent Tegyük fel, hogy egy alkalmazás adatai vagy JSON vagy XML típusú fájlként, lokálisan tároljuk a felhasználó eszközén. \textbf{Lokális fájl} alapú tárolást az alábbi tulajdonságokkal jellemezhetjük:
+\noindent Tegyük fel, hogy egy alkalmazás adatai vagy JSON vagy XML típusú fájlként, lokálisan tároljuk a felhasználó eszközén. \textbf{Lokális fájl} alapú tárolást az alábbi tulajdonságokkal jellemezhetjük.
 \begin{itemize}
 	\item Gyors és egyszerű hozzáférés az adatokhoz.
 	\item Könnyedén implementálható megoldás, évtizedek óta alkalmazott módszer az adatok lokális fájlként való tárolása.
@@ -97,8 +113,11 @@ Adatátviteli formátumok közül a leggyakrabban használtak közé tartozik az
 \newpage
 \subsection{Adatbázis}
 
-Adatbázisok kapcsán minden bizonnyal hallottunk már az SQL-ről, legtöbb relációs adatbázis ezt a nyelvet használja, egy struktúrált lekérdező nyelv. Feltételezem az SQL ismeretét, ezért bővebb jellemzésére nem tér ki a dokumentum. 
-\\Adatbázisok viszont lehetnek különböző típusúak, különböző adatmodellűek. Két típust fogunk megnézni, a relációs adatbázist és NoSQL adatbázist. Ennek a két adatmodellnek egy rövid összehasonlítását tartalmazza a \ref{tab:rdbmsandnosql}-es táblázat.
+Relációs adatbázisok kapcsán minden bizonnyal hallottunk már az SQL nyelvről. A legtöbb relációs adatbázis ezt a nyelvet használja, egy strukturált lekérdező nyelv. Feltételezem az SQL ismeretét, ezért bővebb jellemzésére nem tér ki a dolgozat.
+
+% TODO: Ezt itt le kellene tisztázni! (Az SQL-es felvezetés furcsa így.)
+
+Adatbázisok viszont lehetnek különböző típusúak, különböző adatmodellűek. Két típust fogunk megnézni, a relációs adatbázist és NoSQL adatbázist. Ennek a két adatmodellnek egy rövid összehasonlítását tartalmazza a \ref{tab:rdbmsandnosql}-es táblázat.
 
 \begin{table}[H]
 	\centering
@@ -120,21 +139,28 @@ Adatbázisok kapcsán minden bizonnyal hallottunk már az SQL-ről, legtöbb rel
 	\end{tabular}
 \end{table}
 
+% TODO: Sok a táblázatban a fals állítás.
+% - A NoSQL lehet séma független.
+% - A No a "Not Only" rövidítése, tehát lehet relációs is.
+% - Az adatok megadására jóval több lehetőség van.
+% - Az adatmodell és a séma változás nem ugyan az.
+
 \vspace{10pt}
-\noindent Azonfelül, hogy egy adatbázis milyen adatmodellű, lehet lokális, a felhasználó eszközén tárolt és távoli, felhőalapú, cloud adatbázis.
-\\ Térjünk ki a lokális és felhőalapú adatbázisok közötti összehasonlításra: \newline
+\noindent Azonfelül, hogy egy adatbázis milyen adatmodellel rendelkezik, lehet lokális, a felhasználó eszközén tárolt és távoli, például felhőalapú, \textit{cloud} adatbázis.
 
+Térjünk ki a lokális és felhőalapú adatbázisok közötti összehasonlításra!
 
-\noindent \textbf{Lokális adatbázis} \cite{enwiki:1085248519}, hasonló \underline{előnyei} vannak, mint egy helyileg tárolt fájlnak:
+\noindent \textbf{Lokális adatbázis} \cite{enwiki:1085248519}, hasonló \underline{előnyei} vannak, mint egy helyileg tárolt fájlnak.
 \begin{itemize}
-	\item Egyszerű hozzáférés az adatokhoz, teljes adat kontrollálás.
+	\item Egyszerű hozzáférés az adatokhoz, teljes felügyelet az adatok felett.
 	\item Nincs szükség internetkapcsolatra.
 	\item Gyorsabb, mint egy távoli adatbázis, mivel gyorsabb a helyi lemez elérése, mint egy távoli esetében a hálózaton keresztüli kommunikáció.
 \end{itemize}
+
 \noindent \underline{Hátrány:}
 \begin{itemize}
 	\item Nehéz az adatmegosztás külső résztvevővel (másik számítógép lokális adatbázisa).
-	\item Ha az eszköz olyan állapotba kerül, hogy a fájlokhoz nem lehet hozzáférni, akkor elveszlik minden adat.
+	\item Ha az eszköz olyan állapotba kerül, hogy a fájlokhoz nem lehet hozzáférni, akkor elvész minden adat.
 \end{itemize}
 
 \newpage \noindent \textbf{Felhőalapú adatbázis} \cite{chandra2012study}:
@@ -145,38 +171,47 @@ Adatbázisok kapcsán minden bizonnyal hallottunk már az SQL-ről, legtöbb rel
 	\item Cloud adatbázis használata esetén a szinkronizáció bonyolult problémája kikerülhető. Több eszköz használhatja ugyanazt az adatbázist, ugyanazokkal az adatokkal dolgozhatnak.
 \end{itemize}
 
-\newpage
 \Section{Adat állapot}
-Adat állapota alatt három lehetséges esetet értünk, data-at-rest, data-in-motion és data-in-use. Az alfejezet a data-at-rest és data-in-motion \cite{varriale2016secube} adatállapot fogalmát, biztonságukkal kapcsolatos információkat írja le.
 
-\subsection{Data-at-rest}
+Az adat állapota alatt három lehetséges esetet értünk, \textit{data-at-rest}, \textit{data-in-motion} és \textit{data-in-use}. Az alfejezet a data-at-rest és data-in-motion \cite{varriale2016secube} adatállapot fogalmát, biztonságukkal kapcsolatos információkat írja le.
+
+\SubSection{Data-at-rest}
+
 Nyugvó adatnak olyan adatokat nevezünk, amelyek nem mozognak eszközről eszközre, vagy hálózatról hálózatra. Általában merevlemezen vagy pendrive-on tárolódnak.
 \vspace{5pt}\\A nyugalmi adatvédelem célja a bármilyen eszközön vagy hálózaton tárolt inaktív adat védelme.
 \vspace{5pt}\\Nyugvó adatokat általában kevésbé sebezhetőnek tartják, mint a mozgásban lévő adatokat (data-in-motion), gyakran értékesebbnek is tekinthető tartalmuk. Nyugvó adatok esetében az ellopható információ mennyisége sokkal nagyobb lehet mint az éppen úton levő adatoké (data-in-motion).
 \vspace{5pt}\\A nyugvó adatok biztonsága a szükséges óvintézkedések megtételétől függ.
-\\Egy cég legtöbb esetben adatit saját hálózatán belül tárolja, ettől függetlenül veszélyben lehetnek rosszindulatú külső és belső fenyegetésekkel szemben. Egy betolakodó könnyedén elérheti az adott cég adatait, ha sikerül jogtalanul hozzáférnie egy számítógépükhöz vagy egy lopott eszközt feltörnie.
+\\Egy cég legtöbb esetben adatait saját hálózatán belül tárolja, ettől függetlenül veszélyben lehetnek rosszindulatú külső és belső fenyegetésekkel szemben. Egy betolakodó könnyedén elérheti az adott cég adatait, ha sikerül jogtalanul hozzáférnie egy számítógépükhöz vagy egy lopott eszközt feltörnie.
 \vspace{5pt}\\Data-at-rest típusú adatok védelme érdekében az egyik legjobb, legegyszerűbb és leggyakrabban alkalmazott módszer ezek titkosítása.
 
+% TODO: Az előző részből ki kellene venni a felesleges formázást!
 
 \subsection{Data-in-motion / data-in-transit}
+
 Mozgásban lévő adatnak vagy tranzitadatnak olyan adatokat nevezünk, amelyek aktívan mozgásban vannak egyik helyről a másikra, vagy az interneten vagy magánhálózaton keresztül.
 \vspace{5pt}\\Mivel az adatok mozgásban vannak, ezért kevésbé biztonságosnak tekinthetők. Célja olyan adatok védelme amelyek például belső hálózaton belül mozognak, vagy helyi tárolóeszközről felhőtípusú tárolóeszközre.
 \vspace{5pt}\\Tranzitadat esetében is egy kiváló biztonsági intézkedés az adatok titkosítása. Védi az adatokat, ha két fél közötti kommunikációt ’lehallgatják’.
 Ez a védelem az adatok titkosításával biztosítható, még mozgatás előtt, vagy magának a kommunikációs csatornának titkosításával. Ez lehet talán a legfontosabb része a mozgásban lévő adatok védelmének, illetve a megfelelő kulcskezelés. Végpontok hitelesítése és adat érkezésekor való visszafejtése és ellenőrzése is tovább fokozhatja a védelmet. 
 
-\newpage
 \Section{Adattitkosítási módszerek}
 
-Ezt a szegmenst két részre bontható. Először az adatbázis titkosítási módszerek kerülnek bemutatásra, ezek olyan titkosítási eljárások, amik kizárólag adatbázisok és adataik titkosítására lettek kifejlesztve. Másik csoportba minden más olyan titkosítási módszer tartozik, amik nem adatbázishoz köthetők (fájlok, fájlrendszerek).
+Ez a szakasz két részre bontható. Először az adatbázis titkosítási módszerek kerülnek bemutatásra. Ezek olyan  eljárások, amelyek kizárólag adatbázisok és adataik titkosítására lettek kifejlesztve. Másik csoportba minden más olyan titkosítási módszer tartozik, amik nem adatbázishoz köthetők (fájlok, fájlrendszerek).
 
-\subsection{Adatbázis titkosítási módszerek} 
+\SubSection{Adatbázis titkosítási módszerek} 
 
-Olyan folyamatot nevezünk adatbázis titkosításnak, ami egy vagy több titkosítási algoritmus használatával az adatbázisban tárolt adatokat titkosított szöveggé (cipher text) alakítja. Ez a szöveg értelmezhetetlen a megfelelő kulcs ismerete nélkül \cite{bouganim2009database}.
-\\Célja, hogy megvédje az adatainkat a potenciális fenyegetésektől. Ha egy hacker valahogy sikeresen feltöri az adatbázist, akkor számára értéktelen, értelmezhetetlen szöveggel fog találkozni.
-\\Többféle titkosítási technika is létezik, melyek közül a legleterjedtebbek következnek.\newline
+Olyan folyamatot nevezünk adatbázis titkosításnak, ami egy vagy több titkosítási algoritmus használatával az adatbázisban tárolt adatokat titkosított szöveggé (\textit{cipher text}) alakítja. Ez a szöveg értelmezhetetlen a megfelelő kulcs ismerete nélkül \cite{bouganim2009database}.
 
-\noindent\textbf{Transparent Data Encryption (TDE) (Átlátható adat titkosítás):}\newline
+Célja, hogy megvédje az adatainkat a potenciális fenyegetésektől. Ha egy támadó valahogy sikeresen feltöri az adatbázist, akkor számára értéktelen, értelmezhetetlen szöveggel fog találkozni.
+
+Többféle titkosítási technika is létezik, melyek közül a legelterjedtebbek következnek.
+
+\bigskip
+
+% TODO: El kellene dönteni, hogy aláhúzás vagy félkövér jelölés lesz az ilyen részekhez, és egységesíteni.
+
+\noindent\textbf{Átlátható adat titkosítás}
 \begin{itemize}
+	\item \textit{TDE, Transparent Data Encryption}
 	\item Teljes adatbázist, nyugvó adatokat (data-at-rest) titkosít merevlemezen és a biztonsági mentési adathordozón is. Használatban és szállításban lévő adatokat nem véd (data-in-use, data-in-transit).
 	\item A módszer biztosítja, ha még el is lopják a fizikai adathordozót, akkor sem férnek hozzá a tolvajok az eszközön lévő adatokhoz.
 	\item Mivel az összes adatot titkosítja, ezért nem szükséges speciális módon rendezni az adatokat.
@@ -185,11 +220,12 @@ Olyan folyamatot nevezünk adatbázis titkosításnak, ami egy vagy több titkos
 	\item Microsoft, Oracle, IBM is alkalmazza ezt a módszert adatbázis fájlok titkosítása érdekében.
 \end{itemize}
 
+\bigskip
 
-\vspace{25pt}
-\noindent\textbf{Column Level Encryption (Oszlop szintű titkosítás):}\newline
+\noindent\textbf{Oszlop szintű titkosítás}\newline
 \begin{itemize}
-	\item Relációs adatmodell esetén egy adatbázis táblákból, oszlopokból, sorokból és cellákból/mezőkből áll. Ahogy a módszer nevéből is következik, relációs adatbázis egy sorát titkoítja.
+	\item \textit{CLE, Column Level Encryption}
+	\item Relációs adatmodell esetén egy adatbázis táblákból, oszlopokból, sorokból és cellákból/mezőkből áll. Ahogy a módszer nevéből is következik, relációs adatbázis egy sorát titkosítja.
 	\item Lehetséges független oszlopok titkosítása. Egy oszlop összes adatát titkosítja kivétel nélkül. 
 	\item Akkor használatos, ha nincs szükség teljes adatbázis titkosításra, egyértelműen megkülönböztethető, hogy mely oszlopok tárolnak érzékeny adatot és melyek nem.
 	\item Előnye, hogy könnyedén megkülönböztethető az érzékeny és a kevésbé érzékeny adat, illetve külön kulcs használható minden oszlop titkosításához, így növelve a biztonságot. Sokkal rugalmasabb, mint a teljes adatbázist titkosító TDE.
@@ -197,9 +233,11 @@ Olyan folyamatot nevezünk adatbázis titkosításnak, ami egy vagy több titkos
 	\item Microsoft, Oracle, IBM , MyDiamo és még sok más cég használja ezt a titkosítási módszert.
 \end{itemize}
 
-\vspace{25pt}
-\noindent\textbf{Field / Cell Level Encryption (Cella/mező szintű titkosítás):}\newline
+\bigskip
+
+\noindent\textbf{Cella/mező szintű titkosítás}
 \begin{itemize}
+	\item \textit{Field/Cell Level Encryption}
 	\item Relációs adatmodell esetén használható.
 	\item Kiválasztható, hogy pontosan melyik mezőt szeretnénk titkosítani. 
 	\item Akkor használatos, ha nincs szükség teljes adatbázis titkosításra, hanem megkülönböztethető, hogy mely cellák tárolnak érzékeny adatot és melyek nem.
@@ -208,10 +246,9 @@ Olyan folyamatot nevezünk adatbázis titkosításnak, ami egy vagy több titkos
 	\item Microsoft, Oracle, IBM , MyDiamo és még sok más cég használja ezt a titkosítási módszert.
 \end{itemize}
 
-\subsection{Egyéb titkosítási módszerek}
+\SubSection{Egyéb titkosítási módszerek}
 
-\vspace{15pt}
-\noindent\textbf{Filesystem Encryption:} \cite{enwiki:1020951139} \newline
+\noindent\textbf{Filesystem Encryption} \cite{enwiki:1020951139}
 \begin{itemize}
 	\item Fájlrendszer titkosítás, szokás még fájl / mappa titkosításnak, FBE-nek (file-based encryption) is nevezni.
 	\item Célja fájl(ok) tartalmának titkosítása.
@@ -223,64 +260,80 @@ Olyan folyamatot nevezünk adatbázis titkosításnak, ami egy vagy több titkos
 	\item Teljesítmény problémák miatt nem igazán alkalmazzák, de ennek ellenére kis felhasználószámú rendszerek esetében ajánlott.
 \end{itemize}
 
+\bigskip
 
-\vspace{25pt}
-\noindent\textbf{Full Disk Encryption:} \cite{enwiki:1084723482} \newline
+\noindent\textbf{Full Disk Encryption:} \cite{enwiki:1084723482}
 \begin{itemize}
 	\item Merevlemez teljes tartalma titkosításra kerül. 
 	\item Általában ugyanazt a kulcsot használja az egész meghajtó titkosításához, ezért futásidőben az összes adat visszafejthető.
 	\item Nagy hátránya, ha a támadó futásidőben fér hozzá a számítógéphez, minden fájl elérhető számára. 
 \end{itemize}
 
-\vspace{25pt}
-\noindent\textbf{Application Level Encryption:} \cite{saxena2015application} \newline
+\bigskip
+
+\noindent\textbf{Application Level Encryption} \cite{saxena2015application}
 \begin{itemize}
 	\item Kódolás és dekódolás adatátvitel és tárolás előtt történik.
 	\item Maga az alkalmazás végzi a titkosítási folyamatot.
-	\item Az adat csak a megfelelő alklamazáson keresztül érhető el. Egy hacker-nek szüksége van az adatbázis és az adatokat használó alkalmazásra is az adatok visszafejtéséhez.
+	\item Az adat csak a megfelelő alkalmazáson keresztül érhető el. Egy támadónak szüksége van az adatbázis és az adatokat használó alkalmazásra is az adatok visszafejtéséhez.
 	\item Negatívuma lehet, ha ezt a titkosítási módszert szeretné alkalmazni egy cég, akkor maguknak kell implementálniuk, ami egy nem informatikai cég esetében bonyolult probléma lehet.
 	\item Másik hátránya, a kulcsok kezelésének az összetettsége is megnövekedhet, ha több, különböző alkalmazásnak kell ugyanazon adatbázishoz hozzáférnie, írnia, olvasnia.
 \end{itemize}
 
+\Section{Szinkronizáció}
 
-\newpage \Section{Szinkronizáció}
+% TODO: Egyszerűbben kellene formázni!
 
 Szóba került egy probléma többgépes alkalmazás készítése esetében, mégpedig az adatok szinkronizálása különböző eszközökön \cite{nakatani2006data}.
 \vspace{5pt} \\ Az adatszinkronizálás egy olyan folyamat, ami alatt a különböző eszközökön eltárolt információkat megpróbáljuk össze egyeztetni, összhangba hozni.
 \vspace{5pt} \\Alkalmazások készítésekor szükséges a szinkronizáció problémájának megoldása, hiszen nem szeretnénk ugyanazt az információt bevinni a rendszerünkbe, amit már egy másik eszközön korábban megtettünk. Legtöbb esetben szeretnénk azonos adatokat elérni minden készüléken.
 \vspace{5pt} \\Programozási szempontból ez adatbázisok és/vagy fájlok szinkronizálását jelenti.
 \vspace{15pt} \\ A probléma részletes felvezetése a következőképpen nézne ki:
-\vspace{5pt} \\  Tegyük fel van két fájl, A és B, amelyek két lassú kommunikációs kapcsolattal (slowcommunication link) összekötött gépen vannak. A-t úgy szeretnénk frissíteni, hogy tartalma megegyezzen B tartalmával.  Ha A nagyméretű, akkor A másolása B-re lassú lesz. Gyorsaság érdekében A-t tömöríthetjük küldés előtt, de ez nem egy perfekt megoldás.
-\vspace{5pt} \\ Tegyük fel, hogy A és B nagyon hasonló, mondjuk ugyanazon eredeti fájlból származnak. Felgyorsítás érdekében a hasonlóság valamilyen módon történő kihasználása lenne a logikus lépés. Gyakori módszer, hogy A és B közötti különbségeket küldik el a felek egymásnak, majd ebből a listából a fájl rekonstruálásra kerül. 
-\vspace{5pt} \\ A probléma az ilyen módszerekkel, hogy a különbségek kialakításához olvashatónak kell lennie mindkét fájlnak, ami csak úgy érhető el, ha a kapcsolat egyik végén mindkét fájl rendelkezésre áll. Ha nem található meg egy eszközön mindkét fájl, akkor nem használhatók ezek a módszerek.
-\vspace{5pt} \\ Mondhatjuk, hogy ez a probléma felvetés lokális adatbázis fájlok szinkronizálása esetén is fennáll.
-\vspace{15pt} \\ A szinkronizáció megoldása nem egy triviális probléma, nem is találtam rá specifikus 'how-to' jellegű leírást, lépésekre lebontott protokollt, ahogy két fájl szinkronizálási folyamata kéne történjen.
-\\ Megtaláltam viszont a szinkronizációnak két fajtáját \cite{balaji2020blog}:
+\vspace{5pt} \\  Tegyük fel, hogy van két fájl, A és B, amelyek két lassú kommunikációs kapcsolattal (\textit{slow communication link}) összekötött gépen vannak. A-t úgy szeretnénk frissíteni, hogy tartalma megegyezzen B tartalmával.  Ha A nagy méretű, akkor A másolása B-re lassú lesz. Gyorsaság érdekében A-t tömöríthetjük küldés előtt, de ez nem egy perfekt megoldás.
 
-\subsection{Egyirányú szinkronizáció (One-way synchronization)}
-Szokás még fájltükrözésnek (file mirroring), fájlreplikációnak (file replication) és fájlmentésnek (file backup) nevezni.
-\vspace{5pt} \\A fájlok várhatóan csak egy helyen változnak. A változtatások egyeztetése érdekében a szinkronizálási folyamat egy irányba másolja a fájlokat. A két tárolási helyszín nem tekinthető egyenértékűnek. Az egyik helyszín a forrás (source), a másik pedig a cél (target). Bármilyen változtatás a forrásba tükröződni fog a célba. A célon elvégzett változtatások nem fognak a forráson replikálódni.Ha ez a folyamat végigmegy, azt lehet mondani, hogy a forrás tükrözve van a célba.
-\vspace{5pt} \\Ez a módszer a forrás pontos másolatát hozza létre a célba. Hasznos és hatékony biztonsági mentés szempontjából, mivel csak a változtatott / új fájlok másolódnak.
+Tegyük fel, hogy A és B nagyon hasonló, mondjuk ugyanazon eredeti fájlból származnak. Felgyorsítás érdekében a hasonlóság valamilyen módon történő kihasználása lenne a logikus lépés. Gyakori módszer, hogy A és B közötti különbségeket küldik el a felek egymásnak, majd ebből a listából a fájl rekonstruálásra kerül. 
 
+A probléma az ilyen módszerekkel, hogy a különbségek kialakításához olvashatónak kell lennie mindkét fájlnak, ami csak úgy érhető el, ha a kapcsolat egyik végén mindkét fájl rendelkezésre áll. Ha nem található meg egy eszközön mindkét fájl, akkor nem használhatók ezek a módszerek.
 
-\subsection{Kétirányú szinkronizáció (Two-way synchronization)}
-Gyors szinkronizálásnak is szokás nevezni (fast sync).
-\vspace{5pt} \\Ez a folyamat mindkét irányba másolja a fájlokat. A fájlok várhatóan mindkét helyen változnak, a két (vagy több) hely egyenértékűnek tekinthető.
-\vspace{5pt} \\Célja, hogy két vagy több hely azonos legyen egymással.
+Mondhatjuk, hogy ez a probléma felvetés lokális adatbázis fájlok szinkronizálása esetén is fennáll.
 
+A szinkronizáció megoldása nem egy triviális probléma, nem is találtam rá specifikus '\textit{how-to}' jellegű leírást, lépésekre lebontott protokollt, ahogy két fájl szinkronizálási folyamata kéne történjen.
+Megtaláltam viszont a szinkronizációnak két fajtáját \cite{balaji2020blog}:
 
+\SubSection{Egyirányú szinkronizáció}
 
-\Section{Kulcskezelés - Key management}
-Kulcs előállítását, cseréjét, tárolását és használatát jelenti \cite{rafaeli2003survey}.
-\vspace{5pt} \\Komplexitás szempontjából, minél több alkalmazás adata kerül titkosításra, úgy nő általában a tárolandó és kezelendő kulcsok száma is.
-\vspace{5pt} \\Kulcsok nem megfelelő tárolása és kezelése adatszivárgást eredményezhet. Ha a kulcskezelő rendszer valamilyen oknál fogva elveszti vagy törli a kulcsokat, akkor a titkosított adatok is elvesznek, feltéve ha nem készült a kulcsokról biztonsági másolat.
-\vspace{5pt} \\Vitatható, de úgy gondolom, hogy a megfelelő kulcskezelés a titkosítási folyamat legfontosabb része.
-\vspace{5pt} \\Kimondottan kulcskezelésre számos, úgynevezett kulcskezelő rendszereket (KMS) hoztak létre. Egy ilyen rendszer magába foglalja a kulcsok biztonságos generálását, cseréjét, tárolását.
-\vspace{5pt} \\Kulcskezeléshez tartozó fogalom a ’certificate’ azaz tanúsítvány. A certificate egy szabványosított módszer egy adott felhasználó / applikáció / szerver hitelességének igazolására.
-\vspace{5pt} \\A maximum biztonság elérése érdekében általában egy harmadik-oldali ún. ’certificate authority’(CA) azaz tanúsítvány kiadó felel a certificate-ek kiosztásáért. Egy certificate a következő információkat tartalmazhatja:
+Angolul \textit{One-way synchronization}.
+Szokás még fájltükrözésnek (\textit{file mirroring}), fájlreplikációnak (\textit{file replication}) és fájlmentésnek (\textit{file backup}) nevezni.
+
+A fájlok várhatóan csak egy helyen változnak. A változtatások egyeztetése érdekében a szinkronizálási folyamat egy irányba másolja a fájlokat. A két tárolási helyszín nem tekinthető egyenértékűnek. Az egyik helyszín a forrás (\textit{source}), a másik pedig a cél (\textit{target}). Bármilyen változtatás a forrásba tükröződni fog a célba. A célon elvégzett változtatások nem fognak a forráson replikálódni.Ha ez a folyamat végigmegy, azt lehet mondani, hogy a forrás tükrözve van a célba.
+
+Ez a módszer a forrás pontos másolatát hozza létre a célba. Hasznos és hatékony biztonsági mentés szempontjából, mivel csak a változtatott / új fájlok másolódnak.
+
+\SubSection{Kétirányú szinkronizáció}
+
+Angolul \textit{Two-way synchronization}.
+Gyors szinkronizálásnak is szokás nevezni.
+
+Ez a folyamat mindkét irányba másolja a fájlokat. A fájlok várhatóan mindkét helyen változnak, a két (vagy több) hely egyenértékűnek tekinthető.
+
+Célja, hogy két vagy több hely azonos legyen egymással.
+
+\Section{Kulcskezelés - }
+A kulcskezelés (\textit{Key Management}) kulcs előállítását, cseréjét, tárolását és használatát jelenti \cite{rafaeli2003survey}.
+
+Komplexitás szempontjából, minél több alkalmazás adata kerül titkosításra, úgy nő általában a tárolandó és kezelendő kulcsok száma is.
+
+Kulcsok nem megfelelő tárolása és kezelése adatszivárgást eredményezhet. Ha a kulcskezelő rendszer valamilyen oknál fogva elveszti vagy törli a kulcsokat, akkor a titkosított adatok is elvesznek, feltéve ha nem készült a kulcsokról biztonsági másolat.
+
+Vitatható, de úgy gondolom, hogy a megfelelő kulcskezelés a titkosítási folyamat legfontosabb része.
+
+Kimondottan kulcskezelésre számos, úgynevezett kulcskezelő rendszereket (\textit{KMS}) hoztak létre. Egy ilyen rendszer magába foglalja a kulcsok biztonságos generálását, cseréjét, tárolását.
+
+Kulcskezeléshez tartozó fogalom a ’\textit{certificate}’ azaz tanúsítvány. A certificate egy szabványosított módszer egy adott felhasználó / applikáció / szerver hitelességének igazolására.
+
+A maximum biztonság elérése érdekében általában egy harmadik-oldali ún. ’\textit{certificate authority}’(CA) azaz tanúsítvány kiadó felel a certificate-ek kiosztásáért. Egy certificate a következő információkat tartalmazhatja:
 \begin{itemize}
 	\item Szervezeti információk: egyértelmű vállalat / szervezet azonosítók pl név vagy cím.
 	\item Certificate authority neve: a certificate előállítója ezzel az információval azonosítja magát.
 	\item Digitális aláírás: az előállító ezzel az aláírással látja el a certificate-et, hogy ellenőrizhető legyen annak hitelessége. A megfelelő CA ellenőrzi a tanúsítványt, hogy egy hiteles szolgáltatótól származik-e.
 \end{itemize}
-

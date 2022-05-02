@@ -1,13 +1,17 @@
 \Chapter{Tervezés}
+
 Ez a fejezet a program tervezésével kapcsolatos információkat, specifikációkat tartalmazza. Egy látványterv leírása a felhasználói felületről és a szükséges funkciókról.
 
-\Section{Grafikus Felhasználói Felület (GUI) - megjelenés, funkció}
+\Section{A grafikus felhasználói felület tervei}
 
 Az alkalmazás két menüpontből álljon, jegyzetek és kereső menü. A két menü működése egyedi objektumok használatával történjen.
 
+% TODO: Minden subsection-t javtani kellene SubSection-re!
+
 \subsection{Szükséges adattípusok}
 Szükséges egy Note és egy Page objektum konstruktor létrehozása.
-\\A Note objektumnak legyenek a következő változói:
+
+A Note objektumnak legyenek a következő változói:
 \begin{itemize}
 	\item String noteName - A jegyzet neve.
 	\item ArrayList<Page> pageList - Egy Page típusú ArrayList a jegyzet oldalainak tárolására. Egyszerűen lehet majd törölni és hozzáadni új Page objektumokat.
@@ -28,7 +32,7 @@ Szükséges egy Note és egy Page objektum konstruktor létrehozása.
 
 \subsection{Közös elemek}
 
-A következő elemek olyanok, amelyeknek mindkét menüpontban látszaniuk kell és használhatóak kell legyenek. A \ref{fig:main_foundation}. ábrán pirossal bekeretezett és számozott részek ezeket az elemeket jelzik, leírásuk számozva, a kép alatt található.
+A következő elemek olyanok, amelyeknek mindkét menüpontban látszaniuk kell és használhatóak kell legyenek. \Aref{fig:main_foundation}. ábrán pirossal bekeretezett és számozott részek ezeket az elemeket jelzik, leírásuk számozva a továbbiakban következnek.
 
 \begin{figure}[h]
 	\centering
@@ -47,7 +51,7 @@ A következő elemek olyanok, amelyeknek mindkét menüpontban látszaniuk kell 
 
 \subsection{Jegyzetek menü}
 
-A \ref{fig:menu_notes}. ábrán látható a jegyzetek menü elképzelt felépítése A pirossal számozott elemek leírása található a kép alatt, elmondja, hogy milyen funkciókat kell majd, hogy az egyes elemek betöltsenek.
+\Aref{fig:menu_notes}. ábrán látható a jegyzetek menü elképzelt felépítése A pirossal számozott elemek leírása található a következőkben, amely elmondja, hogy milyen funkciókat kell majd, hogy az egyes elemek betöltsenek.
 
 \begin{figure}[h]
 	\centering
@@ -79,7 +83,7 @@ Az első és második pontban leírt funkcióknak csak a kijelölt szövegen leg
 
 \subsection{Kereső menü}
 
-A \ref{fig:menu_search}. ábrán látható a kereső menü elképzelt felépítése A pirossal számozott elemek leírása található a kép alatt, elmondja, hogy milyen funkciókat kell majd, hogy az egyes elemek betöltsenek.
+A \ref{fig:menu_search}. ábrán látható a kereső menü elképzelt felépítése A pirossal számozott elemek leírása található a későbbiekben, hogy részletezze, hogy milyen funkciókat kell majd, hogy az egyes elemek betöltsenek.
 
 \begin{figure}[h]
 	\centering
@@ -118,6 +122,6 @@ Az adatok adatbázisba legyenek eltárolva, vagy felhőalapú adatbázisba, vagy
 \Section{Titkosítás}
 A titkosítási algoritmus tesztek alapján a legjobbnak vélt algoritmussal kerüljenek az adatok kódolásra.
 \\A titkosítás vagy alkalmazás szinten, saját implementációval legyen megoldva vagy a tárolástól függően az ismertetett adatbázis titkosítási módszerek egyikének alkalmazásával.
-\\Mivel az alkalmazás minden esetben az adathalmaz egészével dolgozik, ezért elegendő lehet, ha egy xml vagy json fájl kerül titkosításra, amely az összes adatot tartalmazza, nem pedig minden adat egyesével.
+\\Mivel az alkalmazás minden esetben az adathalmaz egészével dolgozik, ezért elegendő lehet, ha egy XML vagy JSON fájl kerül titkosításra, amely az összes adatot tartalmazza, nem pedig minden adat egyesével.
 \\A titkosítási kulcsok legyenek biztonságosan tárolva, több eszköz között biztonságosan megosztva.
 \\Az alkalmazás bezárása előtt kerüljenek át az adatok az adatbázisba. Alkalmazás megnyitása után kerüljenek beolvasásra majd megjelenítésre.

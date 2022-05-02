@@ -7,6 +7,7 @@ Az alkalmazáshoz szükséges fájlok elérési útvonalát a config.xml fájlba
 Egy fájl elérési útvonalát az alábbi módon kell megadni: \\C:\textbackslash Users\textbackslash AMD\textbackslash Desktop\textbackslash firebase\_service\_key\_example.json.
 \vspace{5pt}\\Ha az alkalmazást először futattjuk az eszközön, vagy egy új mappában tettük a futtatható .jar fájlt, amiben nem található config.xml, akkor automatikusan létrejön az adott mappában egy fájl, példa adatokkal. Ezeket meg kell változtatnunk, hogy használni tudjuk az alkalmazást.
 \vspace{15pt}\\A \ref{fig:config_file}. ábra egy automatikusan létrehozott config.xml fájl felépítését mutatja. A pirossal számozott sorok tartalmát kell szerkesszük, a további alfejezetekben ezt fejtem ki.
+% TODO: Az alábbi kerülhet XML vagy Java környezetbe!
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/config_1.png}
@@ -20,7 +21,7 @@ A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő ki
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.2]{images/config_2.png}
+	\includegraphics[scale=0.3]{images/config_2.png}
 	\caption{Firebase regisztráció}
 	\label{fig:firebase_reg}
 \end{figure}
@@ -29,7 +30,7 @@ A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő ki
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.2]{images/config_3.png}
+	\includegraphics[scale=0.3]{images/config_3.png}
 	\caption{Firebase kezdő képernyő}
 	\label{fig:firebase_storage_reg}
 \end{figure}
@@ -39,17 +40,19 @@ A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő ki
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.2]{images/config_4.png}
+	\includegraphics[scale=0.3]{images/config_4.png}
 	\caption{Firebase storage alapértelmezett kép}
 	\label{fig:firebase_storage_default}
 \end{figure}
+
+% TODO: Tag-ek helyett egyszerűbb és elegánsabb elemeke emlegetni.
 
 \noindent A config.xml fájlban a tag-ek (<dbJsonPath>...</dbJsonPath>) közé kell a megfelelő adatokat beírnunk. A \ref{fig:config_file}. ábrán piros 2-essel jelölt <dbStoragePath>...</dbStoragePath> tag-ek közé a \ref{fig:firebase_storage_default}. ábrán 1-essel jelölt linket kell bemásoljuk a 'gs://' nélkül.
 \vspace{5pt}\\Ha ez megvan kattintsunk a \ref{fig:firebase_storage_default}. ábrán piros 2-essel jelölt fogaskerékre, majd 'Project settings', az újonnan megjelent felső sávban pedig a service accounts-ra (lásd \ref{fig:firebase_service_key}. ábra 3-mas lehetőség).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.2]{images/config_5.png}
+	\includegraphics[scale=0.3]{images/config_5.png}
 	\caption{Firebase service key generálás}
 	\label{fig:firebase_service_key}
 \end{figure}
@@ -161,7 +164,8 @@ Az \ref{fig:menu_search_2}. ábrán látható a kereső menü felépítése, a p
 \vspace{5pt} \\Ha a lap találatok között az egyikre kattintunk, akkor nem kerülünk vissza a Notes Menu-be. Az adott lap tartalmát tudjuk szerkeszteni és megtekinteni egy Notes Menu-höz hasonló szövegdobozban \textbf{(3.elem)}. Ennek funkciói teljesen megegyeznek az említett szövegdobozéval és menteni is a ctrl+s-el kell a változtatásokat, vagy a mentés ikonra kattintva.
 \vspace{5pt} \\Ha esetleg átnevezni vagy törölni szeretnénk az adott lapot, a Notes Menu-ben tehetjük ezt meg.
 
-\Section{Ismert bug-ok}
+\Section{Ismert hibák}
+
 Jelenleg kettő kisebb bug-ról tudok, ami biztosan megtalálható az alkalmazásban. Egyik bug sem 'töri meg' az alkalmazást, de a gördülékeny működéshez jó lenne a közeljövőben megoldani őket.
 \\ Mind a felhasználói felülethez köthető, azon belül is a kereső menühöz.
 \begin{itemize}

@@ -1,7 +1,10 @@
 \Chapter{Titkosítási algoritmusok}
 
-A titkosítási algoritmusok fogalma eltérő az eljárásoktól, amiket adattitkosítási módszereknek neveztem. Egy titkosítási algoritmus olyan matematikai folyamat, amely egy szimpla szöveget (plain text) kódolt szöveggé transzformál (cipher text) \cite{thakkar2022blog}.
-\\ Lehet szimmetrikus vagy aszimmetrikus egy algoritmus, ez a kódolt szöveg és a titkosítási kulcs(ok) közötti kapcsolatot írja le.
+% TODO: Úgy általában rendbe kellene tenni a LaTeX formázást.
+
+A titkosítási algoritmusok fogalma eltérő az eljárásoktól, amiket adattitkosítási módszereknek neveztem. Egy titkosítási algoritmus olyan matematikai folyamat, amely egy szimpla szöveget (\textit{plain text}) kódolt szöveggé transzformál (\textit{cipher text}) \cite{thakkar2022blog}.
+
+Lehet szimmetrikus vagy aszimmetrikus egy algoritmus, ez a kódolt szöveg és a titkosítási kulcs(ok) közötti kapcsolatot írja le.
 \vspace{5pt}\\Mindegyik titkosítási módszer, legyen az adatbázis titkosítás, vagy fájlrendszer titkosítás, valamilyen titkosítási algoritmust alkalmaz.
 \\A dolgozat méréseit és összehasonlításait ezeken az algoritmusokon végeztem.
 \vspace{5pt}\\Az algoritmusok belső matematikai működéséről részletes leírást nem tartalmaz a dokumentum. Bonyolultak és hosszúak, sok-sok oldalt kellene írni ahhoz, hogy megismerjük minden egyes algoritmus pontosan milyen számításokat végez a végső kódölt szöveg eléréséhez.
@@ -14,7 +17,7 @@ A titkosítási algoritmusok fogalma eltérő az eljárásoktól, amiket adattit
 \\Általános működési elve a szimmetrikus algoritmusoknak a \ref{fig:sym_encryption} ábrán látható.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{images/sym.png}
+	\includegraphics[scale=0.75]{images/sym.png}
 	\caption{Szimmetrikus titkosítási algoritmusok működése \cite{ssl2buywiki}.}
 	\label{fig:sym_encryption}
 \end{figure}
@@ -48,7 +51,8 @@ A titkosítási algoritmusok fogalma eltérő az eljárásoktól, amiket adattit
 
 \subsection{Triple DES}
 \noindent Működése megegyezik a DES működésével.
-\vspace{5pt}\\3x16 sorozatot végez, így biztonságosabbnak mondható \cite{enwiki:1078804116}.
+\vspace{5pt}\\$3 \times 16$ sorozatot végez, így biztonságosabbnak mondható \cite{enwiki:1078804116}.
+% TODO: Mit jelentene az itt, hogy sorozatot végez?
 \vspace{5pt}\\Hátránya lehet, hogy a titkosítás és visszafejtés ugyanazzal az algoritmussal és kulcsokkal történik.
 
 
@@ -70,11 +74,11 @@ A titkosítási algoritmusok fogalma eltérő az eljárásoktól, amiket adattit
 \noindent Egy privát és egy publikus kulcsot használ \cite{yassein2017comprehensive}.
 \vspace{5pt} \\A publikus kulcs lehetővé teszi, hogy bárki titkosítsa az adatokat.
 \vspace{5pt} \\A privát kulcs szükséges az adatok  dekódolásához. 
-\vspace{5pt} \\Biztonságosabbnak vélhető, mivel a privát kulcsok nem kerülnek megosztásra, de ugyanakkor nagyobb a számítási költsége is.\newline
+\vspace{5pt} \\Biztonságosabbnak vélhető, mivel a privát kulcsok nem kerülnek megosztásra, de u\-gyan\-ak\-kor nagyobb a számítási költsége is.\newline
 \vspace{5pt}\\ Aszimmetrikus algoritmusok általános működési elve a \ref{fig:asym_encryption} ábrán látható.
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.4]{images/asym.png}
+	\includegraphics[scale=0.5]{images/asym.png}
 	\caption{Aszimmetrikus titkosítási algoritmusok működése \cite{ssl2buywiki}.}
 	\label{fig:asym_encryption}
 \end{figure}
@@ -103,18 +107,20 @@ A titkosítási módszerek közül kimaradt, az úgynevezett 'hashing', vagy has
 \vspace{5pt} \\Egy algoritmus mindig ugyanolyan méretű kimenetet állít elő. 
 \vspace{5pt} \\Nagyon nehéz két olyan különböző szót találni, amelyek ugyanazon hash algoritmussal transzformálva ugyanazt a titkosított szöveget eredményeznék.
 \vspace{5pt} \\Egy hash algoritmussal transzformált szöveget visszaalakítani egyszerű, értelmes szöveggé (plain text) már nem lehet, éppen ezért használják jelszavak titkosítására.
-\vspace{5pt} \\Nem visszaalakíthatósága miatt egyezőség vizsgálatát lehet megnézni két ugyanazon hash algoritmussal transzformált , kódolt szöveg között. Ha két hash egyezik, akkor ugyan az volt a bemeneti érték, ha nem egyeznek, akkor különbözőek voltak.
+\vspace{5pt} \\Nem visszaalakíthatósága miatt egyezőség vizsgálatát lehet megnézni két ugyanazon hash algoritmussal transzformált, kódolt szöveg között. Ha két hash egyezik, akkor ugyan az volt a bemeneti érték, ha nem egyeznek, akkor különbözőek voltak.
 \vspace{5pt} \\Úgynevezett salt és pepper –rel szokás a hasheket ellátni, magasabb biztonság elérése érdekében.
 \vspace{5pt} \\ \underline{Salt:} A titkosítandó szövegrészhez extra szöveg csatolása bonyolultság növeléséhez. Regisztrációkor lehet például az email címet és jelszót kombinálni, majd a kombinált szövegen elvégezni a hash algoritmust. Ilyen adatokat 'salted hash'-nek nevezünk.
-\vspace{5pt} \\ \underline{Pepper:} Salted hash adathoz , tehát már titkosított adathoz fűz további értékeket. Egy adatbázis esetében ez általában megegyező értéket jelent, azaz minden hashelt adathoz ugyanaz a pepper érték adja hozzá.
-\vspace{25pt} \\ Két leggyakrabban implementált hash algoritmus:
+\vspace{5pt} \\ \underline{Pepper:} Salted hash adathoz, tehát már titkosított adathoz fűz további értékeket. Egy adatbázis esetében ez általában megegyező értéket jelent, azaz minden hashelt adathoz ugyanaz a pepper érték adja hozzá.
 
-\subsection{MD5 (Message Digest 5)}
+A következőkben a két leggyakrabban implemntált hash algoritmust áthatjuk.
+
+\SubSection{MD5 (Message Digest 5)}
 Régebben gyakran használt funkció, ami egy 128 bites kimenetet állít elő \cite{gupta2014review}.
-\vspace{5pt} \\Kiderült róla, hogy nem ütközésálló (collision resistant), emiatt kriptográfusok más hash algoritmusokat ajánlanak. Egy hash függvényre akkor mondjuk, hogy ütközésálló, hogyha nehéz olyan két különböző bemenetet találni, amely ugyanazt a kimenetet eredményezi.
+\vspace{5pt} \\Kiderült róla, hogy nem ütközésálló (\textit{collision resistant}), emiatt kriptográfusok más hash algoritmusokat ajánlanak. Egy hash függvényre akkor mondjuk, hogy ütközésálló, hogyha nehéz olyan két különböző bemenetet találni, amely ugyanazt a kimenetet eredményezi.
 
 
-\subsection{SHA (Secure Hashing Algorithm) Family}
+\SubSection{SHA (Secure Hashing Algorithm) Family}
+
 Hat különböző hash függvényből áll: SHA-0, SHA-1, SHA-224, SHA-256, SHA-384, SHA-512 \cite{dang2008recommendation}.
 \vspace{5pt} \\Változó méretű bemenetet alakítanak fix méretű kiementté.
 \vspace{5pt} \\Az első négy 512 bites blokkokat használ 32 bites szavakra osztva, az utolsó kettő pedig 1024 bites blokkokat 64 bites szavakra bontva.
@@ -133,9 +139,11 @@ A mérések végzéséhez az alkalmazásomból elmentett adatokat fogom tesztada
 \vspace{5pt}\\Feltehető a mérési eredmények arányos növekedése nagyobb fájlméret esetén.
 
 \subsection{Tesztprogram}
-\vspace{5pt}\noindent A mérések összeállítása előtti próbálgatásaimból megtudtam, hogy a titkosítási és visszafejtési idő (a program kód alapján, a System.currentTimeMillis() parancs használatával) nem mindig egyezik meg ugyanazon fájl többszöri titkosítása esetén. Ebből következik, hogy egy adott fájl titkosítását mindegyik algoritmus használatakor többször is el kell végeznem, hogy egy korrekt közelítő értéket kapjak.
-\vspace{5pt}\\A tesztprogram elkészítésére elsősorban a javax.crypto és java.security könyvtárakat használtam. A program szempontjából ezen könyvtárak által szolgáltatott fontosabb \underline{interface-ek}:
-\vspace{5pt}\\Key: Az összes kulcs legfelső szintű interface-e. Meghatározza az összes kulcs objektum által használt funkciókat.
+\vspace{5pt}\noindent A mérések összeállítása előtti próbálgatásaimból megtudtam, hogy a titkosítási és visszafejtési idő (a program kód alapján, a \texttt{System.currentTimeMillis()} parancs használatával) nem mindig egyezik meg ugyanazon fájl többszöri titkosítása esetén. Ebből következik, hogy egy adott fájl titkosítását mindegyik algoritmus használatakor többször is el kell végeznem, hogy egy korrekt közelítő értéket kapjak.
+\vspace{5pt}\\A tesztprogram elkészítésére elsősorban a \texttt{javax.crypto} és \texttt{java.security} könyvtárakat használtam. A program szempontjából ezen könyvtárak által szolgáltatott fontosabb
+% TODO: A programkódra jellemző neveket módszeresen tt-vel kellene szedni!
+ \underline{interface-ek}:
+\vspace{5pt}\\\textit{Key}: Az összes kulcs legfelső szintű interface-e. Meghatározza az összes kulcs objektum által használt funkciókat.
 \vspace{5pt}\\PrivateKey: Célja, hogy csoportosítsa az összes privát kulcs interface-t. Nem tartalmaz metódusokat vagy konstansokat. Speciális privát kulcs interface-ek kiterjesztik ezt az interface-t. 
 \vspace{5pt}\\PublicKey: Célja, hogy csoportosítsa az összes nyilvános kulcs interface-t. Nem tartalmaz metódusokat vagy konstansokat. Speciális nyilvános kulcs interface-ek kiterjesztik ezt az interface-t. \newline
 
@@ -166,7 +174,7 @@ cipher.init(Cipher.DECRYPT_MODE, privateKey);
 byte[] decryptedFileBytes = cipher.doFinal(inputBytes);
 \end{java}
 Szimmetrikus algoritmus használata esetén a publicKey és privateKey helyére a létrehozott szimmetrikus kulcsot kell elhelyezni.
-\vspace{15pt}\\ - Kódolt byte-ok fájlba írása, majd a dekódolt byte-ok másik fájlba írása. Azért dekódoltam, hogy meggyőződjek róla, hogy semmi hiba nem történt titkosítás és visszafejtés alatt.
+\vspace{15pt}\\ - Kódolt byte-ok fájlba írása, majd a dekódolt byte-ok másik fájlba írása kerül bemutatásra. Azért dekódoltam, hogy meggyőződjek róla, hogy semmi hiba nem történt titkosítás és visszafejtés alatt.
 \begin{java}
 //Titkositott byte-ok irasa
 FileOutputStream outputStream = 
@@ -199,7 +207,7 @@ A kezdő és végérték inicializálását a megfelelő helyekre kell elhelyezn
 \begin{java}
 String key = "T@stK#Y1";
 //Titkos kulcs letrehozasa
-Key secretKey = new SecretKeySpec(key.getBytes(), "DES");	
+Key secretKey = new SecretKeySpec(key.getBytes(), "DES");
 \end{java}
 Az alkalmazás többi részében a secretKey objektumot kellett használni.
 \vspace{7pt}\\- Aszimmetrikus algoritmusok mérésekor a következő volt a kód:
@@ -235,7 +243,7 @@ A számítógépem paraméterei:
 		\hline
 		Mekkora egy block mérete? & 128 bit & 64 bit & 64 bit & 64 bit \\
 		\hline
-		Hány kört végez az algoritmus? & Kulcs méretétől függ  & 16 kör & 3 x 16 kör & 16 kör \\
+		Hány kört végez az algoritmus? & Kulcs méretétől függ  & 16 kör & $3 \times 16$ kör & 16 kör \\
 		 & 128 bit - 10 kör & & & \\
 		 & 192 bit - 12 kör & & & \\
 		 & 256 bit - 14 kör & & & \\
@@ -371,7 +379,7 @@ A számítógépem paraméterei:
 
 
 \noindent Néhány esetben viszonylag nagy eltérés volt az értékek között, például a Triple DES esetében, a 4MB méret 5.mérése (lásd \ref{tab:enc_4mb} táblázat) ~50 milliszekundummal nagyobb mint a többi mérés. Pontosabb átlagértékeket kaphatnánk, ha egy módszerrel X méretű fájlt százszor titkosítanánk, nem pedig csak tízszer, és az így kapott eredményeket átlagolnánk.
-\vspace{5pt}\\Ettől függetlenül az így kapott értékekről lehet következtetéseket vonni:
+\vspace{5pt}\\Ettől függetlenül az így kapott értékekről lehet következtetéseket levonni.
 \vspace{5pt}\\Mindkét téren (titkosítás és visszafejtés) az AES használata bizonyult a leggyorsabbnak (lásd \ref{tab:avg_enc} és \ref{tab:avg_dec} táblázat). Ahogy a fájl mérete nőtt, úgy az AES titkosítási ideje nem nőtt olyan látványosan, mint a többi algoritmus esetében. Visszafejtési időre szintén igaz ez az állítás. 
 \vspace{5pt}\\Gyorsaságot tekintve legközelebb az AES-hez a Blowfish állt, mind visszafejtés és titkosítás terén is. 
 \vspace{5pt}\\A DES és a Triple DES közötti egyre inkább növekvő különbség várható volt, hiszen a Triple DES háromszor végzi el azt, amit a DES csak egyszer. Ennek ellenére titkosítási időben nem érte el a Triple DES az elődje háromszorosát, habár nagyobb fájlméret esetén a növekedésüket nézve valószínűleg el fogja, sőt ezt a tendenciát követve valószínűleg a különbség több, mint a háromszorosára is nőhet. Visszafejtési időben sokkal inkább látszik ez a különbség, 4 MB-os fájl titkosítása átlagosan kétszer addig tart a Triple DES-nek, mint a DES-nek, visszafejtést nézve 4 MB esetén ez az érték majdnem háromszorosára nőtt (lásd \ref{tab:avg_enc} és \ref{tab:avg_dec} táblázat).
@@ -486,7 +494,7 @@ A kapott értékek a \ref{tab:enc_64mb}-as és \ref{tab:dec_64mb}-es táblázato
 \vspace{15pt} \\ \textbf{RSA}
 \vspace{5pt} \\ Szerettem volna a szimmetrikus algoritmusokkal összehasonlítani, de nem lenne korrekt, mivel az adatmennyiség felsőhatára, amit a javax.crypto könyvtár használatával titkosítani tudtam 245 byte volt. Ha nagyobb mérettel próbálkoztam hibaüzenetet kaptam „Data must not be longer than 245 bytes”.
 \vspace{5pt} \\Ezután az interneten jobban utána olvastam a problémának és megtudtam, hogy az RSA algoritmus maximum akkora mennyiségű adatot képes titkosítani, mint az RSA kulcs mérete (mínusz az ún. header data, azaz fejlécadat). 
-\vspace{5pt} \\Kettő hatványait használtam kulcsméret megadására, először 2048 bit nagyságú kulccsal kezdtem.
+\vspace{5pt} \\Kettő hatványait használtam kulcsméret megadására, először 2048 bit nagy\-sá\-gú kulcs\-csal kezdtem.
 \\Az eredmények milliszekundumban értendők és a \ref{tab:enc_rsa}-as és \ref{tab:dec_rsa}-es táblázatban találhatók.
 
 \begin{table}[H]
@@ -560,7 +568,7 @@ A kapott értékek a \ref{tab:enc_64mb}-as és \ref{tab:dec_64mb}-es táblázato
 \end{table}
 
 \noindent Ezután megpróbáltam nagyobb fájlokat titkosítani, így növelnem kellett a kulcs nagyságát is.
-\vspace{5pt} \\ A kulcs nagysága: 8192 bit. Titkosítandó fájl nagysága: 1013 byte (a fejlécadat nagysága miatt ez lett a limit, de a kettőt összeadva egyébként $2^{10}$-en, azaz 1024 byte). Titkosított fájl mérete: 1024 byte. Az eredmények a \ref{tab:rsa_1024byte} táblázatban találhatók. A 4 különböző fájl átlagértékei grafikonos formában a \ref{fig:rsa_graf}-as ábrán láthatók.
+\vspace{5pt} \\ A kulcs nagysága: 8192 bit. Titkosítandó fájl nagysága: 1013 byte (a fejlécadat nagysága miatt ez lett a limit, de a kettőt összeadva egyébként $2^{10}$-en, azaz 1024 byte). Titkosított fájl mérete: 1024 byte. Az eredmények  \aref{tab:rsa_1024byte} táblázatban találhatók. A 4 különböző fájl átlagértékei grafikonos formában \aref{fig:rsa_graf}-as ábrán láthatók.
 
 \begin{table}[H]
 	\centering
@@ -606,7 +614,7 @@ A kapott értékek a \ref{tab:enc_64mb}-as és \ref{tab:dec_64mb}-es táblázato
 	\label{fig:rsa_graf}
 \end{figure}
 \\ \noindent DSA mérését és összehasonlítását nem tartom korrektnek, mivel nem nagy méretű adat titkosítására, hanem digitális aláírásokra lett kifejlesztve.
-\vspace{5pt}\\ECC mérést szintén nem készítettem, mivel nem tudtam. Utánanéztem az interneten és ECC titkosítást elméletileg a javax.crypto könyvtár segítségével nem lehet végrehajtani. Más függvény könyvtárat azért nem használtam, mert úgy gondolom fennáll a lehetősége, hogy eltérnek az algoritmusok implementálásai, így olyan könyvtár használata lenne optimális, amely az összes vizsgált algoritmust tartalmazza.
+\vspace{5pt}\\ECC mérést szintén nem készítettem, mivel nem tudtam. Utánanéztem az interneten és ECC titkosítást elméletileg a \texttt{javax.crypto} könyvtár segítségével nem lehet végrehajtani. Más függvény könyvtárat azért nem használtam, mert úgy gondolom fennáll a lehetősége, hogy eltérnek az algoritmusok implementálásai, így olyan könyvtár használata lenne optimális, amely az összes vizsgált algoritmust tartalmazza.
 
 
 
