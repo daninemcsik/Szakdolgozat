@@ -240,36 +240,11 @@ public class SearchMenuScreen extends JPanel{
 		pageListScroll.getVerticalScrollBar().setUI(new CustomScrollbar());
 		searchPanel.add(pageListScroll);
 		pageListScroll.setVisible(false);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	
 		//SZERKESZTÕ GOMBJAI
 		textEditorButtons = new TextEditorButtons(this, textPane);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//ACTION / MOUSE LISTENERS
+	
+		//LISTENERS
 		searchButton.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -299,7 +274,6 @@ public class SearchMenuScreen extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				try {
 					searchBar.setPopupVisible(true);
-					System.out.println(searchBar.getSelectedItem().toString());
 					text.setText(searchBar.getSelectedItem().toString());
 				}catch (Exception e1) {
 				}
@@ -340,7 +314,6 @@ public class SearchMenuScreen extends JPanel{
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				System.out.println("c" + searchBar.getModel().getSize());
 			}
 			
 			

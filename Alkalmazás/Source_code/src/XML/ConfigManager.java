@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,14 +39,21 @@ public class ConfigManager extends DefaultHandler{
 	private String dbJsonPath;
 	private String dbStoragePath;
 	
-	private String configFilePath = "C:\\Users\\AMD\\Desktop\\config.xml";
+	private String configFilePath;
 	private PopupWindow popupWindow = new PopupWindow();
 	
-	public ConfigManager(){
+	public ConfigManager() {
+		try {
+			this.configFilePath = new File(ConfigManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent() + "\\config.xml";
+			System.out.println(configFilePath);
+		} catch(URISyntaxException e) {
+			int val = popupWindow.createErrorHandlingWindow("Code error 12", 
+					"URISyntaxException while creating config file");
+    		while(val == 1) {}
+		}
 		init();
-
+		
 	}
-
 	
 	public void init(){
 		File file = new File(configFilePath);
@@ -155,7 +163,9 @@ public class ConfigManager extends DefaultHandler{
 			fileWriter.close();
 			
 		} catch (Exception e) {
-			System.out.println("error3");
+			int val = popupWindow.createErrorHandlingWindow("Code error 11", 
+					"Exception while writing config file");
+			while(val == 1) {}
 		}
 	
 	}
@@ -175,7 +185,9 @@ public class ConfigManager extends DefaultHandler{
 			Result result = new StreamResult(new File(file));
 			transformer.transform(source, result);
 		}catch(Exception e) {
-			
+			int val = popupWindow.createErrorHandlingWindow("Code error 11", 
+					"Exception while writing config file");
+			while(val == 1) {}
 		}
 	}
 	

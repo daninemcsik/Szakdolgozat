@@ -8,7 +8,6 @@ import java.awt.Color;
 
 
 public class ComboBoxRenderer extends JLabel implements ListCellRenderer<String>{
-
 	
 	/**
 	 * Randomly generated serial version ID
@@ -22,8 +21,6 @@ public class ComboBoxRenderer extends JLabel implements ListCellRenderer<String>
 		
 		
 	}
-	
-	
 
 	@SuppressWarnings("rawtypes")
 	@Override
