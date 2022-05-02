@@ -70,8 +70,7 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 	
 	@Override
 	protected void addButtonComponents(Container container, Object[] buttons, int initialIndex) {
-		
-		
+			
 		JButton customButton = createButton();
 		JButton customButton2 = createButton();
 		
@@ -128,38 +127,7 @@ public class CustomJOptionPaneLayout extends BasicOptionPaneUI{
 			public void mouseReleased(MouseEvent e) {
 				customButton2.setBackground(buttonBackgroundColor);
 			}
-		});
-		
-		
-		/*
-		Action acceptButtonAction = new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				acceptAction(customButton);
-			}
-		};
-		Action declineButtonAction = new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Window w = SwingUtilities.getWindowAncestor(customButton2);
-				if(w != null) {
-					w.dispose();
-				}
-			}
-		};
-		
-		InputMap inputMap;
-		KeyStroke key;
-		
-		inputMap = customButton.getInputMap();
-		key = KeyStroke.getKeyStroke( (char) KeyEvent.VK_ENTER); 
-		inputMap.put(key, acceptButtonAction);
-			
-		inputMap = customButton2.getInputMap();
-		key = KeyStroke.getKeyStroke( (char) KeyEvent.VK_ESCAPE); 
-		inputMap.put(key, declineButtonAction);
-		*/
-		
+		});		
 	}
 	
 	public void acceptAction(JButton customButton) {
