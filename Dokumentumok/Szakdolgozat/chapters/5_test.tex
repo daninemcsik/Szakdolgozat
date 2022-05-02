@@ -4,19 +4,23 @@ A fejezet az elkészített alkalmazás rendeltetésszerű működését mutatja 
 
 \Section{Config fájl}
 Az alkalmazáshoz szükséges fájlok elérési útvonalát a config.xml fájlban kell megadni.
-Egy fájl elérési útvonalát az alábbi módon kell megadni: \\C:\textbackslash Users\textbackslash AMD\textbackslash Desktop\textbackslash firebase\_service\_key\_example.json.
-\vspace{5pt}\\Ha az alkalmazást először futattjuk az eszközön, vagy egy új mappában tettük a futtatható .jar fájlt, amiben nem található config.xml, akkor automatikusan létrejön az adott mappában egy fájl, példa adatokkal. Ezeket meg kell változtatnunk, hogy használni tudjuk az alkalmazást.
-\vspace{15pt}\\A \ref{fig:config_file}. ábra egy automatikusan létrehozott config.xml fájl felépítését mutatja. A pirossal számozott sorok tartalmát kell szerkesszük, a további alfejezetekben ezt fejtem ki.
-% TODO: Az alábbi kerülhet XML vagy Java környezetbe!
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.5]{images/config_1.png}
-	\caption{Config.xml tartalma első futtatás után}
-	\label{fig:config_file}
-\end{figure}
+Egy fájl elérési útvonalát az alábbi módon kell megadni: \\\texttt{C:\textbackslash Users\textbackslash AMD\textbackslash Desktop\textbackslash firebase\_service\_key\_example.json}.
+\vspace{5pt}\\Ha az alkalmazást először futattjuk az eszközön, vagy egy új mappában tettük a futtatható .jar fájlt, amiben nem található \texttt{config.xml}, akkor automatikusan létrejön az adott mappában egy fájl, példa adatokkal. Ezeket meg kell változtatnunk, hogy használni tudjuk az alkalmazást.
+\vspace{15pt}\\Az alábbi kódrészlet egy automatikusan létrehozott config.xml fájl felépítését mutatja. A pirossal számozott sorok tartalmát kell szerkesszük, a további alfejezetekben ezt fejtem ki.
+\begin{java}
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+ <editable>
+  <dbJsonPath>C:\Users\Example\Downloads\
+   noteapp-b5be3-firebase\_service\_key\_path.json
+  </dbJsonPath>
+  <dbStoragePath>noteapp-b5be3.appspot.com</dbStoragePath>
+ </editable>
+</config>	
+\end{java}
 
 \subsection{Firebase}
-A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő kitöltéséhez létre kell hoznunk egy Firebase adatbázist. 
+Az xml fájl megfelelő konfigurálásához létre kell hoznunk egy Firebase adatbázist.
 \vspace{5pt}\\Egy böngészőben a \href{https://console.firebase.google.com/u/0/}{console.firebase.google.com} url beírása, majd egy google fiókba való belépés után ez a \ref{fig:firebase_reg}. ábrán látható kép fogad minket.
 
 \begin{figure}[H]
@@ -45,9 +49,7 @@ A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő ki
 	\label{fig:firebase_storage_default}
 \end{figure}
 
-% TODO: Tag-ek helyett egyszerűbb és elegánsabb elemeke emlegetni.
-
-\noindent A config.xml fájlban a tag-ek (<dbJsonPath>...</dbJsonPath>) közé kell a megfelelő adatokat beírnunk. A \ref{fig:config_file}. ábrán piros 2-essel jelölt <dbStoragePath>...</dbStoragePath> tag-ek közé a \ref{fig:firebase_storage_default}. ábrán 1-essel jelölt linket kell bemásoljuk a 'gs://' nélkül.
+\noindent A config.xml fájlban lévő tag-ek/elemek (\texttt{<dbJsonPath> ... </dbJsonPath>}) közé kell a megfelelő adatokat beírnunk. A config.xml fájlban lévő \texttt{<dbStoragePath> ... </dbStoragePath>} elemek közé a \ref{fig:firebase_storage_default}. ábrán 1-essel jelölt linket kell bemásoljuk a 'gs://' nélkül.
 \vspace{5pt}\\Ha ez megvan kattintsunk a \ref{fig:firebase_storage_default}. ábrán piros 2-essel jelölt fogaskerékre, majd 'Project settings', az újonnan megjelent felső sávban pedig a service accounts-ra (lásd \ref{fig:firebase_service_key}. ábra 3-mas lehetőség).
 
 \begin{figure}[H]
@@ -57,7 +59,7 @@ A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő ki
 	\label{fig:firebase_service_key}
 \end{figure}
 \noindent Nyomjuk meg sorrendben a \ref{fig:firebase_service_key}. ábrán piros számokkal jelölt gombokat, majd a felugró ablaknál a 'Generate key' gombot. Sikeresen letöltöttük a szükséges Firebase Service Key json fájlt!
-\vspace{5pt}\\A config.xml fájlban a <dbJsonPath>...</dbJsonPath> tag-ek közé másoljuk be a letöltött json fájl elérési útvonalát. Ezt a leírás elején található példa elérési úthoz hasonlóan tegyük.
+\vspace{5pt}\\A config.xml fájlban a \texttt{<dbJsonPath>...</dbJsonPath>} elemek közé másoljuk be a letöltött json fájl elérési útvonalát. Ezt a leírás elején található példa elérési úthoz hasonlóan tegyük.
 \vspace{5pt}\\ Ha lépésről lépésre mindent megtettünk, a config.xml fájl tartalma hasonlóan kell, hogy kinézzen, mint a \ref{fig:config_file_final}. ábrán látható.
 \begin{figure}[h]
 	\centering
@@ -72,8 +74,8 @@ A \ref{fig:config_file}. ábrán piros 1 és 2-essel jelölt sorok megfelelő ki
 
 \subsection{Fontos információk}
 \textbf{Nagyon fontos}, hogy a .jks fájlt ne töröljük. Ha mégis letöröljük hibákba fogunk ütközni, az alkalmazás adatai elvesznek és nem tudjuk őket sehogy visszaszerezni.
-\vspace{5pt}\\Ha töröltük a KeyStore fájlt, akkor \ref{fig:firebase_storage_default}. ábrán lévő felületen töröljük a Storage-ben lévő, programhoz tartozó összes fájlt (appKeyStore.jks, applicationData.xml). Így az előzőleg elmentett titkosított adatok is eltűnnek, és a .jks fájl is. A program ebben az esetben következő futtatáskor új fájlokat generál és üres tartalommal indul.
-\vspace{5pt}\\A program futtatásához java futtató környezet szükséges, ezt JRE-nek hívják (Java Runtime Environment). Telepíthetjük az Oracle-féle implementációt is, ami a \\ \href{https://java.com/en/download/manual.jsp}{https://java.com/en/download/manual.jsp} linken érhető el.
+\vspace{5pt}\\Ha töröltük a \texttt{KeyStore} fájlt, akkor \ref{fig:firebase_storage_default}. ábrán lévő felületen töröljük a Storage-ben lévő, programhoz tartozó összes fájlt (\texttt{appKeyStore.jks, applicationData.xml}). Így az előzőleg elmentett titkosított adatok is eltűnnek, és a .jks fájl is. A program ebben az esetben következő futtatáskor új fájlokat generál és üres tartalommal indul.
+\vspace{5pt}\\A program futtatásához java futtató környezet szükséges, ezt \texttt{JRE-nek hívják (Java Runtime Environment}). Telepíthetjük az Oracle-féle implementációt is, ami a \\ \href{https://java.com/en/download/manual.jsp}{https://java.com/en/download/manual.jsp} linken érhető el.
 
 \vspace{30pt}\Section{Jegyzetek menü}
 

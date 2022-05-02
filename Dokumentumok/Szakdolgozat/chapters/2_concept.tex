@@ -47,15 +47,22 @@ Tag-ek között megadhatjuk a tartalmukat (például autó márka), vagy tovább
 \noindent \underline{JSON – JavaScript Object Notation}
 \vspace{10pt}
 \newline \noindent Rugalmas, könnyen értelmezhető emberek és számítógép számára is
-\vspace{5pt}\\ Adatok név-érték párokban szerepelnek (pl. ”keresztnév” : ”Dániel”).
-\\Több egymást követő adat vesszővel van elválasztva egymástól (pl.: ”márka” : ”Mercedes”, ”szín” : ”piros”).
-\\ \{ \} – objektumot tartalmaz (pl. \{”keresztnév” : ”Dániel”, ”vezetéknév” : ”Nemcsik”\})
-\newline [ ] –tömböt tartalmaz (pl. \{ ”diákok”:[
-\\  \indent	\{”keresztnév” : ”Dániel”, ”vezetéknév” : ”Nemcsik”\},
-\\  \indent \{”keresztnév” : ”Tibor”, ”vezetéknév” : ”Nagy”\}
-]\}
+\vspace{5pt}\\ Adatok név-érték párokban szerepelnek (pl. \texttt{”keresztnev” : ”Daniel”}).
 
-% TODO: A JSON-ös részt is az előzőhöz hasonlóan kellene formázni.
+Több egymást követő adat vesszővel van elválasztva egymástól (pl.: \texttt{”marka” : ”Mercedes”, ”szin” : ”piros”}).
+
+\texttt{\{ \}} – objektumot tartalmaz (pl.: 
+\begin{java}
+{"keresztnev" : "Daniel", "vezeteknev" : "Nemcsik"}
+\end{java}
+
+\texttt{[ ]} –tömböt tartalmaz (pl. 
+\begin{java}
+{ "diakok":[
+{"keresztnev" : "Daniel", "vezeteknev" : "Nemcsik"},
+{"keresztnev" : "Tibor", "vezeteknev" : "Nagy"}
+]}
+\end{java}
 
 \begin{table}[H]
 	\centering
@@ -86,8 +93,6 @@ Tag-ek között megadhatjuk a tartalmukat (például autó márka), vagy tovább
 		\hline
 		Adatcsere formátumtípusú & Jelölőnyelv formátumtípusú\\
 		\hline
-		Adat megjelenítésére nem alkalmas & Mivel jelölőnyelv (\textit{markup language}), ezért adat megjelenítésére is alkalmas\\
-		\hline
 		Egy szabványos JavaScript függvénnyel használat előtt elemezni/felbontani/szeparálni (parzolni) kell a fájlt. & Adott programozási nyelvnek megfelelően kell elemezni/felbontani/szeparálni (parzolni) a fájlt.\\
 		\hline
 		Könnyedén elemezhető, kevés kód szükséges hozzá & Nehezebben elemezhető a tartalma\\
@@ -97,7 +102,6 @@ Tag-ek között megadhatjuk a tartalmukat (például autó márka), vagy tovább
 	\end{tabular}
 \end{table}
 
-% TODO: Mit jelent az, hogy adat megjelenítésére nem alkalmas?
 
 \vspace{6pt}
 \noindent Tegyük fel, hogy egy alkalmazás adatai vagy JSON vagy XML típusú fájlként, lokálisan tároljuk a felhasználó eszközén. \textbf{Lokális fájl} alapú tárolást az alábbi tulajdonságokkal jellemezhetjük.
@@ -113,9 +117,7 @@ Tag-ek között megadhatjuk a tartalmukat (például autó márka), vagy tovább
 \newpage
 \subsection{Adatbázis}
 
-Relációs adatbázisok kapcsán minden bizonnyal hallottunk már az SQL nyelvről. A legtöbb relációs adatbázis ezt a nyelvet használja, egy strukturált lekérdező nyelv. Feltételezem az SQL ismeretét, ezért bővebb jellemzésére nem tér ki a dolgozat.
-
-% TODO: Ezt itt le kellene tisztázni! (Az SQL-es felvezetés furcsa így.)
+Relációs adatbázisok kapcsán minden bizonnyal hallottunk már az SQL nyelvről. A legtöbb relációs adatbázis ezt a nyelvet használja. Az SQL egy strukturált lekérdező nyelv, adatbázissal való kommunikációra használható. Utasításokat használ különböző feladatok elvégzésére, mint adatok frissítése vagy lekérdezése egy adatbázisból.
 
 Adatbázisok viszont lehetnek különböző típusúak, különböző adatmodellűek. Két típust fogunk megnézni, a relációs adatbázist és NoSQL adatbázist. Ennek a két adatmodellnek egy rövid összehasonlítását tartalmazza a \ref{tab:rdbmsandnosql}-es táblázat.
 
@@ -128,22 +130,16 @@ Adatbázisok viszont lehetnek különböző típusúak, különböző adatmodell
 		\hline
 		\textbf{Relációs adatbázis} & \textbf{NoSQL adatbázis} \\
 		\hline
-		Adatok összefüggése táblák közötti kapcsolattal határozható meg. &  Dinamikus séma, nem struktúrált adatnak nevezzük.\\
-		Struktúrált formátumú tárolási mód. & Nem relációs adatmodell.\\
-		& Adatok gyakran kulcs-érték párokban szerepelnek vagy JSON formátumban.\\
+		Adatok összefüggése táblák közötti kapcsolattal határozható meg. &  Lehet séma független.\\
+		Struktúrált formátumú tárolási mód. & Több lehetséges adatmodell, köztük relációs is.\\
+		& Adatok sok módon megadhatók, gyakori a kulcs-érték párokban történő megadásuk vagy a JSON formátum.\\
 		\hline
-		Felépítéséből adódóan adatmodell változásokat nehezebb implementálni. & Könnyebb implementálni adatmodell változásokat, mivel az adatok nem biztos, hogy kapcsolódnak egymáshoz. \\
+		Felépítéséből adódóan séma változásokat nehezebb implementálni. & Könnyebb implementálni séma változásokat, mivel az adatok nem biztos, hogy kapcsolódnak egymáshoz. \\
 		\hline
-		Fix, meghatározott adat felépítés esetén a legjobb használni. & Nem struktúrált, komplex adatok esetén gyorsabb, kisebb erőforrás igényű lehet, mint egy relációs adatbázis használata.\\
+		Fix, meghatározott séma felépítés esetén a legjobb használni. & Nem struktúrált, komplex adatok esetén gyorsabb, kisebb erőforrás igényű lehet, mint egy relációs adatbázis használata.\\
 		\hline
 	\end{tabular}
 \end{table}
-
-% TODO: Sok a táblázatban a fals állítás.
-% - A NoSQL lehet séma független.
-% - A No a "Not Only" rövidítése, tehát lehet relációs is.
-% - Az adatok megadására jóval több lehetőség van.
-% - Az adatmodell és a séma változás nem ugyan az.
 
 \vspace{10pt}
 \noindent Azonfelül, hogy egy adatbázis milyen adatmodellel rendelkezik, lehet lokális, a felhasználó eszközén tárolt és távoli, például felhőalapú, \textit{cloud} adatbázis.
@@ -178,20 +174,28 @@ Az adat állapota alatt három lehetséges esetet értünk, \textit{data-at-rest
 \SubSection{Data-at-rest}
 
 Nyugvó adatnak olyan adatokat nevezünk, amelyek nem mozognak eszközről eszközre, vagy hálózatról hálózatra. Általában merevlemezen vagy pendrive-on tárolódnak.
-\vspace{5pt}\\A nyugalmi adatvédelem célja a bármilyen eszközön vagy hálózaton tárolt inaktív adat védelme.
-\vspace{5pt}\\Nyugvó adatokat általában kevésbé sebezhetőnek tartják, mint a mozgásban lévő adatokat (data-in-motion), gyakran értékesebbnek is tekinthető tartalmuk. Nyugvó adatok esetében az ellopható információ mennyisége sokkal nagyobb lehet mint az éppen úton levő adatoké (data-in-motion).
-\vspace{5pt}\\A nyugvó adatok biztonsága a szükséges óvintézkedések megtételétől függ.
-\\Egy cég legtöbb esetben adatait saját hálózatán belül tárolja, ettől függetlenül veszélyben lehetnek rosszindulatú külső és belső fenyegetésekkel szemben. Egy betolakodó könnyedén elérheti az adott cég adatait, ha sikerül jogtalanul hozzáférnie egy számítógépükhöz vagy egy lopott eszközt feltörnie.
-\vspace{5pt}\\Data-at-rest típusú adatok védelme érdekében az egyik legjobb, legegyszerűbb és leggyakrabban alkalmazott módszer ezek titkosítása.
 
-% TODO: Az előző részből ki kellene venni a felesleges formázást!
+A nyugalmi adatvédelem célja a bármilyen eszközön vagy hálózaton tárolt inaktív adat védelme.
+
+Nyugvó adatokat általában kevésbé sebezhetőnek tartják, mint a mozgásban lévő adatokat (data-in-motion), gyakran értékesebbnek is tekinthető tartalmuk. Nyugvó adatok esetében az ellopható információ mennyisége sokkal nagyobb lehet mint az éppen úton levő adatoké (data-in-motion).
+
+A nyugvó adatok biztonsága a szükséges óvintézkedések megtételétől függ.
+
+Egy cég legtöbb esetben adatait saját hálózatán belül tárolja, ettől függetlenül veszélyben lehetnek rosszindulatú külső és belső fenyegetésekkel szemben. Egy betolakodó könnyedén elérheti az adott cég adatait, ha sikerül jogtalanul hozzáférnie egy számítógépükhöz vagy egy lopott eszközt feltörnie.
+
+Data-at-rest típusú adatok védelme érdekében az egyik legjobb, legegyszerűbb és leggyakrabban alkalmazott módszer ezek titkosítása.
 
 \subsection{Data-in-motion / data-in-transit}
 
 Mozgásban lévő adatnak vagy tranzitadatnak olyan adatokat nevezünk, amelyek aktívan mozgásban vannak egyik helyről a másikra, vagy az interneten vagy magánhálózaton keresztül.
-\vspace{5pt}\\Mivel az adatok mozgásban vannak, ezért kevésbé biztonságosnak tekinthetők. Célja olyan adatok védelme amelyek például belső hálózaton belül mozognak, vagy helyi tárolóeszközről felhőtípusú tárolóeszközre.
-\vspace{5pt}\\Tranzitadat esetében is egy kiváló biztonsági intézkedés az adatok titkosítása. Védi az adatokat, ha két fél közötti kommunikációt ’lehallgatják’.
-Ez a védelem az adatok titkosításával biztosítható, még mozgatás előtt, vagy magának a kommunikációs csatornának titkosításával. Ez lehet talán a legfontosabb része a mozgásban lévő adatok védelmének, illetve a megfelelő kulcskezelés. Végpontok hitelesítése és adat érkezésekor való visszafejtése és ellenőrzése is tovább fokozhatja a védelmet. 
+
+Mivel az adatok mozgásban vannak, ezért kevésbé biztonságosnak tekinthetők. Célja olyan adatok védelme amelyek például belső hálózaton belül mozognak, vagy helyi tárolóeszközről felhőtípusú tárolóeszközre.
+
+Tranzitadat esetében is egy kiváló biztonsági intézkedés az adatok titkosítása. Védi az adatokat, ha két fél közötti kommunikációt ’lehallgatják’.
+
+Ez a védelem az adatok titkosításával biztosítható, még mozgatás előtt, vagy magának a kommunikációs csatornának titkosításával.
+
+Ez lehet talán a legfontosabb része a mozgásban lévő adatok védelmének, illetve a megfelelő kulcskezelés. Végpontok hitelesítése és adat érkezésekor való visszafejtése és ellenőrzése is tovább fokozhatja a védelmet. 
 
 \Section{Adattitkosítási módszerek}
 
@@ -206,8 +210,6 @@ Célja, hogy megvédje az adatainkat a potenciális fenyegetésektől. Ha egy t�
 Többféle titkosítási technika is létezik, melyek közül a legelterjedtebbek következnek.
 
 \bigskip
-
-% TODO: El kellene dönteni, hogy aláhúzás vagy félkövér jelölés lesz az ilyen részekhez, és egységesíteni.
 
 \noindent\textbf{Átlátható adat titkosítás}
 \begin{itemize}
@@ -285,11 +287,15 @@ Többféle titkosítási technika is létezik, melyek közül a legelterjedtebbe
 % TODO: Egyszerűbben kellene formázni!
 
 Szóba került egy probléma többgépes alkalmazás készítése esetében, mégpedig az adatok szinkronizálása különböző eszközökön \cite{nakatani2006data}.
-\vspace{5pt} \\ Az adatszinkronizálás egy olyan folyamat, ami alatt a különböző eszközökön eltárolt információkat megpróbáljuk össze egyeztetni, összhangba hozni.
-\vspace{5pt} \\Alkalmazások készítésekor szükséges a szinkronizáció problémájának megoldása, hiszen nem szeretnénk ugyanazt az információt bevinni a rendszerünkbe, amit már egy másik eszközön korábban megtettünk. Legtöbb esetben szeretnénk azonos adatokat elérni minden készüléken.
-\vspace{5pt} \\Programozási szempontból ez adatbázisok és/vagy fájlok szinkronizálását jelenti.
+
+Az adatszinkronizálás egy olyan folyamat, ami alatt a különböző eszközökön eltárolt információkat megpróbáljuk össze egyeztetni, összhangba hozni.
+
+Alkalmazások készítésekor szükséges a szinkronizáció problémájának megoldása, hiszen nem szeretnénk ugyanazt az információt bevinni a rendszerünkbe, amit már egy másik eszközön korábban megtettünk. Legtöbb esetben szeretnénk azonos adatokat elérni minden készüléken.
+
+Programozási szempontból ez adatbázisok és/vagy fájlok szinkronizálását jelenti.
 \vspace{15pt} \\ A probléma részletes felvezetése a következőképpen nézne ki:
-\vspace{5pt} \\  Tegyük fel, hogy van két fájl, A és B, amelyek két lassú kommunikációs kapcsolattal (\textit{slow communication link}) összekötött gépen vannak. A-t úgy szeretnénk frissíteni, hogy tartalma megegyezzen B tartalmával.  Ha A nagy méretű, akkor A másolása B-re lassú lesz. Gyorsaság érdekében A-t tömöríthetjük küldés előtt, de ez nem egy perfekt megoldás.
+
+Tegyük fel, hogy van két fájl, A és B, amelyek két lassú kommunikációs kapcsolattal (\textit{slow communication link}) összekötött gépen vannak. A-t úgy szeretnénk frissíteni, hogy tartalma megegyezzen B tartalmával.  Ha A nagy méretű, akkor A másolása B-re lassú lesz. Gyorsaság érdekében A-t tömöríthetjük küldés előtt, de ez nem egy perfekt megoldás.
 
 Tegyük fel, hogy A és B nagyon hasonló, mondjuk ugyanazon eredeti fájlból származnak. Felgyorsítás érdekében a hasonlóság valamilyen módon történő kihasználása lenne a logikus lépés. Gyakori módszer, hogy A és B közötti különbségeket küldik el a felek egymásnak, majd ebből a listából a fájl rekonstruálásra kerül. 
 
