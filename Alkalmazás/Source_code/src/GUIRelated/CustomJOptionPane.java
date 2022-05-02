@@ -19,7 +19,6 @@ public class CustomJOptionPane extends JOptionPane{
             
 	}
 
-
 	@Override
 	public JDialog createDialog(String title) {
 		

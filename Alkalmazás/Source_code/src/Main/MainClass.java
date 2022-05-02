@@ -26,24 +26,17 @@ public class MainClass {
 	private static PopupWindow popupWindow = new PopupWindow();
 	
 	public static void main(String[] args) {
-		try {
+
+		loadingScreen = new LoadingScreen();
 			
-			loadingScreen = new LoadingScreen();
+		checkInternetConnectionOnce();
+		new ConfigManager();
+		mainScreen = new MainScreenOutline(initApplicationContent(), dbStorageClient);
+		loadingScreen.close();
+		mainScreen.setVisible(true);
 			
-			checkInternetConnectionOnce();
-			new ConfigManager();
-			File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").toURI());
-			System.out.println("MainClassba írja ki " + jarDir.getPath());
-			mainScreen = new MainScreenOutline(initApplicationContent(), dbStorageClient);
-			loadingScreen.close();
-			mainScreen.setVisible(true);
+		checkInternetConnection();
 			
-			checkInternetConnection();
-			
-	        
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public static void checkInternetConnection() {
@@ -62,10 +55,16 @@ public class MainClass {
 			Thread.sleep(4000);
 			checkInternetConnection();
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch(IOException e){
+			int val = popupWindow.createErrorHandlingWindow("Code error 11", "IOException while checking connection");
+			while(val == 1) {}
+		} catch(InterruptedException e){
+			int val = popupWindow.createErrorHandlingWindow("Code error 16", 
+					"InterruptedExceptionwhile while checking connection");
+			while(val == 1) {}
 		}
 	}
+	
 	
 	public static void checkInternetConnectionOnce() {
 		Process process;
@@ -79,10 +78,15 @@ public class MainClass {
 				popupWindows.createNoInternetPopupMenu("inform", "inform");
 				System.exit(0);
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch(IOException e){
+			int val = popupWindow.createErrorHandlingWindow("Code error 11", "IOException while checking connection");
+			while(val == 1) {}
+		} catch(InterruptedException e){
+			int val = popupWindow.createErrorHandlingWindow("Code error 16", 
+					"InterruptedExceptionwhile while checking connection");
+			while(val == 1) {}
 		}
+		
 	}
 			
 	private static Content initApplicationContent() {

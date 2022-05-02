@@ -47,7 +47,6 @@ import GUIRelated.CustomScrollbar;
 @SuppressWarnings("deprecation")
 public class TextEditorButtons {
 
-	//private JFrame frame;
 	private JLabel boldTextButton;
 	private JLabel italicTextButton;
 	private JLabel underlineTextButton;
