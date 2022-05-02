@@ -2,13 +2,12 @@
 
 A fejezet a program készítése során felmerülő problémák leírásával foglalkozik. Bemutatja hogyan sikerült az alkalmazás egyes részeit implementálnom. Nem tartalmaz a program használatával kapcsolatos információkat. 
 \\A fejezet felépítése a program csomag-szintű felépítésével egyezik.
-% \\Nem \LaTeX\-Java stílusú kódrészleteket tartalmaz, hanem beszúrt képeket a kész kódról.
 
 \Section{Data}
 
-Az előző fejezetben leírt szükséges adattípusokat egy Content nevű osztályba gyűjtöttem össze. A csomag felépítése \aref{fig:package_data}. ábrán látható.
-\vspace{5pt}\\Két tároló objektumot tartalmaz, amelyek DefaultListModel típusúak, ezen belül Note és Page típusú adatokat tartalmaznak. DefaultListModel objektumot egy lista elemeinek létrehozására és megjelenítésére használjuk Java-ban. Mivel az adatok csak listákban kerülnek megjelenítésre, ezért ez az objektum tökéletes volt az adatok tárolására.
-\vspace{5pt}\\Az alkalmazás azon részei, amelyek az adatokkal dolgoznak a Content osztályon keresztül érik el őket.
+Az előző fejezetben leírt szükséges adattípusokat egy \texttt{Content} nevű osztályba gyűjtöttem össze. A csomag felépítése \aref{fig:package_data}. ábrán látható.
+\vspace{5pt}\\Két tároló objektumot tartalmaz, amelyek \texttt{DefaultListModel} típusúak, ezen belül \texttt{Note} és \texttt{Page} típusú adatokat tartalmaznak. \texttt{DefaultListModel} objektumot egy lista elemeinek létrehozására és megjelenítésére használjuk Java-ban. Mivel az adatok csak listákban kerülnek megjelenítésre, ezért ez az objektum tökéletes volt az adatok tárolására.
+\vspace{5pt}\\Az alkalmazás azon részei, amelyek az adatokkal dolgoznak a \texttt{Content} osztályon keresztül érik el őket.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.7]{images/package_data.png}
@@ -17,10 +16,10 @@ Az előző fejezetben leírt szükséges adattípusokat egy Content nevű osztá
 \end{figure}
 
 \Section{Database}
-Egy osztályt tartalmaz, a DatabaseFunctions-t, amiben az adatbázissal kapcsolatos funkciókat gyűjtöttem össze, mint az adatbázishoz való csatlakozás, fájlok fel- és letöltése. A csomag felépítése a \ref{fig:package_database}. ábrán látható.
+Egy osztályt tartalmaz, a \texttt{DatabaseFunctions}-t, amiben az adatbázissal kapcsolatos funkciókat gyűjtöttem össze, mint az adatbázishoz való csatlakozás, fájlok fel- és letöltése. A csomag felépítése a \ref{fig:package_database}. ábrán látható.
 \vspace{5pt}\\Az adatok Firebase nevű felhőalapú adatbázisban kerülnek tárolásra, így az alkalmazás megfelelő működéséhez szükséges van internetkapcsolatra.
 \\Az alkalmazást át kellett alakítanom Maven project-re, hogy a Firebase adatbázis driver-éhez hozzá tudjak férni, majd az API segítségével kapcsolatba tudjak lépni az adatbázissal.
-\\Lehetsőségünk van Firebase-en belül Blob (Binary large object/Nagy bináris objektum) fájlok tárolására. Az alkalmazás adatai titkosított XML fájl formájában kerülnek az adatbázisba. A Firebase ezen felül data-at-rest titkosítást is alkalmaz.
+\\Lehetsőségünk van Firebase-en belül \texttt{Blob (Binary large object/Nagy bináris objektum)} fájlok tárolására. Az alkalmazás adatai titkosított XML fájl formájában kerülnek az adatbázisba. A Firebase ezen felül data-at-rest titkosítást is alkalmaz.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.7]{images/package_database.png}
@@ -28,17 +27,15 @@ Egy osztályt tartalmaz, a DatabaseFunctions-t, amiben az adatbázissal kapcsola
 	\label{fig:package_database}
 \end{figure}
 
-% TODO: Az ilyen képek helyett az osztályokról inkább kisebb UML diagramok kellenének!
-
 \Section{Encryption}
 Titkosítással kapcsolatos osztályokat tartalmaz. A csomag felépítése a \ref{fig:package_encryption}. ábrán látható.
-\vspace{5pt}\\Az AppKeyStore osztálynak két funkciója van. 
-\\Egyik egy random generált 256 bit-es AES titkosítási kulcs létrehozására szolgál, amit egy KeyStore objektumban tárol, ezt .jks kiterjesztésű 256 karakter hosszú jelszóval védett fájlként tárolja. A fájl a progarm működése alatt feltöltődik az adatbázisba.
+\vspace{5pt}\\Az \texttt{AppKeyStore} osztálynak két funkciója van. 
+\\Egyik egy random generált 256 bit-es AES titkosítási kulcs létrehozására szolgál, amit egy \texttt{KeyStore} objektumban tárol, ezt .jks kiterjesztésű 256 karakter hosszú jelszóval védett fájlként tárolja. A fájl a program működése alatt feltöltődik az adatbázisba.
 \\A jelszó karakterek random sorozatából áll, de minden .jks fájl ugyanazzal a jelszóval van védve. Vitatható, hogy ez a megoldás biztonságos-e, úgy gondolom, hogy igen, a jelszó hosszából és karaktereiből ítélve, ugyanis nem csak számokat és betűket tartalmaz, hanem szimbólumokat is.
 \\Adatbázisba töltését szükségszerűnek tartom, hogy különböző eszközökön is el tudjuk érni ugyanazt a tartalmat.
 \\Másik metódusa segítségével letölti az adatbázisból a .jks fájlt, amit ideiglenesen eltárol az eszközön, majd ebből az ideiglenes fájlból éri el a korábban létrehozott titkosítási kulcsot.
-\vspace{5pt}\\Az EncryptionFunctions osztály a titkosítást és visszafejtést végző funkciókat tartalmazza. Ezek a műveletek a .jks fájlba elmentett random generált kulcsot alkalmazzák az XML fájl titkosításához és visszafejtéséhez.
-\\A funkciók AES algoritmust használnak, működésük megegyezik az algoritmusok összehasonlításához használt tesztalkalmazás működésével, a javax.crypto csomag osztályait alkalmaztam.
+\vspace{5pt}\\Az \texttt{EncryptionFunctions} osztály a titkosítást és visszafejtést végző funkciókat tartalmazza. Ezek a műveletek a .jks fájlba elmentett random generált kulcsot alkalmazzák az XML fájl titkosításához és visszafejtéséhez.
+\\A funkciók AES algoritmust használnak, működésük megegyezik az algoritmusok összehasonlításához használt tesztalkalmazás működésével, a \texttt{javax.crypto} csomag osztályait alkalmaztam.
 
 \begin{figure}[h]
 	\centering
@@ -48,8 +45,8 @@ Titkosítással kapcsolatos osztályokat tartalmaz. A csomag felépítése a \re
 \end{figure}
 
 \Section{XML}
-A csomag XML-lel foglalkozó osztályokat tartalmaz, felépítése a \ref{fig:package_xml}. ábrán látható. Ilyen az XMLReader, ami olvassa és 'parse'-olja az adott XML fájlt. Az XMLWriter XML dokumentum írását és formázását végzi.
-\vspace{5pt}\\A program a szükséges fájlokat egy config.xml-nek nevezett dokumentumból éri el, aminek írását és olvasását a ConfigManager osztály végzi. Ennek az osztálynak a részletes működését a következő fejezet tartalmazza.
+A csomag XML-lel foglalkozó osztályokat tartalmaz, felépítése a \ref{fig:package_xml}. ábrán látható. Ilyen az \texttt{XMLReader}, ami olvassa és parzolja az adott XML fájlt. Az \texttt{XMLWriter} XML dokumentum írását és formázását végzi.
+\vspace{5pt}\\A program a szükséges fájlokat egy \texttt{config.xml}-nek nevezett dokumentumból éri el, aminek írását és olvasását a \texttt{ConfigManager} osztály végzi. Ennek az osztálynak a részletes működését a következő fejezet tartalmazza.
 
 
 \begin{figure}[h]
@@ -61,7 +58,7 @@ A csomag XML-lel foglalkozó osztályokat tartalmaz, felépítése a \ref{fig:pa
 
 \Section{GUI}
 Ez a csomag a felhasználói felület főbb osztályait tartalmazza (lásd \ref{fig:package_gui}. ábra).
-\vspace{5pt}\\Legnehezebb dolgom a TextEditorButtons nevű osztállyal volt, ami a 4.1.3-mas alfejezetben leírt szövegszerkesztő megfelelő működését biztosítja. A felhasználói felület készítése során ennek az osztálynak létrehozása volt a legidőigényesebb feladat.
+\vspace{5pt}\\Legnehezebb dolgom a \texttt{TextEditorButtons} nevű osztállyal volt, ami a 4.1.3-mas alfejezetben leírt szövegszerkesztő megfelelő működését biztosítja. A felhasználói felület készítése során ennek az osztálynak létrehozása volt a legidőigényesebb feladat.
 \\Alapértelmezett beállítás a 12-es nagyság, fehér szín és Dialog betűstílus. A szövegszerkesztőbe beírt adatok és a szövegszerkesztő gombjai között nincs valós-idejű kapcsolat.
 \\Ezt egy példával tudom legjobban elmagyarázni: ha a szöveg egy részének (a gombok ugye csak a kijelölt részeket szerkesztik) stílusát megváltoztatjuk, tegyük fel 18-as betűméret, piros szín és Times New Roman betűstílusra, a gombokon feltüntetett szöveg megváltozik. Ha a kurzorral egy nem szerkesztett szövegrészre kattintunk, akkor a gombok állapota nem áll vissza az alapértelmezett beállításokra, hanem az utoljára beállított opción marad (tehát nem lesz Dialog-12-fehér, hanem Times New Roman-18-piros marad).
 
@@ -82,20 +79,20 @@ A csomag olyan osztályokat tartalmaz, amelyek a grafikus felhasználói felüle
 	\caption{GUIRelated csomag és osztályai}
 	\label{fig:package_guirelated}
 \end{figure}
-\\A felhasználói felületet Java Swing használatával készítettem. Ahhoz, hogy megértsük milyen nehézségekkel szembesültem, egy rövid leírásban be kell mutassam a függvénykönyvtárat:
+\\A felhasználói felületet \texttt{Java Swing} használatával készítettem. Ahhoz, hogy megértsük milyen nehézségekkel szembesültem, egy rövid leírásban be kell mutassam a függvénykönyvtárat:
 \vspace{10pt}\\A Swing egy GUI widget toolkit. Widget-ek alatt olyan grafikus elemeket értünk, mint gombok, szövegdobozok, listák, legördülő menük, görgők, stb...
-\\A Swing egy régi technológia, viszont rengeteg alkalmazás használja. A Java GUI készítésre létrehoztak egy modernebb függvénykönyvtárat, ami a Swing-re épül, a JavaFX-et.
+\\A Swing egy régi technológia, viszont rengeteg alkalmazás használja. A Java GUI készítésre létrehoztak egy modernebb függvénykönyvtárat, ami a Swing-re épül, a \texttt{JavaFX}-et.
 \\Kevésbé használt, mint a Swing, valószínűleg azért, mivel az alkalmazások nagy része korábban, Swing-ben készült, és nincs szükség JavaFX-szé való konvertálásukra. Új Java GUI-k készítésére valószínűnek tartom, hogy inkább JavaFX-et használnak.
 \vspace{10pt}\\Azért választottam a Swing-et a JavaFX helyett, mert már dolgoztam a könyvtárral, míg a JavaFX-et egyáltalán nem ismertem, így azt gondoltam, hogy egyszerűbb dolgom lesz.
 \\Hamar rá kellett jönnöm, hogy nem lesz olyan egyszerű dolgom, mint amire számítottam, de ettől függetlenül maradtam a Swing használata mellett. Ahhoz, hogy a widget-eknek egy modern megjelenést tudjunk adni, rengeteg szülőosztály-beli metódust kell megvizsgálnunk és felülírnunk. Sok esetben nem érhető el olyan funkció, amit logikusnak tartanánk, hogy létezik és közvetlenül szerkeszthető. Pár példa, hogy mire is gondolok:
-\vspace{5pt}\\A JButton widget egy gomb, amire lehet szöveget írni. Ha megnyomjuk a gombot, megváltozik a háttérszíne, amíg el nem engedjük az egérgombot. Ezt a színt közvetlenül egy metódussal nem lehet megváltoztatni. A felülírt kódról egy részlet a \ref{fig:package_guirelated_jbutton}. ábrán látható
+\vspace{5pt}\\A \texttt{JButton} widget egy gomb, amire lehet szöveget írni. Ha megnyomjuk a gombot, megváltozik a háttérszíne, amíg el nem engedjük az egérgombot. Ezt a színt közvetlenül egy metódussal nem lehet megváltoztatni. A felülírt kódról egy részlet a \ref{fig:package_guirelated_jbutton}. ábrán látható
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{images/package_guirelated_jbutton_details.png}
 	\caption{JButton megjelenését felülírő osztály}
 	\label{fig:package_guirelated_jbutton}
 \end{figure}
-\\A JList listaelemek háttérszínét, legyen-e az elemeknek kerete vagy sem, elemek szövegének színét sem lehet közvetlen metódussal megváltoztatni. A felülírt kódról egy részlet a \ref{fig:package_guirelated_jlistrenderer}. ábrán látható
+\\A \texttt{JList} listaelemek háttérszínét, legyen-e az elemeknek kerete vagy sem, elemek szövegének színét sem lehet közvetlen metódussal megváltoztatni. A felülírt kódról egy részlet a \ref{fig:package_guirelated_jlistrenderer}. ábrán látható
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{images/package_guirelated_jlistrenderer_details.png}
